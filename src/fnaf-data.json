@@ -1,0 +1,6 @@
+[
+  {"id": "freddy", "name": "Freddy Fazbear", "game": "FNAF 1", "risk": "High", "jumpscare": "📢 TOREADOR MARCH LAUNCHED!"},
+  {"id": "bonnie", "name": "Bonnie", "game": "FNAF 1", "risk": "Extreme", "jumpscare": "🎸 LEFT VENT ATTACK!"},
+  {"id": "chica", "name": "Chica", "game": "FNAF 1", "risk": "Medium", "jumpscare": "🍕 KITCHEN PANS CLATTERING!"},
+  {"id": "foxy", "name": "Foxy", "game": "FNAF 1", "risk": "Severe", "jumpscare": "🏃 PIRATE COVE SPRINT!"}
+]
