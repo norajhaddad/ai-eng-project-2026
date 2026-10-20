@@ -1,6 +1,12 @@
 
 import React, { useState } from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  NavLink,
+  Route,
+  Routes
+} from 'react-router-dom';
+
 import {
   ArrowLeft,
   Check,
@@ -11,35 +17,101 @@ import {
   X,
 } from 'lucide-react';
 
-import fnafData from './fnaf-data.json';
+import FilterDropdown from './FilterDropdown.jsx';
+import fnafData from './fnaf-roster.js';
 import AnimatronicCard from './AnimatronicCard.jsx';
 import './styles.css';
 
 const accents = ['peach', 'violet', 'gold', 'mint'];
 
+// Character portraits: upload PNG files to
+// src/assets/characters/ using character IDs as filenames.
+// Example: freddy.png, toy-bonnie.png, jack-o-chica.png.
+// Characters without an image display initials instead.
+const portraitModules = import.meta.glob(
+  './assets/characters/*.{png,jpg,jpeg,webp}',
+  { eager: true, query: '?url', import: 'default' }
+);
+
+const characterImages = {};
+
+Object.entries(portraitModules).forEach(([path, url]) => {
+  const filename = path.split('/').pop();
+  const id = filename.replace(/\.(png|jpg|jpeg|webp)$/i, '');
+  characterImages[id] = url;
+});
+
 function CharacterIcon({ character, size = 'normal' }) {
   const initials = character.name
     .split(' ')
-    .map((word) => word[0])
+    .map(word => word[0])
     .join('')
     .slice(0, 2);
 
   const index = fnafData.findIndex(
-    (entry) => entry.id === character.id
+    entry => entry.id === character.id
   );
+
+  const accent = accents[
+    Math.max(0, index) % accents.length
+  ];
+
+  const image = characterImages[character.id];
 
   return (
     <span
-      className={`character-avatar avatar-${accents[index % accents.length]} avatar-${size}`}
+      className={`character-avatar avatar-${accent} avatar-${size}`}
       aria-label={character.name}
       title={character.name}
     >
-      {initials}
+      {image ? (
+        <img
+          src={image}
+          alt=""
+          className="character-image"
+        />
+      ) : (
+        initials
+      )}
     </span>
   );
 }
 
 function Gallery() {
+  const [gameFilter, setGameFilter] = useState('All');
+  const [locationFilter, setLocationFilter] = useState('All');
+  const [methodFilter, setMethodFilter] = useState('All');
+
+  const games = [
+    'All',
+    ...new Set(fnafData.map(c => c.originalGame))
+  ];
+
+  const locations = [
+    'All',
+    ...new Set(fnafData.map(c => c.unlockLocation))
+  ];
+
+  const methods = [
+    'All',
+    ...new Set(fnafData.map(c => c.unlockMethod))
+  ];
+
+  const filteredCharacters = fnafData.filter(character => (
+    (gameFilter === 'All' ||
+      character.originalGame === gameFilter) &&
+    (locationFilter === 'All' ||
+      character.unlockLocation === locationFilter) &&
+    (methodFilter === 'All' ||
+      character.unlockMethod === methodFilter)
+  ));
+
+  function clearFilters() {
+    setGameFilter('All');
+    setLocationFilter('All');
+    setMethodFilter('All');
+  }
+
   return (
     <main className="page-shell">
       <div className="page-intro">
@@ -53,36 +125,111 @@ function Gallery() {
         </h1>
 
         <p>
-          For those who are tired of the attack names that aren't intuitive.
+          For those who are tired of the attack names
+          that aren't intuitive.
         </p>
       </div>
 
       <div className="section-heading">
         <h2>
           Character collection
-          <span className="count-pill">{fnafData.length}</span>
+          <span className="count-pill">
+            {fnafData.length}
+          </span>
         </h2>
 
         <span className="helper-text">
-          More characters coming soon
+          Original roster + Update 2
         </span>
       </div>
 
-      <div className="character-grid">
-        {fnafData.map((character, index) => (
-          <AnimatronicCard
-            key={character.id}
-            character={character}
-            accent={accents[index % accents.length]}
-            icon={
-              <CharacterIcon
-                character={character}
-                size="large"
-              />
-            }
-          />
-        ))}
+
+      <div className="gallery-filters">
+        <FilterDropdown
+          label="Original game"
+          value={gameFilter}
+          options={games}
+          onChange={setGameFilter}
+          allLabel="All games"
+          color="lavender"
+        />
+
+        <FilterDropdown
+          label="Unlock location"
+          value={locationFilter}
+          options={locations}
+          onChange={setLocationFilter}
+          allLabel="All locations"
+          color="peach"
+        />
+
+        <FilterDropdown
+          label="Unlock method"
+          value={methodFilter}
+          options={methods}
+          onChange={setMethodFilter}
+          allLabel="All methods"
+          color="mint"
+        />
+
+        <button
+          type="button"
+          className="filter-reset"
+          onClick={clearFilters}
+        >
+          Clear filters
+        </button>
       </div>
+
+
+      <p className="filter-count">
+        Showing {filteredCharacters.length} of{' '}
+        {fnafData.length} animatronics
+      </p>
+
+      {filteredCharacters.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-illustration">
+            <Sparkles size={36} />
+          </div>
+
+          <h3>No matches found!</h3>
+
+          <p>
+            Try changing one of your filters.
+          </p>
+
+          <button
+            type="button"
+            className="button button-secondary"
+            onClick={clearFilters}
+          >
+            Clear filters
+          </button>
+        </div>
+      ) : (
+        <div className="character-grid">
+          {filteredCharacters.map(character => {
+            const index = fnafData.findIndex(
+              entry => entry.id === character.id
+            );
+
+            return (
+              <AnimatronicCard
+                key={character.id}
+                character={character}
+                accent={accents[index % accents.length]}
+                icon={
+                  <CharacterIcon
+                    character={character}
+                    size="large"
+                  />
+                }
+              />
+            );
+          })}
+        </div>
+      )}
     </main>
   );
 }
@@ -92,9 +239,9 @@ function TeamBuilder({ parties, onCreateParty }) {
   const [selected, setSelected] = useState([]);
 
   function toggle(id) {
-    setSelected((current) => {
+    setSelected(current => {
       if (current.includes(id)) {
-        return current.filter((value) => value !== id);
+        return current.filter(value => value !== id);
       }
 
       if (current.length >= 4) {
@@ -140,9 +287,9 @@ function TeamBuilder({ parties, onCreateParty }) {
           </h1>
 
           <p>
-            Pick exactly four unique animatronics to create
-            a party. You can use a character in more than
-            one party.
+            Pick exactly four unique animatronics to
+            create a party. You can use a character in
+            more than one party.
           </p>
         </div>
 
@@ -156,7 +303,7 @@ function TeamBuilder({ parties, onCreateParty }) {
         </div>
 
         <div className="selection-list">
-          {fnafData.map((character) => {
+          {fnafData.map(character => {
             const active = selected.includes(character.id);
             const unavailable =
               selected.length === 4 && !active;
@@ -168,7 +315,9 @@ function TeamBuilder({ parties, onCreateParty }) {
                 aria-pressed={active}
                 disabled={unavailable}
                 onClick={() => toggle(character.id)}
-                className={`selection-row ${active ? 'selected' : ''}`}
+                className={`selection-row ${
+                  active ? 'selected' : ''
+                }`}
               >
                 <CharacterIcon character={character} />
 
@@ -177,7 +326,7 @@ function TeamBuilder({ parties, onCreateParty }) {
 
                   <small>
                     {character.fnafWorld.roles
-                      .map((role) => role.label)
+                      .map(role => role.label)
                       .join(' · ')}
                   </small>
                 </span>
@@ -239,7 +388,9 @@ function TeamBuilder({ parties, onCreateParty }) {
       <div className="section-heading">
         <h2>
           My parties
-          <span className="count-pill">{parties.length}</span>
+          <span className="count-pill">
+            {parties.length}
+          </span>
         </h2>
 
         <button
@@ -260,7 +411,9 @@ function TeamBuilder({ parties, onCreateParty }) {
 
           <h3>No parties yet!</h3>
 
-          <p>Your next great team starts with four friends.</p>
+          <p>
+            Your next great team starts with four friends.
+          </p>
 
           <button
             className="button button-secondary"
@@ -281,13 +434,13 @@ function TeamBuilder({ parties, onCreateParty }) {
 
               <div className="party-label">
                 <strong>Party {index + 1}</strong>
-                <small>4 adventurers</small>
+                <small>4 animatronics</small>
               </div>
 
               <div className="party-members">
-                {party.memberIds.map((id) => {
+                {party.memberIds.map(id => {
                   const character = fnafData.find(
-                    (entry) => entry.id === id
+                    entry => entry.id === id
                   );
 
                   return character ? (
@@ -305,7 +458,8 @@ function TeamBuilder({ parties, onCreateParty }) {
 
       <p className="helper-text below-list">
         Parties are saved for this session only.
-        Database saving and battle analysis are planned features.
+        Database saving and battle analysis are
+        planned features.
       </p>
     </main>
   );
@@ -315,7 +469,7 @@ export default function App() {
   const [parties, setParties] = useState([]);
 
   function addParty(memberIds) {
-    setParties((current) => [
+    setParties(current => [
       ...current,
       {
         id: crypto.randomUUID(),
@@ -381,7 +535,7 @@ export default function App() {
         </Routes>
 
         <footer className="site-footer">
-          Made for curious adventurers
+          Made for curious animatronics
           <span>✦</span>
           Unofficial fan project
         </footer>

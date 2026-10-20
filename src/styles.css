@@ -1,14 +1,14 @@
 
 @font-face {
-  font-family: "Berlin Sans";
-  src: url("./assets/fonts/BRLNSDB.TTF") format("truetype");
+  font-family: 'Berlin Sans';
+  src: url('./assets/fonts/BRLNSDB.TTF') format('truetype');
   font-style: normal;
   font-weight: 600;
   font-display: swap;
 }
 
 :root {
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: #29344e;
   background: #f9f7f2;
   font-synthesis: none;
@@ -74,7 +74,7 @@ a {
   display: flex;
   align-items: center;
   gap: 11px;
-  font-family: "Berlin Sans", system-ui, sans-serif;
+  font-family: 'Berlin Sans', system-ui, sans-serif;
   font-weight: 800;
   font-size: 24px;
   line-height: 1;
@@ -158,7 +158,7 @@ a {
 }
 
 .page-intro h1 {
-  font-family: "Berlin Sans", system-ui, sans-serif;
+  font-family: 'Berlin Sans', system-ui, sans-serif;
   font-size: clamp(40px, 5vw, 65px);
   font-weight: 800;
   line-height: 1.08;
@@ -191,7 +191,7 @@ a {
 
 .section-heading h2,
 .selection-top h2 {
-  font-family: "Berlin Sans", system-ui, sans-serif;
+  font-family: 'Berlin Sans', system-ui, sans-serif;
   font-size: 28px;
   margin: 0;
 }
@@ -275,7 +275,7 @@ a {
   color: #ffffffa8;
 }
 
-/* Character icons */
+/* Character icons and portraits */
 
 .character-avatar {
   width: 46px;
@@ -285,9 +285,10 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font: 800 16px "Berlin Sans", system-ui, sans-serif;
+  font: 800 16px 'Berlin Sans', system-ui, sans-serif;
   border: 2px solid #ffffffbd;
   box-shadow: 0 3px 10px #00000012;
+  overflow: hidden;
 }
 
 .avatar-large {
@@ -318,6 +319,13 @@ a {
   color: #296d58;
 }
 
+.character-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Character card details */
 
 .card-body {
@@ -332,8 +340,10 @@ a {
 }
 
 .card-title-line h3 {
-  font: 800 24px "Berlin Sans", system-ui, sans-serif;
+  font: 800 24px 'Berlin Sans', system-ui, sans-serif;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .starter-tag {
@@ -344,6 +354,7 @@ a {
   color: #b47a29;
   padding: 6px 8px;
   border-radius: 7px;
+  flex-shrink: 0;
 }
 
 .character-subtitle {
@@ -352,15 +363,62 @@ a {
   margin: 5px 0 16px;
 }
 
+/* Unlock badges come before combat roles */
+
+.character-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 6px;
+  min-height: 56px;
+  margin-bottom: 16px;
+}
+
+.unlock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.unlock-badge svg {
+  flex-shrink: 0;
+}
+
+.unlock-pinwheel {
+  background: #eee4ff;
+  color: #7134ae;
+}
+
+.unlock-minigame {
+  background: #fff0d9;
+  color: #a6540a;
+}
+
+.unlock-normal {
+  background: #e7edf7;
+  color: #465879;
+}
+
 .role-tags {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
   min-height: 56px;
-  align-content: start;
+  align-content: flex-start;
 }
 
 .role-tag {
+  display: inline-flex;
+  align-items: center;
   font-size: 11px;
   font-weight: 750;
   padding: 7px 9px;
@@ -369,10 +427,18 @@ a {
   color: #77669a;
 }
 
+.unlock-hint {
+  margin: -8px 0 14px;
+  font-size: 0.78rem;
+  color: #777b8e;
+}
+
+/* Moveset */
+
 .card-body h4 {
   border-top: 1px solid #eeeaf0;
   padding-top: 16px;
-  font: 800 18px "Berlin Sans", system-ui, sans-serif;
+  font: 800 18px 'Berlin Sans', system-ui, sans-serif;
   margin: 13px 0;
 }
 
@@ -472,7 +538,7 @@ a {
 }
 
 .empty-state h3 {
-  font: 800 28px "Berlin Sans", system-ui, sans-serif;
+  font: 800 28px 'Berlin Sans', system-ui, sans-serif;
   margin: 0 0 8px;
 }
 
@@ -500,7 +566,7 @@ a {
 }
 
 .party-number {
-  font: 800 23px "Berlin Sans", system-ui, sans-serif;
+  font: 800 23px 'Berlin Sans', system-ui, sans-serif;
   color: #d5c9e6;
 }
 
@@ -511,7 +577,7 @@ a {
 }
 
 .party-label strong {
-  font: 800 20px "Berlin Sans", system-ui, sans-serif;
+  font: 800 20px 'Berlin Sans', system-ui, sans-serif;
 }
 
 .party-label small {
@@ -548,7 +614,7 @@ a {
 }
 
 .selection-count {
-  font: 800 24px "Berlin Sans", system-ui, sans-serif;
+  font: 800 24px 'Berlin Sans', system-ui, sans-serif;
   color: #e58b92;
 }
 
@@ -597,7 +663,7 @@ a {
 }
 
 .selection-description strong {
-  font: 800 20px "Berlin Sans", system-ui, sans-serif;
+  font: 800 20px 'Berlin Sans', system-ui, sans-serif;
 }
 
 .selection-description small {
@@ -643,6 +709,66 @@ a {
   padding: 0 7px;
 }
 
+/* Gallery filters */
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+
+.gallery-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1 1 170px;
+  min-width: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.gallery-filters select,
+.gallery-filters .filter-reset {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d6d4e5;
+  border-radius: 12px;
+  background: white;
+  color: #29243b;
+  font: inherit;
+}
+
+.gallery-filters select {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gallery-filters .filter-reset {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.gallery-filters .filter-reset:hover {
+  background: #f1edff;
+}
+
+.filter-count {
+  margin: 0 0 18px;
+  font-size: 0.88rem;
+  color: #73798b;
+}
+
+/* Keyboard accessibility */
+
+.gallery-filters select:focus-visible,
+.gallery-filters button:focus-visible,
+.selection-row:focus-visible {
+  outline: 3px solid #a88bd1;
+  outline-offset: 3px;
+}
+
 /* Mobile screens */
 
 @media (max-width: 650px) {
@@ -686,5 +812,151 @@ a {
 
   .card-banner {
     height: 110px;
+  }
+
+  .gallery-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gallery-filters label {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .gallery-filters .filter-reset {
+    width: 100%;
+  }
+}
+
+/* Custom dropdown layout */
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+
+.filter-dropdown {
+  position: relative;
+  flex: 1 1 190px;
+  min-width: 0;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #75618e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.filter-trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 2px solid #e3d6f4;
+  border-radius: 15px;
+  background: #f2ebfc;
+  color: #514169;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  box-shadow: 0 4px 0 #e4d9f0;
+}
+
+.filter-trigger:hover {
+  background: #eae0fa;
+}
+
+.filter-trigger.is-open {
+  border-color: #ab89d6;
+}
+
+.filter-chevron {
+  flex-shrink: 0;
+}
+
+.filter-trigger.is-open .filter-chevron {
+  transform: rotate(180deg);
+}
+
+/* Floating menu — this fixes the visible options */
+
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  max-height: 290px;
+  overflow-y: auto;
+  padding: 7px;
+  border: 2px solid #e3d6f4;
+  border-radius: 16px;
+  background: #fffdfb;
+  box-shadow: 0 15px 35px #45425c26;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  color: #535269;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.filter-option:hover,
+.filter-option:focus-visible {
+  background: #f5efff;
+  outline: none;
+}
+
+.filter-option.is-selected {
+  background: #f2ebfc;
+  color: #514169;
+  font-weight: 800;
+}
+
+/* Individual filter colors */
+
+.filter-peach .filter-trigger {
+  background: #fff0df;
+  border-color: #f3dfc5;
+  color: #815b40;
+  box-shadow: 0 4px 0 #f1dfc9;
+}
+
+.filter-mint .filter-trigger {
+  background: #e4f4ec;
+  border-color: #c9e8d8;
+  color: #386b57;
+  box-shadow: 0 4px 0 #d2e9dd;
+}
+
+.filter-peach .filter-option.is-selected {
+  background: #fff0df;
+  color: #815b40;
+}
+
+.filter-mint .filter-option.is-selected {
+  background: #e4f4ec;
+  color: #386b57;
+}
+
+@media (max-width: 650px) {
+  .filter-dropdown {
+    flex: 0 0 100%;
   }
 }
