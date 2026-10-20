@@ -1,6 +1,110 @@
 [
-  {"id": "freddy", "name": "Freddy Fazbear", "game": "FNAF 1", "risk": "High", "jumpscare": "📢 TOREADOR MARCH LAUNCHED!"},
-  {"id": "bonnie", "name": "Bonnie", "game": "FNAF 1", "risk": "Extreme", "jumpscare": "🎸 LEFT VENT ATTACK!"},
-  {"id": "chica", "name": "Chica", "game": "FNAF 1", "risk": "Medium", "jumpscare": "🍕 KITCHEN PANS CLATTERING!"},
-  {"id": "foxy", "name": "Foxy", "game": "FNAF 1", "risk": "Severe", "jumpscare": "🏃 PIRATE COVE SPRINT!"}
+  {
+    "id": "freddy",
+    "name": "Freddy Fazbear",
+    "game": "FNAF 1",
+    "risk": "High",
+    "fnafWorld": {
+      "characterName": "Adventure Freddy Fazbear",
+      "moves": [
+        { "name": "Mic Toss", "effect": "Throws a microphone at an enemy." },
+        { "name": "Pizza Wheel", "effect": "Attacks multiple enemies." },
+        { "name": "Birthday", "effect": "Temporarily increases attack power, defense, and speed." }
+      ],
+      "movesStatus": "verified-community-wiki",
+      "roles": [
+        { "label": "Party buffer", "basis": ["Birthday"], "status": "inferred" },
+        { "label": "Multi-target offense", "basis": ["Pizza Wheel"], "status": "inferred" }
+      ],
+      "unlock": {
+        "method": "starter",
+        "earliestArea": null,
+        "recommendedArea": null,
+        "status": "verified-community-wiki"
+      },
+      "source": "https://freddy-fazbears-pizza.fandom.com/wiki/Adventure_Freddy_Fazbear",
+      "researchNeeded": ["Cross-check against an in-game or primary source."]
+    }
+  },
+  {
+    "id": "bonnie",
+    "name": "Bonnie",
+    "game": "FNAF 1",
+    "risk": "Extreme",
+    "fnafWorld": {
+      "characterName": "Adventure Bonnie the Rabbit",
+      "moves": [
+        { "name": "Bite", "effect": "Damages two enemies." },
+        { "name": "Bash Jam", "effect": "Damages all enemies." },
+        { "name": "Happy Jam", "effect": "Heals the party instantly." }
+      ],
+      "movesStatus": "verified-community-wiki",
+      "roles": [
+        { "label": "Multi-target offense", "basis": ["Bite", "Bash Jam"], "status": "inferred" },
+        { "label": "Party healer", "basis": ["Happy Jam"], "status": "inferred" }
+      ],
+      "unlock": {
+        "method": "starter",
+        "earliestArea": null,
+        "recommendedArea": null,
+        "status": "verified-community-wiki"
+      },
+      "source": "https://freddy-fazbears-pizza.fandom.com/wiki/Adventure_Bonnie_the_Rabbit",
+      "researchNeeded": ["Cross-check against an in-game or primary source."]
+    }
+  },
+  {
+    "id": "chica",
+    "name": "Chica",
+    "game": "FNAF 1",
+    "risk": "Medium",
+    "fnafWorld": {
+      "characterName": "Adventure Chica the Chicken",
+      "moves": [
+        { "name": "Cupcake", "effect": "Heals all party members." },
+        { "name": "Party Favors", "effect": "Heals the party instantly and damages all enemies." },
+        { "name": "Regen Song", "effect": "Heals the party over time." }
+      ],
+      "movesStatus": "verified-community-wiki",
+      "roles": [
+        { "label": "Party healer", "basis": ["Cupcake", "Party Favors", "Regen Song"], "status": "inferred" },
+        { "label": "Multi-target offense", "basis": ["Party Favors"], "status": "inferred" }
+      ],
+      "unlock": {
+        "method": "starter",
+        "earliestArea": null,
+        "recommendedArea": null,
+        "status": "verified-community-wiki"
+      },
+      "source": "https://freddy-fazbears-pizza.fandom.com/wiki/Adventure_Chica_the_Chicken",
+      "researchNeeded": ["Cross-check against an in-game or primary source."]
+    }
+  },
+  {
+    "id": "foxy",
+    "name": "Foxy",
+    "game": "FNAF 1",
+    "risk": "Severe",
+    "fnafWorld": {
+      "characterName": "Adventure Foxy the Pirate",
+      "moves": [
+        { "name": "Hook", "effect": "Deals low damage to a single enemy." },
+        { "name": "Jumpscare", "effect": "Stuns all enemies for a few seconds." },
+        { "name": "Hot Cheese", "effect": "Damages enemies over time." }
+      ],
+      "movesStatus": "verified-community-wiki",
+      "roles": [
+        { "label": "Crowd control", "basis": ["Jumpscare"], "status": "inferred" },
+        { "label": "Damage over time", "basis": ["Hot Cheese"], "status": "inferred" }
+      ],
+      "unlock": {
+        "method": "starter",
+        "earliestArea": null,
+        "recommendedArea": null,
+        "status": "verified-community-wiki"
+      },
+      "source": "https://freddy-fazbears-pizza.fandom.com/wiki/Adventure_Foxy_the_Pirate",
+      "researchNeeded": ["Cross-check against an in-game or primary source."]
+    }
+  }
 ]
