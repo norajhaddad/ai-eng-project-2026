@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+
 import {
   BrowserRouter,
   NavLink,
@@ -10,8 +11,11 @@ import {
 import {
   ArrowLeft,
   Check,
+  ChevronDown,
   ChevronRight,
+  ChevronUp,
   Plus,
+  Search,
   Sparkles,
   Users,
   X
@@ -24,6 +28,7 @@ import './styles.css';
 
 const accents = ['peach', 'violet', 'gold', 'mint'];
 const CHARACTERS_PER_PAGE = 12;
+const PARTY_CHARACTERS_PER_PAGE = 16;
 
 const portraitModules = import.meta.glob(
   './assets/characters/*.{png,jpg,jpeg,webp}',
@@ -349,6 +354,40 @@ function Gallery() {
 function TeamBuilder({ parties, onCreateParty }) {
   const [selecting, setSelecting] = useState(false);
   const [selected, setSelected] = useState([]);
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [mobilePartyOpen, setMobilePartyOpen] = useState(false);
+
+  const selectedCharacters = selected
+    .map(id =>
+      fnafData.find(character => character.id === id)
+    )
+    .filter(Boolean);
+
+  const filteredCharacters = fnafData.filter(character => {
+    const query = search.trim().toLowerCase();
+
+    return (
+      character.name.toLowerCase().includes(query) ||
+      character.fnafWorld.roles.some(role =>
+        role.label.toLowerCase().includes(query)
+      )
+    );
+  });
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(
+      filteredCharacters.length / PARTY_CHARACTERS_PER_PAGE
+    )
+  );
+
+  const currentPage = Math.min(page, totalPages);
+
+  const visibleCharacters = filteredCharacters.slice(
+    (currentPage - 1) * PARTY_CHARACTERS_PER_PAGE,
+    currentPage * PARTY_CHARACTERS_PER_PAGE
+  );
 
   function toggle(id) {
     setSelected(current => {
@@ -366,6 +405,9 @@ function TeamBuilder({ parties, onCreateParty }) {
 
   function cancel() {
     setSelected([]);
+    setSearch('');
+    setPage(1);
+    setMobilePartyOpen(false);
     setSelecting(false);
   }
 
@@ -376,9 +418,93 @@ function TeamBuilder({ parties, onCreateParty }) {
     cancel();
   }
 
+  function clearSearch() {
+    setSearch('');
+    setPage(1);
+  }
+
+  function PartySlots() {
+    return (
+      <div className="party-preview-slots">
+        {Array.from({ length: 4 }, (_, index) => {
+          const character = selectedCharacters[index];
+
+          return (
+            <div
+              key={index}
+              className={`party-preview-slot ${
+                character ? 'filled' : 'empty'
+              }`}
+            >
+              {character ? (
+                <>
+                  <CharacterIcon character={character} />
+
+                  <span className="party-slot-details">
+                    <strong>{character.name}</strong>
+                    <small>
+                      {character.fnafWorld.roles
+                        .map(role => role.label)
+                        .join(' · ')}
+                    </small>
+                  </span>
+
+                  <button
+                    type="button"
+                    className="party-slot-remove"
+                    onClick={() => toggle(character.id)}
+                    aria-label={`Remove ${character.name}`}
+                    title={`Remove ${character.name}`}
+                  >
+                    <X size={16} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="party-empty-icon">
+                    <Plus size={18} />
+                  </span>
+                  <span className="party-empty-label">
+                    Empty slot {index + 1}
+                  </span>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  function PartyActions() {
+    return (
+      <div className="party-preview-actions">
+        <button
+          className="button button-quiet"
+          type="button"
+          onClick={() => setSelected([])}
+          disabled={selected.length === 0}
+        >
+          <X size={16} />
+          CLEAR
+        </button>
+
+        <button
+          className="button button-primary"
+          type="button"
+          disabled={selected.length !== 4}
+          onClick={create}
+        >
+          CREATE PARTY
+          <ChevronRight size={17} />
+        </button>
+      </div>
+    );
+  }
+
   if (selecting) {
     return (
-      <main className="page-shell narrow-page">
+      <main className="page-shell party-builder-page">
         <button
           className="text-button back-button"
           onClick={cancel}
@@ -405,78 +531,220 @@ function TeamBuilder({ parties, onCreateParty }) {
           </p>
         </div>
 
-        <div className="selection-top">
-          <h2>Available characters</h2>
+        <div className="party-builder-layout">
+          <section className="party-picker">
+            <div className="selection-top">
+              <h2>Available characters</h2>
 
-          <span className="selection-count">
-            {selected.length}
-            <span> / 4 selected</span>
-          </span>
-        </div>
+              <span className="selection-count">
+                {selected.length}
+                <span> / 4 selected</span>
+              </span>
+            </div>
 
-        <div className="selection-list">
-          {fnafData.map(character => {
-            const active = selected.includes(character.id);
-            const unavailable =
-              selected.length === 4 && !active;
+            <label className="party-search">
+              <Search size={18} aria-hidden="true" />
 
-            return (
-              <button
-                key={character.id}
-                type="button"
-                aria-pressed={active}
-                disabled={unavailable}
-                onClick={() => toggle(character.id)}
-                className={`selection-row ${
-                  active ? 'selected' : ''
-                }`}
+              <input
+                type="search"
+                placeholder="Find an animatronic or role..."
+                value={search}
+                onChange={event => {
+                  setSearch(event.target.value);
+                  setPage(1);
+                }}
+                aria-label="Search animatronics"
+              />
+
+              {search && (
+                <button
+                  type="button"
+                  className="party-search-clear"
+                  onClick={clearSearch}
+                  aria-label="Clear search"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </label>
+
+            <p className="party-results-count">
+              Showing {filteredCharacters.length} of{' '}
+              {fnafData.length} animatronics
+            </p>
+
+            <div className="party-character-grid">
+              {visibleCharacters.map(character => {
+                const active = selected.includes(character.id);
+
+                const unavailable =
+                  selected.length === 4 && !active;
+
+                return (
+                  <button
+                    key={character.id}
+                    type="button"
+                    aria-pressed={active}
+                    disabled={unavailable}
+                    onClick={() => toggle(character.id)}
+                    className={`party-character-tile ${
+                      active ? 'selected' : ''
+                    }`}
+                  >
+                    <span className="party-tile-check">
+                      {active ? (
+                        <Check
+                          size={15}
+                          strokeWidth={3}
+                        />
+                      ) : (
+                        <Plus size={15} />
+                      )}
+                    </span>
+
+                    <CharacterIcon character={character} />
+
+                    <strong className="party-tile-name">
+                      {character.name}
+                    </strong>
+
+                    <small className="party-tile-roles">
+                      {character.fnafWorld.roles
+                        .map(role => role.label)
+                        .join(' · ')}
+                    </small>
+                  </button>
+                );
+              })}
+            </div>
+
+            {filteredCharacters.length === 0 && (
+              <div className="party-no-results">
+                <Search size={24} />
+                <p>No matching animatronics found.</p>
+                <button
+                  type="button"
+                  className="text-button"
+                  onClick={clearSearch}
+                >
+                  Clear search
+                </button>
+              </div>
+            )}
+
+            {totalPages > 1 && (
+              <nav
+                className="party-pagination"
+                aria-label="Party builder character pages"
               >
-                <CharacterIcon character={character} />
+                <button
+                  type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage === 1}
+                  onClick={() =>
+                    setPage(currentPage - 1)
+                  }
+                >
+                  ← Previous
+                </button>
 
-                <span className="selection-description">
-                  <strong>{character.name}</strong>
-
-                  <small>
-                    {character.fnafWorld.roles
-                      .map(role => role.label)
-                      .join(' · ')}
-                  </small>
+                <span className="party-page-number">
+                  Page {currentPage} of {totalPages}
                 </span>
 
-                <span className="selection-check">
-                  {active ? (
-                    <Check
-                      size={18}
-                      strokeWidth={3}
-                    />
-                  ) : (
-                    <Plus size={18} />
-                  )}
-                </span>
-              </button>
-            );
-          })}
+                <button
+                  type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage === totalPages}
+                  onClick={() =>
+                    setPage(currentPage + 1)
+                  }
+                >
+                  Next →
+                </button>
+              </nav>
+            )}
+          </section>
+
+          <aside className="party-preview party-preview-desktop">
+            <div className="party-preview-heading">
+              <h2>Current party</h2>
+
+              <span className="party-preview-count">
+                {selected.length} / 4
+              </span>
+            </div>
+
+            <p className="party-preview-helper">
+              Select four animatronics to build your team.
+            </p>
+
+            <PartySlots />
+            <PartyActions />
+          </aside>
         </div>
 
-        <div className="selection-actions">
+        <div
+          className={`mobile-party-panel ${
+            mobilePartyOpen ? 'expanded' : ''
+          }`}
+        >
           <button
-            className="button button-quiet"
             type="button"
-            onClick={() => setSelected([])}
+            className="mobile-party-toggle"
+            onClick={() =>
+              setMobilePartyOpen(current => !current)
+            }
+            aria-expanded={mobilePartyOpen}
+            aria-controls="mobile-party-details"
           >
-            <X size={16} />
-            CLEAR
+            <span className="mobile-party-heading">
+              <strong>Current party</strong>
+              <span>{selected.length} / 4</span>
+            </span>
+
+            <span className="mobile-party-portraits">
+              {Array.from({ length: 4 }, (_, index) => {
+                const character = selectedCharacters[index];
+
+                return (
+                  <span
+                    key={index}
+                    className={`mobile-party-portrait ${
+                      character ? 'filled' : 'empty'
+                    }`}
+                  >
+                    {character ? (
+                      <CharacterIcon character={character} />
+                    ) : (
+                      <Plus size={18} />
+                    )}
+                  </span>
+                );
+              })}
+            </span>
+
+            <span className="mobile-party-expand-label">
+              {mobilePartyOpen
+                ? 'Hide party details'
+                : 'View party details'}
+
+              {mobilePartyOpen ? (
+                <ChevronDown size={17} />
+              ) : (
+                <ChevronUp size={17} />
+              )}
+            </span>
           </button>
 
-          <button
-            className="button button-primary"
-            type="button"
-            disabled={selected.length !== 4}
-            onClick={create}
+          <div
+            id="mobile-party-details"
+            className="mobile-party-details"
+            hidden={!mobilePartyOpen}
           >
-            CREATE PARTY
-            <ChevronRight size={17} />
-          </button>
+            <PartySlots />
+            <PartyActions />
+          </div>
         </div>
       </main>
     );
