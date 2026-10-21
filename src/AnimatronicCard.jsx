@@ -76,8 +76,11 @@ export default function AnimatronicCard({
         </div>
 
         {isMinigame && character.minigame && (
-          <p className="unlock-hint">
-            {character.minigame}
+          <p className="unlock-hint minigame-hint">
+            <Puzzle size={14} aria-hidden="true" />
+            <span>
+              <strong>Minigame:</strong> {character.minigame}
+            </span>
           </p>
         )}
 

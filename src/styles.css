@@ -1,14 +1,14 @@
 
 @font-face {
-  font-family: 'Berlin Sans';
-  src: url('./assets/fonts/BRLNSDB.TTF') format('truetype');
+  font-family: "Berlin Sans";
+  src: url("./assets/fonts/BRLNSDB.TTF") format("truetype");
   font-style: normal;
   font-weight: 600;
   font-display: swap;
 }
 
 :root {
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: #29344e;
   background: #f9f7f2;
   font-synthesis: none;
@@ -74,7 +74,7 @@ a {
   display: flex;
   align-items: center;
   gap: 11px;
-  font-family: 'Berlin Sans', system-ui, sans-serif;
+  font-family: "Berlin Sans", system-ui, sans-serif;
   font-weight: 800;
   font-size: 24px;
   line-height: 1;
@@ -158,7 +158,7 @@ a {
 }
 
 .page-intro h1 {
-  font-family: 'Berlin Sans', system-ui, sans-serif;
+  font-family: "Berlin Sans", system-ui, sans-serif;
   font-size: clamp(40px, 5vw, 65px);
   font-weight: 800;
   line-height: 1.08;
@@ -191,7 +191,7 @@ a {
 
 .section-heading h2,
 .selection-top h2 {
-  font-family: 'Berlin Sans', system-ui, sans-serif;
+  font-family: "Berlin Sans", system-ui, sans-serif;
   font-size: 28px;
   margin: 0;
 }
@@ -275,7 +275,7 @@ a {
   color: #ffffffa8;
 }
 
-/* Character icons and portraits */
+/* Character icons */
 
 .character-avatar {
   width: 46px;
@@ -285,7 +285,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font: 800 16px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 16px "Berlin Sans", system-ui, sans-serif;
   border: 2px solid #ffffffbd;
   box-shadow: 0 3px 10px #00000012;
   overflow: hidden;
@@ -340,7 +340,7 @@ a {
 }
 
 .card-title-line h3 {
-  font: 800 24px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 24px "Berlin Sans", system-ui, sans-serif;
   margin: 0;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -363,7 +363,7 @@ a {
   margin: 5px 0 16px;
 }
 
-/* Unlock badges come before combat roles */
+/* Unlock and combat badges */
 
 .character-badges {
   display: flex;
@@ -438,7 +438,7 @@ a {
 .card-body h4 {
   border-top: 1px solid #eeeaf0;
   padding-top: 16px;
-  font: 800 18px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 18px "Berlin Sans", system-ui, sans-serif;
   margin: 13px 0;
 }
 
@@ -516,7 +516,7 @@ a {
   color: #79798c;
 }
 
-/* Empty party list */
+/* Empty state */
 
 .empty-state {
   background: #fff;
@@ -538,7 +538,7 @@ a {
 }
 
 .empty-state h3 {
-  font: 800 28px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 28px "Berlin Sans", system-ui, sans-serif;
   margin: 0 0 8px;
 }
 
@@ -566,7 +566,7 @@ a {
 }
 
 .party-number {
-  font: 800 23px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 23px "Berlin Sans", system-ui, sans-serif;
   color: #d5c9e6;
 }
 
@@ -577,7 +577,7 @@ a {
 }
 
 .party-label strong {
-  font: 800 20px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 20px "Berlin Sans", system-ui, sans-serif;
 }
 
 .party-label small {
@@ -614,7 +614,7 @@ a {
 }
 
 .selection-count {
-  font: 800 24px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 24px "Berlin Sans", system-ui, sans-serif;
   color: #e58b92;
 }
 
@@ -663,7 +663,7 @@ a {
 }
 
 .selection-description strong {
-  font: 800 20px 'Berlin Sans', system-ui, sans-serif;
+  font: 800 20px "Berlin Sans", system-ui, sans-serif;
 }
 
 .selection-description small {
@@ -709,7 +709,7 @@ a {
   padding: 0 7px;
 }
 
-/* Gallery filters */
+/* Gallery filter layout */
 
 .gallery-filters {
   display: flex;
@@ -719,39 +719,20 @@ a {
   margin: 24px 0 12px;
 }
 
-.gallery-filters label {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  flex: 1 1 170px;
-  min-width: 0;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.gallery-filters select,
 .gallery-filters .filter-reset {
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid #d6d4e5;
-  border-radius: 12px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 2px solid #e7dce9;
+  border-radius: 15px;
   background: white;
-  color: #29243b;
-  font: inherit;
-}
-
-.gallery-filters select {
-  width: 100%;
-  cursor: pointer;
-}
-
-.gallery-filters .filter-reset {
-  cursor: pointer;
-  font-weight: 700;
+  color: #8a719f;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #eae3ed;
 }
 
 .gallery-filters .filter-reset:hover {
-  background: #f1edff;
+  background: #faf4ff;
 }
 
 .filter-count {
@@ -760,13 +741,303 @@ a {
   color: #73798b;
 }
 
-/* Keyboard accessibility */
+/* Custom dropdowns */
 
-.gallery-filters select:focus-visible,
-.gallery-filters button:focus-visible,
-.selection-row:focus-visible {
-  outline: 3px solid #a88bd1;
+.filter-dropdown {
+  position: relative;
+  flex: 1 1 170px;
+  min-width: 0;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #75618e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.filter-trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 2px solid var(--filter-border);
+  border-radius: 15px;
+  background: var(--filter-bg);
+  color: var(--filter-text);
+  font-size: 14px;
+  font-weight: 750;
+  text-align: left;
+  box-shadow: 0 4px 0 var(--filter-shadow);
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.filter-trigger:hover {
+  filter: brightness(0.98);
+}
+
+.filter-trigger.is-open {
+  border-color: var(--filter-accent);
+  box-shadow: 0 0 0 4px var(--filter-shadow);
+}
+
+.filter-trigger:focus-visible {
+  outline: 3px solid var(--filter-accent);
   outline-offset: 3px;
+}
+
+.filter-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.filter-trigger.is-open .filter-chevron {
+  transform: rotate(180deg);
+}
+
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  max-height: 290px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 7px;
+  border: 2px solid var(--filter-border);
+  border-radius: 17px;
+  background: #fffdfb;
+  box-shadow:
+    0 15px 35px #45425c26,
+    0 4px 8px #45425c0d;
+  animation: dropdown-appear 0.15s ease-out;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  color: #535269;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-option:hover,
+.filter-option:focus-visible {
+  background: var(--filter-hover);
+  color: var(--filter-text);
+}
+
+.filter-option.is-selected {
+  background: var(--filter-bg);
+  color: var(--filter-text);
+  font-weight: 800;
+}
+
+.filter-option svg {
+  flex-shrink: 0;
+  color: var(--filter-accent);
+}
+
+.filter-lavender {
+  --filter-bg: #f2ebfc;
+  --filter-border: #e3d6f4;
+  --filter-text: #514169;
+  --filter-shadow: #e4d9f0;
+  --filter-accent: #ab89d6;
+  --filter-hover: #f5efff;
+}
+
+.filter-peach {
+  --filter-bg: #fff0df;
+  --filter-border: #f3dfc5;
+  --filter-text: #815b40;
+  --filter-shadow: #f1dfc9;
+  --filter-accent: #e9ad78;
+  --filter-hover: #fff3e6;
+}
+
+.filter-mint {
+  --filter-bg: #e4f4ec;
+  --filter-border: #c9e8d8;
+  --filter-text: #386b57;
+  --filter-shadow: #d2e9dd;
+  --filter-accent: #8dc9ac;
+  --filter-hover: #eefaf3;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Landscape gallery */
+
+.gallery-stage {
+  position: relative;
+  isolation: isolate;
+  padding: 28px;
+  margin-top: 18px;
+  border-radius: 28px;
+  overflow: hidden;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.38)
+    ),
+    url("./assets/fnaf-world-background.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #d9eaf2;
+  scroll-margin-top: 20px;
+}
+
+.gallery-page-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #46516d;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* Faint image inside cards */
+
+.gallery-stage .animatronic-card {
+  position: relative;
+  isolation: isolate;
+  background: #fff;
+}
+
+.gallery-stage .animatronic-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("./assets/fnaf-world-background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.gallery-stage .card-banner,
+.gallery-stage .card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-stage .card-body {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+/* Pagination */
+
+.gallery-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.pagination-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+}
+
+.pagination-number,
+.pagination-arrow {
+  min-height: 42px;
+  border: 2px solid #e5d9f0;
+  border-radius: 12px;
+  background: #fff;
+  color: #735994;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 13px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.pagination-number {
+  min-width: 42px;
+}
+
+.pagination-number:hover,
+.pagination-arrow:hover:not(:disabled) {
+  background: #f2eafd;
+  transform: translateY(-2px);
+}
+
+.pagination-number.active {
+  background: #a88bd1;
+  color: white;
+  border-color: #a88bd1;
+}
+
+.pagination-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-number:focus-visible,
+.pagination-arrow:focus-visible,
+.gallery-filters .filter-reset:focus-visible,
+.selection-row:focus-visible {
+  outline: 3px solid #7652a5;
+  outline-offset: 3px;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-menu {
+    animation: none;
+  }
+
+  .filter-chevron,
+  .animatronic-card,
+  .pagination-number,
+  .pagination-arrow {
+    transition: none;
+  }
 }
 
 /* Mobile screens */
@@ -819,7 +1090,7 @@ a {
     align-items: stretch;
   }
 
-  .gallery-filters label {
+  .filter-dropdown {
     flex: 0 0 auto;
     width: 100%;
   }
@@ -827,136 +1098,147 @@ a {
   .gallery-filters .filter-reset {
     width: 100%;
   }
-}
 
-/* Custom dropdown layout */
-
-.gallery-filters {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 12px;
-  margin: 24px 0 12px;
-}
-
-.filter-dropdown {
-  position: relative;
-  flex: 1 1 190px;
-  min-width: 0;
-}
-
-.filter-label {
-  display: block;
-  margin-bottom: 7px;
-  color: #75618e;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.filter-trigger {
-  width: 100%;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 15px;
-  border: 2px solid #e3d6f4;
-  border-radius: 15px;
-  background: #f2ebfc;
-  color: #514169;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-  box-shadow: 0 4px 0 #e4d9f0;
-}
-
-.filter-trigger:hover {
-  background: #eae0fa;
-}
-
-.filter-trigger.is-open {
-  border-color: #ab89d6;
-}
-
-.filter-chevron {
-  flex-shrink: 0;
-}
-
-.filter-trigger.is-open .filter-chevron {
-  transform: rotate(180deg);
-}
-
-/* Floating menu — this fixes the visible options */
-
-.filter-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  z-index: 100;
-  max-height: 290px;
-  overflow-y: auto;
-  padding: 7px;
-  border: 2px solid #e3d6f4;
-  border-radius: 16px;
-  background: #fffdfb;
-  box-shadow: 0 15px 35px #45425c26;
-}
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 11px 12px;
-  border-radius: 10px;
-  color: #535269;
-  font-size: 13px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.filter-option:hover,
-.filter-option:focus-visible {
-  background: #f5efff;
-  outline: none;
-}
-
-.filter-option.is-selected {
-  background: #f2ebfc;
-  color: #514169;
-  font-weight: 800;
-}
-
-/* Individual filter colors */
-
-.filter-peach .filter-trigger {
-  background: #fff0df;
-  border-color: #f3dfc5;
-  color: #815b40;
-  box-shadow: 0 4px 0 #f1dfc9;
-}
-
-.filter-mint .filter-trigger {
-  background: #e4f4ec;
-  border-color: #c9e8d8;
-  color: #386b57;
-  box-shadow: 0 4px 0 #d2e9dd;
-}
-
-.filter-peach .filter-option.is-selected {
-  background: #fff0df;
-  color: #815b40;
-}
-
-.filter-mint .filter-option.is-selected {
-  background: #e4f4ec;
-  color: #386b57;
-}
-
-@media (max-width: 650px) {
-  .filter-dropdown {
-    flex: 0 0 100%;
+  .gallery-stage {
+    padding: 14px;
+    border-radius: 18px;
   }
+
+  .gallery-page-info {
+    font-size: 12px;
+  }
+
+  .gallery-pagination {
+    gap: 8px;
+    padding: 12px 8px;
+  }
+
+  .pagination-number,
+  .pagination-arrow {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+
+/* Make the gallery background more visible */
+.gallery-stage {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.20)
+    ),
+    url("./assets/fnaf-world-background.png");
+}
+
+/* Remove the white line inside cards */
+.gallery-stage .animatronic-card {
+  background: #fff;
+}
+
+.gallery-stage .card-body {
+  background: transparent;
+}
+
+/* Make the background image more visible inside cards */
+.gallery-stage .animatronic-card::before {
+  opacity: 0.18;
+}
+
+/* Main site background */
+.app-layout {
+  background: #EAF4F8;
+}
+
+/* Keep the navigation clean */
+.site-header {
+  background: #FFFFFF;
+}
+
+/* Keep character cards readable */
+.animatronic-card {
+  background: #FFFFFF;
+}
+
+
+/* Stronger contrast for character icons */
+
+.character-avatar {
+  border: 4px solid #ffffff;
+  outline: 2px solid #34405e;
+  box-shadow: 0 6px 14px rgba(25, 35, 60, 0.28);
+}
+
+.avatar-peach {
+  background: #E97950;
+  color: #51251D;
+}
+
+.avatar-violet {
+  background: #9472D5;
+  color: #302052;
+}
+
+.avatar-gold {
+  background: #E8AE30;
+  color: #563B0D;
+}
+
+.avatar-mint {
+  background: #53B88F;
+  color: #164B39;
+}
+
+.avatar-large {
+  border-width: 4px;
+  box-shadow: 0 8px 18px rgba(25, 35, 60, 0.30);
+}
+
+/* Improve text readability without changing the background */
+
+/* Unlock badges, including Starter character */
+.gallery-stage .unlock-badge {
+  background: #D6E2F5;
+  color: #30496F;
+  font-weight: 800;
+}
+
+/* Support, Damage, Poison, Debuff, etc. */
+.gallery-stage .role-tag {
+  background: #E3D8F3;
+  color: #59417E;
+  font-weight: 800;
+}
+
+/* Move descriptions: Hits one enemy, Heals party, etc. */
+.gallery-stage .move-list span {
+  color: #45536A;
+  font-weight: 550;
+}
+
+/* Original game labels: FNaF 1, FNaF 2, etc. */
+.gallery-stage .character-subtitle {
+  color: #59667B;
+}
+
+/* Additional unlock descriptions */
+.gallery-stage .unlock-hint {
+  color: #45536A;
+}
+
+/* Space between puzzle icon and minigame name */
+.minigame-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  line-height: 1.5;
+}
+
+.minigame-hint svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #A6540A;
+}
+.character-avatar {
+  outline: none;
 }

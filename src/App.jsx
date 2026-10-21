@@ -14,7 +14,7 @@ import {
   Plus,
   Sparkles,
   Users,
-  X,
+  X
 } from 'lucide-react';
 
 import FilterDropdown from './FilterDropdown.jsx';
@@ -23,11 +23,8 @@ import AnimatronicCard from './AnimatronicCard.jsx';
 import './styles.css';
 
 const accents = ['peach', 'violet', 'gold', 'mint'];
+const CHARACTERS_PER_PAGE = 12;
 
-// Character portraits: upload PNG files to
-// src/assets/characters/ using character IDs as filenames.
-// Example: freddy.png, toy-bonnie.png, jack-o-chica.png.
-// Characters without an image display initials instead.
 const portraitModules = import.meta.glob(
   './assets/characters/*.{png,jpg,jpeg,webp}',
   { eager: true, query: '?url', import: 'default' }
@@ -81,6 +78,7 @@ function Gallery() {
   const [gameFilter, setGameFilter] = useState('All');
   const [locationFilter, setLocationFilter] = useState('All');
   const [methodFilter, setMethodFilter] = useState('All');
+  const [page, setPage] = useState(1);
 
   const games = [
     'All',
@@ -106,10 +104,40 @@ function Gallery() {
       character.unlockMethod === methodFilter)
   ));
 
+  const totalPages = Math.max(
+    1,
+    Math.ceil(
+      filteredCharacters.length / CHARACTERS_PER_PAGE
+    )
+  );
+
+  const currentPage = Math.min(page, totalPages);
+
+  const visibleCharacters = filteredCharacters.slice(
+    (currentPage - 1) * CHARACTERS_PER_PAGE,
+    currentPage * CHARACTERS_PER_PAGE
+  );
+
   function clearFilters() {
     setGameFilter('All');
     setLocationFilter('All');
     setMethodFilter('All');
+    setPage(1);
+  }
+
+  function changePage(nextPage) {
+    if (nextPage < 1 || nextPage > totalPages) {
+      return;
+    }
+
+    setPage(nextPage);
+
+    document
+      .getElementById('character-gallery')
+      ?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
   }
 
   return (
@@ -143,13 +171,15 @@ function Gallery() {
         </span>
       </div>
 
-
       <div className="gallery-filters">
         <FilterDropdown
           label="Original game"
           value={gameFilter}
           options={games}
-          onChange={setGameFilter}
+          onChange={value => {
+            setGameFilter(value);
+            setPage(1);
+          }}
           allLabel="All games"
           color="lavender"
         />
@@ -158,7 +188,10 @@ function Gallery() {
           label="Unlock location"
           value={locationFilter}
           options={locations}
-          onChange={setLocationFilter}
+          onChange={value => {
+            setLocationFilter(value);
+            setPage(1);
+          }}
           allLabel="All locations"
           color="peach"
         />
@@ -167,7 +200,10 @@ function Gallery() {
           label="Unlock method"
           value={methodFilter}
           options={methods}
-          onChange={setMethodFilter}
+          onChange={value => {
+            setMethodFilter(value);
+            setPage(1);
+          }}
           allLabel="All methods"
           color="mint"
         />
@@ -181,55 +217,131 @@ function Gallery() {
         </button>
       </div>
 
-
       <p className="filter-count">
         Showing {filteredCharacters.length} of{' '}
         {fnafData.length} animatronics
       </p>
 
-      {filteredCharacters.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-illustration">
-            <Sparkles size={36} />
+      <div
+        id="character-gallery"
+        className="gallery-stage"
+      >
+        {filteredCharacters.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-illustration">
+              <Sparkles size={36} />
+            </div>
+
+            <h3>No matches found!</h3>
+
+            <p>
+              Try changing one of your filters.
+            </p>
+
+            <button
+              type="button"
+              className="button button-secondary"
+              onClick={clearFilters}
+            >
+              Clear filters
+            </button>
           </div>
+        ) : (
+          <>
+            <div className="gallery-page-info">
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
 
-          <h3>No matches found!</h3>
+              <span>
+                {visibleCharacters.length} characters
+                on this page
+              </span>
+            </div>
 
-          <p>
-            Try changing one of your filters.
-          </p>
+            <div className="character-grid">
+              {visibleCharacters.map(character => {
+                const index = fnafData.findIndex(
+                  entry => entry.id === character.id
+                );
 
-          <button
-            type="button"
-            className="button button-secondary"
-            onClick={clearFilters}
-          >
-            Clear filters
-          </button>
-        </div>
-      ) : (
-        <div className="character-grid">
-          {filteredCharacters.map(character => {
-            const index = fnafData.findIndex(
-              entry => entry.id === character.id
-            );
-
-            return (
-              <AnimatronicCard
-                key={character.id}
-                character={character}
-                accent={accents[index % accents.length]}
-                icon={
-                  <CharacterIcon
+                return (
+                  <AnimatronicCard
+                    key={character.id}
                     character={character}
-                    size="large"
+                    accent={
+                      accents[index % accents.length]
+                    }
+                    icon={
+                      <CharacterIcon
+                        character={character}
+                        size="large"
+                      />
+                    }
                   />
-                }
-              />
-            );
-          })}
-        </div>
-      )}
+                );
+              })}
+            </div>
+
+            {totalPages > 1 && (
+              <nav
+                className="gallery-pagination"
+                aria-label="Character gallery pages"
+              >
+                <button
+                  type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage === 1}
+                  onClick={() =>
+                    changePage(currentPage - 1)
+                  }
+                >
+                  ← Previous
+                </button>
+
+                <div className="pagination-numbers">
+                  {Array.from(
+                    { length: totalPages },
+                    (_, index) => index + 1
+                  ).map(pageNumber => (
+                    <button
+                      key={pageNumber}
+                      type="button"
+                      className={`pagination-number ${
+                        currentPage === pageNumber
+                          ? 'active'
+                          : ''
+                      }`}
+                      aria-label={`Page ${pageNumber}`}
+                      aria-current={
+                        currentPage === pageNumber
+                          ? 'page'
+                          : undefined
+                      }
+                      onClick={() =>
+                        changePage(pageNumber)
+                      }
+                    >
+                      {pageNumber}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage === totalPages}
+                  onClick={() =>
+                    changePage(currentPage + 1)
+                  }
+                >
+                  Next →
+                </button>
+              </nav>
+            )}
+          </>
+        )}
+      </div>
     </main>
   );
 }
@@ -287,9 +399,9 @@ function TeamBuilder({ parties, onCreateParty }) {
           </h1>
 
           <p>
-            Pick exactly four unique animatronics to
-            create a party. You can use a character in
-            more than one party.
+            Pick exactly four unique animatronics
+            to create a party. You can use a
+            character in more than one party.
           </p>
         </div>
 
@@ -333,7 +445,10 @@ function TeamBuilder({ parties, onCreateParty }) {
 
                 <span className="selection-check">
                   {active ? (
-                    <Check size={18} strokeWidth={3} />
+                    <Check
+                      size={18}
+                      strokeWidth={3}
+                    />
                   ) : (
                     <Plus size={18} />
                   )}
@@ -380,8 +495,9 @@ function TeamBuilder({ parties, onCreateParty }) {
         </h1>
 
         <p>
-          Mix and match animatronics to build your own
-          parties. Each party holds four characters.
+          Mix and match animatronics to build
+          your own parties. Each party holds
+          four characters.
         </p>
       </div>
 
@@ -412,7 +528,8 @@ function TeamBuilder({ parties, onCreateParty }) {
           <h3>No parties yet!</h3>
 
           <p>
-            Your next great team starts with four friends.
+            Your next great team starts with
+            four friends.
           </p>
 
           <button
@@ -458,8 +575,8 @@ function TeamBuilder({ parties, onCreateParty }) {
 
       <p className="helper-text below-list">
         Parties are saved for this session only.
-        Database saving and battle analysis are
-        planned features.
+        Database saving and battle analysis
+        are planned features.
       </p>
     </main>
   );
@@ -473,8 +590,8 @@ export default function App() {
       ...current,
       {
         id: crypto.randomUUID(),
-        memberIds,
-      },
+        memberIds
+      }
     ]);
   }
 
@@ -500,7 +617,9 @@ export default function App() {
                 end
                 to="/"
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : ''}`
+                  `nav-link ${
+                    isActive ? 'active' : ''
+                  }`
                 }
               >
                 Character Gallery
@@ -509,7 +628,9 @@ export default function App() {
               <NavLink
                 to="/team-builder"
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'active' : ''}`
+                  `nav-link ${
+                    isActive ? 'active' : ''
+                  }`
                 }
               >
                 Team Builder
@@ -519,7 +640,10 @@ export default function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<Gallery />} />
+          <Route
+            path="/"
+            element={<Gallery />}
+          />
 
           <Route
             path="/team-builder"
@@ -531,12 +655,13 @@ export default function App() {
             }
           />
 
-          <Route path="*" element={<Gallery />} />
+          <Route
+            path="*"
+            element={<Gallery />}
+          />
         </Routes>
 
         <footer className="site-footer">
-          Made for curious animatronics
-          <span>✦</span>
           Unofficial fan project
         </footer>
       </div>
