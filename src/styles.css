@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap");
+
 
 @font-face {
   font-family: "Berlin Sans";
@@ -8,7 +10,7 @@
 }
 
 :root {
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
   color: #29344e;
   background: #f9f7f2;
   font-synthesis: none;
@@ -89,7 +91,7 @@ a {
 .brand small {
   display: block;
   letter-spacing: 3px;
-  font: 800 10px system-ui, sans-serif;
+  font: 800 10px "Nunito", system-ui, sans-serif;
   color: #9c9bb2;
   margin-top: 6px;
 }
@@ -197,7 +199,7 @@ a {
 }
 
 .count-pill {
-  font: 750 13px system-ui, sans-serif;
+  font: 750 13px "Nunito", system-ui, sans-serif;
   background: #efe7f7;
   color: #8965af;
   padding: 5px 10px;
@@ -619,7 +621,7 @@ a {
 }
 
 .selection-count span {
-  font: 600 13px system-ui, sans-serif;
+  font: 600 13px "Nunito", system-ui, sans-serif;
   color: #aaa4b3;
 }
 
@@ -1814,4 +1816,1250 @@ a {
     width: 40px;
     height: 40px;
   }
+}
+
+/* ========================================
+   MOBILE PARTY PORTRAIT REMOVAL
+   ======================================== */
+
+@media (max-width: 760px) {
+
+  /* Selected portraits are clickable */
+  .mobile-party-portrait.removable {
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .mobile-party-portrait.removable:active {
+    transform: scale(0.93);
+  }
+
+  .mobile-party-portrait.removable:focus-visible {
+    outline: 3px solid #8c70c8;
+    outline-offset: 3px;
+  }
+
+  /* Small X in top-right corner */
+  .mobile-portrait-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #a05a80;
+    color: #ffffff;
+    border: 2px solid #f8f5ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Separate button for opening party details */
+  .mobile-party-expand-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #64538c;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .mobile-party-expand-button:focus-visible {
+    outline: 3px solid #8c70c8;
+    outline-offset: 2px;
+  }
+}
+
+/* ========================================
+   PRECISE MOBILE PORTRAIT REMOVAL
+   ======================================== */
+
+@media (max-width: 760px) {
+
+  /* The portrait itself is not clickable */
+  .mobile-party-portrait.filled {
+    position: relative;
+    cursor: default;
+  }
+
+  /* Only the X button removes a character */
+  .mobile-portrait-remove-button {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: 4px solid #f8f5ff;
+    border-radius: 50%;
+
+    background: #a05a80;
+    color: #ffffff;
+
+    cursor: pointer;
+    z-index: 5;
+
+    transition:
+      background 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .mobile-portrait-remove-button:hover {
+    background: #874468;
+  }
+
+  .mobile-portrait-remove-button:active {
+    transform: scale(0.9);
+  }
+
+  .mobile-portrait-remove-button:focus-visible {
+    outline: 3px solid #8c70c8;
+    outline-offset: 3px;
+  }
+
+  /* Keep the separate details toggle */
+  .mobile-party-expand-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 100%;
+    padding: 4px 8px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #64538c;
+
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+  .mobile-party-expand-button:focus-visible {
+    outline: 3px solid #8c70c8;
+    outline-offset: 2px;
+  }
+
+  /* Prevent old portrait-button styling from interfering */
+  .mobile-party-portrait.removable {
+    cursor: default;
+  }
+}
+
+/* ========================================
+   MOBILE GALLERY FILTER BAR
+   ======================================== */
+
+/* Hide mobile panel on desktop */
+.mobile-gallery-filter-panel {
+  display: none;
+}
+
+@media (max-width: 760px) {
+
+  /* Hide the regular Gallery filters */
+  .gallery-desktop-filters {
+    display: none;
+  }
+
+  /* Make room for the bottom bar */
+  .gallery-page {
+    padding-bottom: 110px;
+  }
+
+  /* Fixed bottom panel */
+  .mobile-gallery-filter-panel {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    background: #f8f5ff;
+    border-top: 2px solid #d8ccef;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 25px rgba(52, 42, 85, 0.14);
+
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Collapsed filter button */
+  .mobile-gallery-filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    padding: 17px 20px;
+
+    background: transparent;
+    border: none;
+
+    color: #34314f;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .mobile-gallery-filter-title,
+  .mobile-gallery-filter-right {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .mobile-gallery-filter-title strong {
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .mobile-gallery-filter-right {
+    color: #64538c;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Number of active filters */
+  .mobile-filter-active-count {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #e6def8;
+    color: #58448d;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  /* Expanded filter panel */
+  .mobile-gallery-filter-details {
+    padding: 10px 20px 22px;
+    border-top: 1px solid #e3dcf1;
+
+    max-height: 70dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-gallery-filter-details[hidden] {
+    display: none;
+  }
+
+  /* Stack filters vertically on mobile */
+  .mobile-gallery-filter-details .gallery-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin: 0;
+  }
+
+  /* Give each filter full width */
+  .mobile-gallery-filter-details .gallery-filters > * {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Clear filters button */
+  .mobile-gallery-filter-details .filter-reset {
+    align-self: flex-start;
+    width: auto;
+  }
+
+  /* Show characters button */
+  .mobile-show-characters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* Make sure expanded panel fits short screens */
+  .mobile-gallery-filter-panel.expanded {
+    max-height: 85dvh;
+    overflow-y: auto;
+  }
+
+  .mobile-gallery-filter-toggle:focus-visible {
+    outline: 3px solid #8c70c8;
+    outline-offset: -4px;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .mobile-gallery-filter-toggle {
+    padding: 15px 12px;
+    gap: 6px;
+  }
+
+  .mobile-gallery-filter-title,
+  .mobile-gallery-filter-right {
+    gap: 5px;
+  }
+
+  .mobile-gallery-filter-right {
+    font-size: 11px;
+  }
+
+  .mobile-filter-active-count {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   FIX MOBILE GALLERY FILTER SPACING
+   ======================================== */
+
+@media (max-width: 760px) {
+
+  .mobile-gallery-filter-details .gallery-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 14px;
+
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-gallery-filter-details .gallery-filters > * {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .mobile-gallery-filter-details {
+    height: auto;
+    min-height: 0;
+    max-height: 70dvh;
+    overflow-y: auto;
+    padding: 14px 18px 20px;
+  }
+
+  .mobile-gallery-filter-panel.expanded {
+    height: auto;
+    max-height: 85dvh;
+  }
+
+  .mobile-show-characters {
+    margin-top: 16px;
+  }
+}
+
+/* =========================================
+   RESPONSIVE CHARACTER GALLERY CORRECTIONS
+   ========================================= */
+
+/* Let character badges use their natural height */
+.character-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 6px;
+  min-height: 0;
+  margin-bottom: 12px;
+}
+
+/* Keep the Moveset section close to the badges */
+.card-body h4 {
+  border-top: 1px solid #eeeaf0;
+  padding-top: 12px;
+  margin: 12px 0;
+  font: 800 18px "Berlin Sans", system-ui, sans-serif;
+}
+
+/* Avoid stretching card content vertically */
+.gallery-stage .animatronic-card {
+  height: auto;
+  min-height: 0;
+}
+
+.gallery-stage .card-body {
+  height: auto;
+  min-height: 0;
+}
+
+/* =========================================
+   TABLET AND MOBILE
+   ========================================= */
+
+@media (max-width: 760px) {
+  .gallery-stage {
+    padding: 20px;
+  }
+
+  .gallery-stage .animatronic-card {
+    height: auto;
+    min-height: 0;
+  }
+
+  .gallery-stage .card-body {
+    height: auto;
+    min-height: 0;
+  }
+
+  .gallery-stage .character-badges {
+    min-height: 0;
+    margin-bottom: 10px;
+  }
+
+  .gallery-stage .card-body h4 {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding-top: 12px;
+  }
+
+  /* Keep the mobile filter controls grouped */
+  .mobile-gallery-filter-details .gallery-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-gallery-filter-details .gallery-filters > * {
+    flex: 0 0 auto;
+    min-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .mobile-gallery-filter-details {
+    height: auto;
+    min-height: 0;
+    max-height: 70dvh;
+    overflow-y: auto;
+    padding: 14px 18px 20px;
+  }
+}
+
+/* Maintain a consistent blue border on narrow screens */
+@media (max-width: 650px) {
+  .gallery-stage {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .gallery-stage {
+    padding: 16px;
+  }
+}
+
+
+/* Gallery cards: consistent proportions and spacing */
+.gallery-stage .character-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 240px), 1fr)
+  );
+  gap: 20px;
+}
+
+/* Cards fill their grid columns */
+.gallery-stage .animatronic-card {
+  width: 100%;
+  max-width: none;
+  justify-self: stretch;
+}
+
+/* Narrow screens: cards fill the available space */
+@media (max-width: 650px) {
+  .gallery-stage {
+    padding: 20px;
+  }
+
+  .gallery-stage .character-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .gallery-stage .animatronic-card {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ========================================
+   SAVED PARTY RESPONSIVE LAYOUT
+   ======================================== */
+
+/* Desktop: everything stays on one row */
+.party-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px;
+}
+
+.party-label {
+  flex-shrink: 0;
+}
+
+.party-row-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  margin-left: auto;
+  width: auto;
+  min-width: 0;
+}
+
+.party-row-actions .party-members {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: auto;
+  margin: 0;
+}
+
+.party-row-actions .party-analyze-button {
+  flex-shrink: 0;
+  width: auto;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Smaller screens: party name above icons and button */
+@media (max-width: 760px) {
+  .party-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .party-row-actions {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .party-row-actions .party-members {
+    gap: 5px;
+  }
+
+  .party-row-actions .party-analyze-button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* ========================================
+   PARTY ANALYSIS PAGE
+   ======================================== */
+
+.party-analysis-page .analysis-section {
+  background: #ffffff;
+  border: 1px solid #eae7ed;
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.party-analysis-page .analysis-section h2 {
+  font: 800 24px "Berlin Sans", system-ui, sans-serif;
+  margin: 0 0 20px;
+  color: #303650;
+}
+
+.party-analysis-page .analysis-character-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.party-analysis-page .analysis-character {
+  background: #f8f5ff;
+  border: 1px solid #e4dcf2;
+  border-radius: 18px;
+  padding: 18px;
+  min-width: 0;
+}
+
+.party-analysis-page .analysis-character h3 {
+  font: 800 21px "Berlin Sans", system-ui, sans-serif;
+  margin: 0 0 14px;
+  color: #34314f;
+}
+
+.party-analysis-page .analysis-character h4 {
+  margin: 20px 0 10px;
+  font-size: 14px;
+  color: #303650;
+}
+
+.party-analysis-page .analysis-role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.party-analysis-page .analysis-character ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.party-analysis-page .analysis-character li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1.5;
+}
+
+.party-analysis-page .analysis-character li strong {
+  display: block;
+  font-size: 13px;
+  color: #34314f;
+}
+
+.party-analysis-page .analysis-character li span {
+  display: block;
+  font-size: 12px;
+  color: #657087;
+}
+
+.party-analysis-page .analysis-role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.party-analysis-page .analysis-role-card {
+  background: #f4effb;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.party-analysis-page .analysis-role-count {
+  display: block;
+  font: 800 26px "Berlin Sans", system-ui, sans-serif;
+  color: #7756a4;
+  margin: 10px 0;
+}
+
+.party-analysis-page .analysis-feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.party-analysis-page .analysis-feedback-grid .analysis-section {
+  margin-bottom: 0;
+}
+
+.party-analysis-page .analysis-strengths {
+  background: #eff9f3;
+  border-color: #c9e8d8;
+}
+
+.party-analysis-page .analysis-weaknesses {
+  background: #fff7ee;
+  border-color: #f3dfc5;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .party-analysis-page .analysis-character-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .party-analysis-page .analysis-character-grid,
+  .party-analysis-page .analysis-feedback-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .party-analysis-page .analysis-section {
+    padding: 18px;
+  }
+}
+
+
+/* Compact, responsive analysis cards */
+.party-analysis-page .analysis-character-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 220px), 1fr)
+  );
+  gap: 14px;
+  justify-content: center;
+}
+
+.party-analysis-page .analysis-character {
+  width: 100%;
+  max-width: 260px;
+  justify-self: start;
+}
+
+/* Mobile: keep cards compact and centered */
+@media (max-width: 600px) {
+  .party-analysis-page .analysis-character-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, 220px), 1fr)
+    );
+    justify-content: center;
+  }
+
+  .party-analysis-page .analysis-character {
+    max-width: 280px;
+    justify-self: center;
+  }
+}
+
+
+
+
+/* ========================================
+   RESPONSIVE ANALYSIS CARD SIZING
+   ======================================== */
+
+.party-analysis-page .analysis-character-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.party-analysis-page .analysis-character {
+  flex: 0 1 240px;
+  width: 100%;
+  max-width: 240px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+  .party-analysis-page .analysis-character-grid {
+    gap: 10px;
+  }
+
+  .party-analysis-page .analysis-character {
+    padding: 12px;
+  }
+}
+
+
+/* ========================================
+   STRENGTHS & WEAKNESSES
+   ======================================== */
+
+/* Two equal panels across the available width */
+.party-analysis-page .analysis-feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Keep both panels equal in width */
+.party-analysis-page .analysis-feedback-grid .analysis-section {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+/* Heading: align icon and text */
+.party-analysis-page .analysis-feedback-grid h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 800 22px "Berlin Sans", system-ui, sans-serif;
+  line-height: 1.25;
+  margin: 0 0 20px;
+}
+
+/* Consistent icon sizing */
+.party-analysis-page .analysis-feedback-grid h2 svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+}
+
+/* More breathing room between bullet points */
+.party-analysis-page .analysis-feedback-grid ul {
+  margin: 0;
+  padding-left: 22px;
+  list-style: disc;
+}
+
+.party-analysis-page .analysis-feedback-grid li {
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: 3px;
+  margin-bottom: 12px;
+}
+
+.party-analysis-page .analysis-feedback-grid li:last-child {
+  margin-bottom: 0;
+}
+
+/* Strengths colors */
+.party-analysis-page .analysis-strengths {
+  background: #eff9f3;
+  border-color: #c9e8d8;
+}
+
+/* Weaknesses colors */
+.party-analysis-page .analysis-weaknesses {
+  background: #fff7ee;
+  border-color: #f3dfc5;
+}
+
+/* Stack panels only when the screen is narrow */
+@media (max-width: 650px) {
+  .party-analysis-page .analysis-feedback-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .party-analysis-page .analysis-feedback-grid .analysis-section {
+    padding: 18px;
+  }
+
+  .party-analysis-page .analysis-feedback-grid h2 {
+    font-size: 20px;
+    gap: 9px;
+  }
+}
+/* Custom Delete Party confirmation dialog */
+.delete-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(38, 34, 61, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.delete-modal {
+  width: min(100%, 440px);
+  padding: 34px 30px 28px;
+  border: 2px solid #e9def3;
+  border-radius: 26px;
+  background: #fffdfb;
+  box-shadow: 0 24px 70px rgba(38, 34, 61, 0.28);
+  text-align: center;
+  animation: delete-modal-enter 0.18s ease-out;
+}
+
+.delete-modal-icon {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 20px;
+  background: #ffe8e7;
+  color: #c75560;
+}
+
+.delete-modal h2 {
+  margin: 0 0 10px;
+  color: #34314f;
+  font: 800 29px "Berlin Sans", system-ui, sans-serif;
+}
+
+.delete-modal p {
+  margin: 0 auto 25px;
+  max-width: 330px;
+  color: #72758a;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.delete-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.delete-modal-actions .button {
+  min-width: 135px;
+}
+
+.delete-modal-confirm {
+  background: #e8777e;
+  color: #fff;
+  box-shadow: 0 4px 0 #c85c65;
+}
+
+.delete-modal-confirm:hover:not(:disabled) {
+  background: #db6872;
+}
+
+.delete-modal-confirm:disabled {
+  opacity: 0.65;
+}
+
+.delete-modal button:focus-visible {
+  outline: 3px solid #8065bb;
+  outline-offset: 3px;
+}
+
+@keyframes delete-modal-enter {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 440px) {
+  .delete-modal { padding: 28px 18px 22px; }
+  .delete-modal-actions { flex-direction: column-reverse; }
+  .delete-modal-actions .button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .delete-modal { animation: none; }
+}
+/* Party deletion controls — responsive styling */
+.parties-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.party-heading-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.party-heading-actions .button { white-space: nowrap; }
+.party-bulk-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.party-select-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border: 1px solid #e3d6f4;
+  border-radius: 13px;
+  background: #f4effb;
+  color: #655084;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.party-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex: 0 0 22px;
+  border: 2px solid #b7a2d4;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.party-checkbox::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  transform: scale(0);
+  transition: transform 0.12s;
+  clip-path: polygon(14% 48%, 0 63%, 39% 100%, 100% 22%, 84% 8%, 37% 69%);
+  background: white;
+}
+.party-checkbox:checked {
+  background: #9071c5;
+  border-color: #9071c5;
+}
+.party-checkbox:checked::before { transform: scale(1); }
+.party-checkbox:focus-visible { outline: 3px solid #efb2d0; outline-offset: 3px; }
+.party-checkbox:disabled { opacity: 0.5; cursor: not-allowed; }
+.party-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-left: auto;
+  min-width: 0;
+}
+.party-action-buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+.party-action-buttons .button { flex: 0 0 auto; }
+.party-trash-button {
+  width: 43px;
+  min-width: 43px;
+  height: 43px;
+  padding: 0;
+  color: #b42318;
+  background: #fce8eb;
+}
+.party-trash-button:hover:not(:disabled) { background: #f9d7dd; }
+@media (max-width: 760px) {
+  .parties-section-heading { align-items: flex-start; flex-direction: column; }
+  .party-heading-actions { width: 100%; }
+  .party-heading-actions .button { flex: 1 1 auto; }
+  .party-row { flex-wrap: wrap; }
+  .party-row-actions {
+    width: 100%;
+    flex: 1 1 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .party-row-actions .party-members { width: auto; margin: 0; flex: 0 1 auto; }
+  .party-action-buttons { margin-left: auto; }
+}
+@media (max-width: 420px) {
+  .party-heading-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .party-heading-actions .button { padding: 11px 9px; font-size: 12px; white-space: normal; }
+  .party-row-actions { flex-wrap: wrap; }
+  .party-action-buttons { margin-left: auto; }
+  .party-row { padding: 14px; }
+  .party-bulk-controls { align-items: stretch; }
+}
+
+/* Party recommendation cards — append to src/styles.css */
+.party-analysis-page .analysis-recommendations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.party-analysis-page .analysis-recommendation {
+  background: #f7f3ff;
+  border: 1px solid #ded3f5;
+  border-radius: 16px;
+  padding: 18px;
+}
+.party-analysis-page .analysis-recommendation h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.party-analysis-page .analysis-recommendation p {
+  margin: 0;
+  line-height: 1.55;
+}
+/* Analysis layout polish — append at the VERY END of src/styles.css */
+.party-analysis-page .analysis-feedback-grid {
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.party-analysis-page .analysis-feedback-grid > .analysis-section {
+  min-width: 0;
+}
+.party-analysis-page .analysis-feedback-grid + .analysis-section {
+  margin-top: 24px;
+}
+.party-analysis-page .analysis-recommendations {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+.party-analysis-page .analysis-recommendation {
+  min-width: 0;
+  background: #f8f5ff;
+  border: 1px solid #ded3f5;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 3px 12px rgba(50, 36, 90, 0.04);
+}
+.party-analysis-page .analysis-recommendation h3 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.party-analysis-page .analysis-recommendation p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.party-analysis-page .analysis-recommendation h3 + p {
+  border-top: 1px solid #e6ddf7;
+  padding-top: 12px;
+}
+@media (max-width: 900px) {
+  .party-analysis-page .analysis-recommendations {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .party-analysis-page .analysis-feedback-grid { gap: 16px; }
+  .party-analysis-page .analysis-recommendations {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .party-analysis-page .analysis-recommendation { padding: 18px; }
+}
+/* Character portraits at the bottom of recommendation cards */
+.party-analysis-page .swap-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #e6ddf7;
+}
+.party-analysis-page .swap-character {
+  min-width: 0;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+.party-analysis-page .swap-character-portrait {
+  width: 76px;
+  height: 76px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #eee7ff;
+  border: 1px solid #ded3f5;
+  font-size: 23px;
+  font-weight: 800;
+}
+.party-analysis-page .swap-character-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.party-analysis-page .swap-character strong {
+  font-size: 13px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.party-analysis-page .swap-character small {
+  color: #756e8e;
+  font-size: 11px;
+}
+.party-analysis-page .swap-preview-arrow {
+  flex: 0 0 auto;
+  color: #8a77ba;
+}
+@media (max-width: 420px) {
+  .party-analysis-page .swap-character-portrait { width: 64px; height: 64px; }
+  .party-analysis-page .swap-preview { gap: 8px; }
+}
+/* Larger Strengths and Weaknesses text */
+.party-analysis-page .analysis-feedback-grid li {
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+/* Custom Strengths and Weaknesses bullets */
+
+.party-analysis-page .analysis-feedback-grid ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.party-analysis-page .analysis-feedback-grid li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+/* Green stars for strengths */
+.party-analysis-page .analysis-strengths li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #59a984;
+  font-size: 18px;
+}
+
+/* Orange diamonds for weaknesses */
+.party-analysis-page .analysis-weaknesses li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e2a15c;
+  font-size: 21px;
+  line-height: 1;
 }
