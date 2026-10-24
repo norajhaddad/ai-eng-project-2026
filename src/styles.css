@@ -1149,7 +1149,7 @@ a {
 
 /* Main site background */
 .app-layout {
-  background: #EAF4F8;
+  background: transparent;
 }
 
 /* Keep the navigation clean */
@@ -4660,6 +4660,8 @@ a {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 5;
+  border-radius: inherit;
 
   background: linear-gradient(
     110deg,
@@ -4871,4 +4873,454 @@ a {
   .animatronic-card .card-banner::before {
     animation: none;
   }
+}
+/* ===== FRUTIGER AERO BACKGROUND TEST ===== */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: url("./assets/frutiger-aero-bg.png")
+    center center / cover fixed no-repeat !important;
+}
+
+#root {
+  background: transparent !important;
+}
+/* ===== FROSTED GLASS GALLERY ===== */
+
+.gallery-stage {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  box-shadow:
+    0 8px 32px rgba(30, 90, 140, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+
+/* ==========================================
+   FNAF WORLD — FRUTIGER AERO MOCKUP CARDS
+   ========================================== */
+
+/* Color themes */
+.gallery-page .aero-card.card-coral,
+.gallery-page .aero-card.card-peach {
+  --aero-top: #ffd9c7;
+  --aero-bottom: #e7f8f5;
+  --aero-accent: #f5a782;
+  --aero-ear: #bd805b;
+  --aero-ear-inner: #f4c0a2;
+  --aero-move: #ffe1cf;
+}
+
+.gallery-page .aero-card.card-purple,
+.gallery-page .aero-card.card-violet {
+  --aero-top: #ded0ff;
+  --aero-bottom: #e4edff;
+  --aero-accent: #a88ae9;
+  --aero-ear: #a887e5;
+  --aero-ear-inner: #f8c4ef;
+  --aero-move: #e4d5ff;
+}
+
+.gallery-page .aero-card.card-yellow,
+.gallery-page .aero-card.card-gold {
+  --aero-top: #ffe9a7;
+  --aero-bottom: #f4f7df;
+  --aero-accent: #f7c64f;
+  --aero-ear: #ffd24f;
+  --aero-ear-inner: #fff4a4;
+  --aero-move: #fff0ba;
+}
+
+.gallery-page .aero-card.card-green,
+.gallery-page .aero-card.card-mint {
+  --aero-top: #bdeee0;
+  --aero-bottom: #daf6f3;
+  --aero-accent: #69cfad;
+  --aero-ear: #56c5a1;
+  --aero-ear-inner: #ffbdd5;
+  --aero-move: #d0f5e7;
+}
+
+/* Whole card */
+.gallery-page .aero-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden; /* confine the full-card shimmer to rounded card edges */
+  border: 2px solid rgba(255,255,255,.95);
+  border-radius: 27px;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.92),
+    var(--aero-bottom)
+  );
+  box-shadow:
+    0 7px 0 var(--card-depth, #5ca5cf),
+    0 14px 25px rgba(24,83,145,.22),
+    inset 0 2px 0 white;
+}
+
+/* Banner */
+.gallery-page .aero-card .card-banner {
+  position: relative;
+  height: 155px;
+  overflow: visible;
+  border-radius: 25px 25px 0 0;
+  background:
+    radial-gradient(
+      circle at 82% 35%,
+      rgba(255,255,255,.65),
+      transparent 24%
+    ),
+    linear-gradient(
+      155deg,
+      rgba(255,255,255,.85),
+      var(--aero-top) 70%
+    );
+  isolation: isolate;
+}
+
+/* Restore delicate twinkles without the old oversized overlays. */
+.gallery-page .aero-card .card-banner::before {
+  content: "✦";
+  display: block;
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  left: 18px;
+  font-size: 14px;
+  color: white;
+  text-shadow: 44px 52px 0 rgba(255,255,255,.85), 170px 6px 0 white,
+    190px 86px 0 rgba(255,255,255,.85);
+  animation: aero-twinkle 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+.gallery-page .aero-card .card-banner::after { display: none; }
+@keyframes aero-twinkle { 0%,100% { opacity:.4; } 50% { opacity:1; } }
+
+/* Curved glass reflection */
+.gallery-page .aero-banner-gloss {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.gallery-page .aero-banner-gloss::before {
+  content: "";
+  position: absolute;
+  top: -85px;
+  left: -12%;
+  width: 125%;
+  height: 145px;
+  border-radius: 0 0 50% 50%;
+  transform: rotate(-7deg);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.82),
+    rgba(255,255,255,.1)
+  );
+}
+
+/* Mascot and badge */
+.gallery-page .aero-mascot {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: -8px;
+  width: 110px;
+  height: 112px;
+  transform: translateX(-50%);
+}
+
+.gallery-page .aero-letter-badge {
+  position: absolute;
+  z-index: 2;
+  top: 23px;
+  left: 15px;
+  width: 80px;
+  height: 80px;
+  transform: rotate(-8deg);
+  border-radius: 23px;
+  background: var(--aero-accent);
+  border: 4px solid white;
+  box-shadow:
+    0 6px 0 rgba(46,92,128,.24),
+    0 10px 15px rgba(26,65,106,.18),
+    inset 0 5px 8px rgba(255,255,255,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Preserve original avatar color and lettering */
+.gallery-page .aero-letter-badge .character-avatar {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: inherit;
+  transform: none;
+  font-size: 30px;
+}
+
+/* Character ears */
+.gallery-page .aero-ears {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gallery-page .aero-ear {
+  position: absolute;
+  top: 0;
+  width: 42px;
+  height: 44px;
+  background: var(--aero-ear);
+  border: 3px solid white;
+  box-shadow: 0 3px 5px rgba(50,85,130,.15);
+}
+
+.gallery-page .aero-ear::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background: var(--aero-ear-inner);
+  border-radius: inherit;
+}
+
+.gallery-page .aero-ear.left {
+  left: -6px;
+  transform: rotate(-20deg);
+}
+
+.gallery-page .aero-ear.right {
+  right: -6px;
+  transform: rotate(20deg);
+}
+
+/* Freddy — round bear ears */
+.gallery-page .aero-bear .aero-ear {
+  border-radius: 50%;
+}
+
+/* Bonnie — tall but proportional bunny ears */
+.gallery-page .aero-bunny .aero-ear {
+  top: -27px;
+  width: 31px;
+  height: 66px;
+  border-radius: 55% 55% 30% 30%;
+}
+
+.gallery-page .aero-bunny .aero-ear.left {
+  left: 12px;
+  transform: rotate(-15deg);
+}
+
+.gallery-page .aero-bunny .aero-ear.right {
+  right: 12px;
+  transform: rotate(15deg);
+}
+
+/* Foxy — upright pointed ears */
+.gallery-page .aero-fox .aero-ear {
+  top: -8px;
+  width: 44px;
+  height: 49px;
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.gallery-page .aero-fox .aero-ear::after {
+  inset: 11px 9px 5px;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.gallery-page .aero-fox .aero-ear.left {
+  left: -8px;
+  transform: rotate(-12deg);
+}
+
+.gallery-page .aero-fox .aero-ear.right {
+  right: -8px;
+  transform: rotate(12deg);
+}
+
+/* Chica — three feather-like tufts */
+.gallery-page .aero-chick .aero-ear {
+  top: -7px;
+  width: 25px;
+  height: 40px;
+  border-radius: 70% 70% 25% 25%;
+}
+
+.gallery-page .aero-chick .aero-ear.left {
+  left: 33px;
+  transform: rotate(-30deg);
+}
+
+.gallery-page .aero-chick .aero-ear.right {
+  right: 33px;
+  transform: rotate(30deg);
+}
+
+/* Bubbles */
+.gallery-page .aero-bubble {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.9);
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255,255,255,.9),
+    rgba(255,255,255,.08) 55%,
+    rgba(150,220,255,.18)
+  );
+  box-shadow: inset 0 0 6px rgba(255,255,255,.8);
+}
+
+.gallery-page .aero-bubble-one {
+  right: 14px;
+  top: 53px;
+  width: 29px;
+  height: 29px;
+}
+
+.gallery-page .aero-bubble-two {
+  left: 16px;
+  bottom: 19px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Extra sparkle */
+.gallery-page .aero-extra-sparkle {
+  position: absolute;
+  right: 22px;
+  top: 15px;
+  color: white;
+  font-size: 24px;
+  text-shadow: 0 0 7px white;
+}
+
+/* Translucent card body */
+.gallery-page .aero-card .card-body {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  padding: 16px 15px 18px;
+  border-radius: 0 0 25px 25px;
+  background: linear-gradient(180deg, rgba(255,255,255,.94), var(--aero-bottom));
+}
+
+/* Decorative symbol in the lower-right */
+.gallery-page .aero-body-decoration {
+  position: absolute;
+  right: 13px;
+  top: 105px;
+  font-size: 54px;
+  opacity: .13;
+  pointer-events: none;
+  filter: grayscale(.25);
+}
+
+/* Character names */
+.gallery-page .aero-card .card-title-line h3 {
+  font-size: 23px;
+  line-height: 1.15;
+}
+
+/* Pill badges */
+.gallery-page .aero-card .unlock-badge,
+.gallery-page .aero-card .role-tag {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,.8),
+    0 2px 0 rgba(65,100,140,.12);
+}
+
+/* Moveset with icons */
+.gallery-page .aero-move-list {
+  display: grid;
+  gap: 11px;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery-page .aero-move-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.gallery-page .aero-move-icon {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #7154a3;
+  background: linear-gradient(
+    145deg,
+    white,
+    var(--aero-move)
+  );
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow:
+    inset 0 2px 2px white,
+    0 3px 5px rgba(55,105,145,.12);
+}
+
+.gallery-page .aero-move-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.gallery-page .aero-move-text strong {
+  display: block;
+  font-size: 13px;
+}
+
+.gallery-page .aero-move-text > span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+/* Keep the original hover shimmer and name effects */
+/* No wobble or bounce animations */
+
+/* Alignment and readability fixes; limited to the Aero gallery. */
+.gallery-page .aero-card { min-width: 0; height: 100%; }
+.gallery-page .aero-card .card-banner { flex: 0 0 155px; }
+.gallery-page .aero-card .card-body { flex: 1 1 auto; color: #29344e; }
+.gallery-page .aero-card .card-title-line h3 { color: #283854; opacity: 1; text-shadow: none; }
+.gallery-page .aero-card .character-subtitle,
+.gallery-page .aero-card .aero-move-text > span { color: #465574; opacity: 1; }
+.gallery-page .aero-card .aero-move-text strong { color: #273750; }
+.gallery-page .aero-card .aero-mascot { pointer-events: none; }
+.gallery-page .aero-card .aero-letter-badge { left: 50%; transform: translateX(-50%) rotate(-8deg); }
+.gallery-page .aero-card .aero-body-decoration { opacity: .09; }
+.gallery-page .aero-card .card-banner .banner-sparkle { position: absolute; right: 22px; top: 20px; }
+.gallery-page .aero-card .role-tag,
+.gallery-page .aero-card .unlock-badge { color: #425579; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .gallery-page .aero-card .card-banner::before { animation: none; }
 }
