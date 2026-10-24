@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Puzzle, Star, MapPin } from 'lucide-react';
 
 export default function AnimatronicCard({
@@ -36,7 +37,14 @@ export default function AnimatronicCard({
 
       <div className="card-body">
         <div className="card-title-line">
-          <h3>{character.name}</h3>
+          <h3>
+            <Link
+              to={`/characters/${character.id}`}
+              className="character-profile-link"
+            >
+              {character.name}
+            </Link>
+          </h3>
 
           {isStarter && (
             <span className="starter-tag">

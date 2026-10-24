@@ -3063,3 +3063,1812 @@ a {
   font-size: 21px;
   line-height: 1;
 }
+
+/* Character encyclopedia */
+
+.character-profile-page {
+  padding-bottom: 64px;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 36px;
+  align-items: center;
+  margin: 32px 0;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #eee7e9;
+  border-radius: 24px;
+}
+
+.profile-portrait {
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f7f0ff;
+  text-align: center;
+}
+
+.profile-portrait img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+}
+
+.profile-intro h1 {
+  margin: 12px 0 20px;
+}
+
+.profile-role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.profile-role {
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: #f3eaff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-section {
+  margin: 28px 0;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #eee7e9;
+  border-radius: 22px;
+}
+
+.profile-moves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.profile-move {
+  padding: 12px 16px;
+  background: #f7f4ff;
+  border-radius: 12px;
+}
+
+.profile-section details {
+  padding: 18px 0;
+  border-bottom: 1px solid #eee7e9;
+}
+
+.profile-section summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.profile-section details p {
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 650px) {
+  .profile-hero {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .profile-section {
+    padding: 20px;
+  }
+}
+
+
+
+/* Clickable character names */
+
+.character-profile-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 1px;
+  text-decoration-thickness: 1.5px;
+  transition: color 0.2s ease;
+}
+
+.character-profile-link:hover {
+  color: #e88faa;
+}
+
+.character-profile-link:focus-visible {
+  color: #e88faa;
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Star bullets for character encyclopedia */
+
+.character-profile-page .profile-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.character-profile-page .profile-section li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.character-profile-page .profile-section li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #e88faa;
+  font-size: 15px;
+}
+
+/* =====================================
+   FNaF World Encyclopedia Theme
+   ===================================== */
+
+.character-profile-page {
+  --world-blue: #48baf4;
+  --world-green: #66d58d;
+  --world-yellow: #ffce55;
+  --world-ink: #22456a;
+
+  padding: 24px 28px 48px;
+  background: linear-gradient(
+    160deg,
+    #e1f7ff 0%,
+    #e5fff0 58%,
+    #f4ffe2 100%
+  );
+  border-radius: 18px;
+  color: var(--world-ink);
+}
+
+/* Back link */
+
+.character-profile-page .back-button {
+  color: #217bb0;
+  font-weight: 700;
+}
+
+/* Character header */
+
+.character-profile-page .profile-hero {
+  background: linear-gradient(
+    115deg,
+    #73cfff 0%,
+    #9be7d5 55%,
+    #bdf39b 100%
+  );
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 5px 0 #52b9a2;
+  padding: 24px;
+  margin: 22px 0 26px;
+  gap: 24px;
+}
+
+.character-profile-page .profile-portrait {
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  min-height: 190px;
+}
+
+.character-profile-page .profile-intro h1 {
+  color: #184e79;
+  margin: 8px 0 14px;
+}
+
+.character-profile-page .profile-intro p {
+  margin: 7px 0;
+}
+
+.character-profile-page .eyebrow {
+  color: #246a9a;
+}
+
+/* Role badges */
+
+.character-profile-page .profile-role {
+  background: #fff5c7;
+  color: #77601e;
+  border: 1px solid #f5d86e;
+}
+
+/* Main sections */
+
+.character-profile-page .profile-section {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #a7e4d3;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  box-shadow: 0 3px 0 rgba(63, 171, 152, 0.12);
+}
+
+.character-profile-page .profile-section h2 {
+  color: #2384b4;
+  margin: 0 0 12px;
+}
+
+/* Moves */
+
+.character-profile-page .profile-moves {
+  gap: 8px;
+}
+
+.character-profile-page .profile-move {
+  background: #dff7ff;
+  border: 1px solid #9bdff5;
+  border-radius: 9px;
+  color: #256b96;
+  padding: 9px 13px;
+  font-weight: 700;
+}
+
+/* Expandable encyclopedia sections */
+
+.character-profile-page .profile-section details {
+  padding: 0;
+  border-bottom: 1px solid #d8eee8;
+}
+
+.character-profile-page .profile-section details:last-child {
+  border-bottom: none;
+}
+
+.character-profile-page .profile-section summary {
+  background: transparent;
+  color: #267e9d;
+  border-radius: 7px;
+  padding: 11px 8px;
+  font-weight: 700;
+  transition: background 0.15s ease;
+}
+
+.character-profile-page .profile-section summary:hover {
+  background: #e3f8ef;
+}
+
+.character-profile-page .profile-section details[open] > summary {
+  background: #d5f5e6;
+  color: #217b61;
+}
+
+/* Compact readable text */
+
+.character-profile-page .profile-section p {
+  margin: 10px 4px;
+  line-height: 1.5;
+}
+
+.character-profile-page .profile-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 12px 4px;
+}
+
+.character-profile-page .profile-section li {
+  position: relative;
+  padding-left: 23px;
+  margin-bottom: 7px;
+  line-height: 1.5;
+}
+
+.character-profile-page .profile-section li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #30bfa0;
+  font-size: 16px;
+}
+
+/* Theory cards */
+
+.character-profile-page .profile-theories {
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.character-profile-page .profile-theory {
+  background: #edfbff;
+  border: 1px solid #a7dfed;
+  border-left: 4px solid #4bb7e8;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.character-profile-page .profile-theory h3 {
+  color: #216fa4;
+  margin-bottom: 8px;
+}
+
+.character-profile-page .profile-theory h4 {
+  color: #258e75;
+  margin: 12px 0 6px;
+}
+
+.character-profile-page .theory-rating {
+  background: #fff0b8;
+  color: #8a641b;
+  border-radius: 7px;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .character-profile-page {
+    padding: 18px 14px 36px;
+  }
+
+  .character-profile-page .profile-hero {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .character-profile-page .profile-section {
+    padding: 16px;
+  }
+}
+
+/* =====================================
+   Encyclopedia Layout Refinement
+   ===================================== */
+
+/* Remove the giant green background block */
+.character-profile-page {
+  background: transparent;
+  border-radius: 0;
+  padding-bottom: 35px;
+}
+
+/* More playful character header */
+.character-profile-page .profile-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(
+    115deg,
+    #65c7ff 0%,
+    #91e3d2 52%,
+    #a9ed8a 100%
+  );
+  box-shadow: 0 6px 0 #54b99b;
+}
+
+/* Decorative sparkles */
+.character-profile-page .profile-hero::before {
+  content: "✦";
+  position: absolute;
+  top: 15px;
+  right: 32px;
+  font-size: 38px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.character-profile-page .profile-hero::after {
+  content: "✧";
+  position: absolute;
+  bottom: 10px;
+  right: 95px;
+  font-size: 58px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Make the moves section a simple colorful strip */
+.character-profile-page .profile-section:has(.profile-moves) {
+  background: #d9f5ff;
+  border: none;
+  border-left: 5px solid #46b7ec;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+/* Remove the heavy card appearance from the encyclopedia */
+.character-profile-page .profile-section:has(details) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 10px 0;
+}
+
+/* Stronger encyclopedia heading */
+.character-profile-page .profile-section:has(details) h2 {
+  color: #247aa9;
+  font-size: 23px;
+  margin-bottom: 16px;
+}
+
+/* Alternate colors in the expandable topics */
+.character-profile-page .profile-section details {
+  border-bottom: 1px solid #c9e3e8;
+}
+
+.character-profile-page .profile-section details:nth-of-type(odd) > summary {
+  color: #2086b6;
+}
+
+.character-profile-page .profile-section details:nth-of-type(even) > summary {
+  color: #279c77;
+}
+
+/* Add small star icons to each topic */
+.character-profile-page .profile-section details > summary::before {
+  content: "✦";
+  margin-right: 8px;
+  color: #f2b83d;
+  font-size: 14px;
+}
+
+/* Highlight an expanded topic */
+.character-profile-page .profile-section details[open] {
+  background: #f3fcff;
+  border-radius: 10px;
+  margin: 8px 0;
+  padding: 0 12px 10px;
+}
+
+/* Tighter overall spacing */
+.character-profile-page .profile-section {
+  margin: 14px 0;
+}
+
+/* =====================================
+   Encyclopedia Topic Tiles
+   ===================================== */
+
+/* Two-column layout */
+.character-profile-page .profile-section:has(details) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+/* Heading spans both columns */
+.character-profile-page .profile-section:has(details) > h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+/* Individual topic tiles */
+.character-profile-page .profile-section:has(details) > details {
+  margin: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #d8f1ff;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Alternate topic colors */
+.character-profile-page .profile-section > details:nth-of-type(1) {
+  background: #d8f1ff;
+  border-color: #9ed9f5;
+}
+
+.character-profile-page .profile-section > details:nth-of-type(2) {
+  background: #ddf7dd;
+  border-color: #a9e6ad;
+}
+
+.character-profile-page .profile-section > details:nth-of-type(3) {
+  background: #fff1c9;
+  border-color: #f2dc96;
+}
+
+.character-profile-page .profile-section > details:nth-of-type(4) {
+  background: #e8e4ff;
+  border-color: #c9c0f5;
+}
+
+.character-profile-page .profile-section > details:nth-of-type(5) {
+  background: #d5f7ed;
+  border-color: #9ce4d1;
+}
+
+.character-profile-page .profile-section > details:nth-of-type(6) {
+  background: #ffe2ec;
+  border-color: #f2b7ce;
+}
+
+/* Tile headings */
+.character-profile-page .profile-section > details > summary {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px;
+  background: transparent;
+  color: #244b68;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.character-profile-page .profile-section > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Gold sparkle */
+.character-profile-page .profile-section > details > summary::before {
+  content: "✦";
+  color: #f0ad32;
+  font-size: 21px;
+  margin-right: 2px;
+}
+
+/* Arrow at the right */
+.character-profile-page .profile-section > details > summary::after {
+  content: "⌄";
+  margin-left: auto;
+  color: #39758c;
+  font-size: 23px;
+  transition: transform 0.2s ease;
+}
+
+.character-profile-page .profile-section > details[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+/* Hover animation */
+@media (hover: hover) {
+  .character-profile-page .profile-section > details:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 rgba(42, 127, 142, 0.16);
+  }
+}
+
+/* Opened tile */
+.character-profile-page .profile-section > details[open] {
+  padding: 0 0 12px;
+  box-shadow: 0 5px 0 rgba(42, 127, 142, 0.12);
+}
+
+/* Text inside opened tiles */
+.character-profile-page .profile-section > details > p,
+.character-profile-page .profile-section > details > ul,
+.character-profile-page .profile-section > details > .profile-theories {
+  margin: 8px 18px 12px;
+}
+
+.character-profile-page .profile-section > details li {
+  margin-bottom: 8px;
+}
+
+/* Keep theory content readable */
+.character-profile-page .profile-theory {
+  padding: 14px;
+}
+
+/* Mobile layout */
+@media (max-width: 650px) {
+  .character-profile-page .profile-section:has(details) {
+    grid-template-columns: 1fr;
+  }
+
+  .character-profile-page .profile-section > details > summary {
+    min-height: 64px;
+    padding: 15px;
+  }
+}
+
+/* =====================================
+   Encyclopedia Interactive Topic Tiles
+   ===================================== */
+
+.character-profile-page .profile-explore {
+  margin: 28px 0 45px;
+}
+
+.profile-explore-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.profile-explore-heading h2 {
+  margin: 0;
+  color: #217fae;
+  font-size: 24px;
+}
+
+.profile-explore-heading > span {
+  color: #6295a9;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Topic buttons */
+
+.profile-topic-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 90px;
+  width: 100%;
+  padding: 18px;
+  text-align: left;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  cursor: pointer;
+  font: inherit;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.topic-tile-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.topic-tile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.topic-tile-text strong {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.topic-tile-text small {
+  font-size: 12px;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+.topic-tile-arrow {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.profile-topic-tile.is-active .topic-tile-arrow {
+  transform: rotate(90deg);
+}
+
+.profile-topic-tile:focus-visible {
+  outline: 3px solid #226a9a;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .profile-topic-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 rgba(37, 121, 143, 0.15);
+  }
+}
+
+/* Individual tile colors */
+
+.topic-background {
+  background: #d8f1ff;
+  border-color: #9ed9f5;
+  color: #247eac;
+}
+
+.topic-appearances {
+  background: #ddf7dd;
+  border-color: #a9e6ad;
+  color: #23865e;
+}
+
+.topic-trivia {
+  background: #fff1c9;
+  border-color: #f2dc96;
+  color: #97631c;
+}
+
+.topic-behindTheScenes {
+  background: #e8e4ff;
+  border-color: #c9c0f5;
+  color: #6c58ad;
+}
+
+.topic-fnafWorld {
+  background: #d5f7ed;
+  border-color: #9ce4d1;
+  color: #168c7e;
+}
+
+.topic-theories {
+  background: #ffe2ec;
+  border-color: #f2b7ce;
+  color: #a64673;
+}
+
+/* Active topic */
+
+.profile-topic-tile.is-active {
+  box-shadow: 0 5px 0 rgba(37, 121, 143, 0.2);
+}
+
+/* Full-width information panel */
+
+.profile-topic-panel {
+  margin-top: 20px;
+  padding: 24px 28px;
+  border: 2px solid #b4dfec;
+  border-radius: 18px;
+  background: #f5fcff;
+  box-shadow: 0 5px 0 rgba(37, 121, 143, 0.1);
+}
+
+.profile-topic-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #cce8ef;
+}
+
+.profile-topic-panel-heading h3 {
+  margin: 0;
+  font-size: 21px;
+  color: #267ba9;
+}
+
+.topic-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 9px;
+  background: #e0f2fa;
+  color: #267ba9;
+  cursor: pointer;
+}
+
+.topic-panel-close:hover {
+  background: #cceaf8;
+}
+
+/* Content spacing */
+
+.profile-topic-panel-content {
+  padding-top: 16px;
+  color: #24486c;
+}
+
+.profile-topic-panel-content p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.profile-topic-panel-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-topic-panel-content li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.profile-topic-panel-content li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #35bda4;
+  font-size: 17px;
+}
+
+/* Theory cards inside panel */
+
+.profile-topic-panel .profile-theories {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.profile-topic-panel .profile-theory {
+  background: #ffffff;
+  border: 1px solid #c9dff0;
+  border-left: 5px solid #e7a0bf;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.profile-topic-panel .profile-theory h3 {
+  color: #9d4e84;
+}
+
+.profile-topic-panel .profile-theory h4 {
+  color: #258d82;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .profile-topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-explore-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .profile-topic-tile {
+    min-height: 75px;
+    padding: 14px;
+  }
+
+  .profile-topic-panel {
+    padding: 18px;
+  }
+}
+
+/* Mobile encyclopedia: compact topic navigation */
+
+@media (max-width: 650px) {
+  .profile-topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .profile-topic-tile {
+    min-height: 76px;
+    padding: 11px;
+    gap: 8px;
+  }
+
+  .topic-tile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .topic-tile-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .topic-tile-text strong {
+    font-size: 12px;
+  }
+
+  .topic-tile-text small {
+    display: none;
+  }
+
+  .topic-tile-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profile-topic-panel {
+    margin-top: 12px;
+    padding: 15px;
+  }
+
+  .profile-topic-panel-content {
+    padding-top: 12px;
+  }
+}
+
+/* =====================================
+   Responsive Encyclopedia Topics
+   ===================================== */
+
+/* Desktop uses the existing grid and bottom panel */
+.profile-desktop-topics {
+  display: block;
+}
+
+.profile-mobile-topics {
+  display: none;
+}
+
+/* Mobile uses inline panels */
+@media (max-width: 650px) {
+  .profile-desktop-topics {
+    display: none;
+  }
+
+  .profile-mobile-topics {
+    display: block;
+  }
+
+  .profile-mobile-topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    align-items: start;
+  }
+
+  .profile-mobile-topic-grid > .profile-topic-panel {
+    grid-column: 1 / -1;
+    margin: 0 0 8px;
+  }
+
+  .profile-mobile-topic-grid .profile-topic-tile {
+    min-height: 74px;
+    padding: 11px;
+    gap: 8px;
+  }
+
+  .profile-mobile-topic-grid .topic-tile-icon {
+    width: 31px;
+    height: 31px;
+    border-radius: 8px;
+  }
+
+  .profile-mobile-topic-grid .topic-tile-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile-mobile-topic-grid .topic-tile-text strong {
+    font-size: 12px;
+  }
+
+  .profile-mobile-topic-grid .topic-tile-text small {
+    display: none;
+  }
+
+  .profile-mobile-topic-grid .topic-tile-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profile-mobile-topic-grid .profile-topic-panel {
+    padding: 16px;
+  }
+}
+
+/* Encyclopedia typography adjustments */
+
+/* Larger topic titles on desktop */
+.character-profile-page .topic-tile-text strong {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+/* Slightly larger descriptions */
+.character-profile-page .topic-tile-text small {
+  font-size: 13px;
+}
+
+/* Make opened panel headings stand out */
+.character-profile-page .profile-topic-panel-heading h3 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+/* Keep body text readable but not oversized */
+.character-profile-page .profile-topic-panel-content {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .character-profile-page .topic-tile-text strong {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .character-profile-page .profile-topic-panel-heading h3 {
+    font-size: 22px;
+  }
+
+  .character-profile-page .profile-topic-panel-content {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* =====================================
+   FNaF World 3D Styling
+   ===================================== */
+
+/* Raised character header */
+.character-profile-page .profile-hero {
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-bottom: 5px solid #4ab59e;
+
+  box-shadow:
+    0 7px 14px rgba(29, 109, 121, 0.16),
+    inset 0 2px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* Raised Moves & Abilities section */
+.character-profile-page .profile-section:has(.profile-moves) {
+  border: 2px solid #9bdcf5;
+  border-bottom: 5px solid #56b8e5;
+  border-left: 5px solid #46b7ec;
+
+  box-shadow:
+    0 5px 12px rgba(43, 139, 178, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Make individual moves look like little game buttons */
+.character-profile-page .profile-move {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #c7edff 100%
+  );
+
+  border: 1px solid #83cff2;
+  border-bottom: 4px solid #66b6dd;
+  border-radius: 10px;
+
+  box-shadow:
+    0 3px 5px rgba(30, 104, 155, 0.12),
+    inset 0 1px 0 #ffffff;
+
+  padding: 9px 14px;
+}
+
+/* Give the six colorful topic tiles depth */
+.character-profile-page .profile-topic-tile {
+  position: relative;
+
+  border-bottom-width: 5px;
+
+  box-shadow:
+    0 5px 10px rgba(32, 108, 128, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.65);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Darker bottom edges matched to each tile */
+.character-profile-page .topic-background {
+  border-bottom-color: #78c6eb;
+}
+
+.character-profile-page .topic-appearances {
+  border-bottom-color: #84d68d;
+}
+
+.character-profile-page .topic-trivia {
+  border-bottom-color: #e6c76b;
+}
+
+.character-profile-page .topic-behindTheScenes {
+  border-bottom-color: #a89ae7;
+}
+
+.character-profile-page .topic-fnafWorld {
+  border-bottom-color: #6bcdb7;
+}
+
+.character-profile-page .topic-theories {
+  border-bottom-color: #e79dbb;
+}
+
+/* Raised on hover */
+@media (hover: hover) {
+  .character-profile-page .profile-topic-tile:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 8px 14px rgba(32, 108, 128, 0.17),
+      inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Pressed-down effect when clicked */
+.character-profile-page .profile-topic-tile:active {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+  box-shadow: inset 0 2px 5px rgba(25, 85, 100, 0.12);
+}
+
+/* Open information panel */
+.character-profile-page .profile-topic-panel {
+  border: 2px solid #a7dbea;
+  border-bottom: 5px solid #76c4db;
+
+  box-shadow:
+    0 6px 12px rgba(32, 108, 128, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Respect reduced motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .character-profile-page .profile-topic-tile {
+    transition: none;
+  }
+}
+
+/* =====================================
+   Chunkier FNaF World 3D Effect
+   ===================================== */
+
+/* Colorful raised topic tiles */
+.character-profile-page .profile-topic-tile {
+  border: none;
+  border-radius: 17px;
+  position: relative;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.85),
+    inset 2px 0 0 rgba(255, 255, 255, 0.35),
+    inset -2px 0 0 rgba(255, 255, 255, 0.25),
+    0 6px 0 var(--tile-shadow),
+    0 9px 13px rgba(30, 90, 115, 0.15);
+}
+
+/* Individual tile depth colors */
+.character-profile-page .topic-background {
+  --tile-shadow: #67bee9;
+}
+
+.character-profile-page .topic-appearances {
+  --tile-shadow: #75d387;
+}
+
+.character-profile-page .topic-trivia {
+  --tile-shadow: #e6c45b;
+}
+
+.character-profile-page .topic-behindTheScenes {
+  --tile-shadow: #a999e6;
+}
+
+.character-profile-page .topic-fnafWorld {
+  --tile-shadow: #60cbb5;
+}
+
+.character-profile-page .topic-theories {
+  --tile-shadow: #e795b7;
+}
+
+/* Slightly glossy upper surface */
+.character-profile-page .profile-topic-tile::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 14px;
+  right: 14px;
+  height: 35%;
+  border-radius: 12px 12px 45% 45%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.24),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Make icons look slightly raised too */
+.character-profile-page .topic-tile-icon {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 3px 0 rgba(40, 100, 120, 0.09);
+}
+
+/* Hover: lift the whole button */
+@media (hover: hover) {
+  .character-profile-page .profile-topic-tile:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 3px 0 rgba(255, 255, 255, 0.9),
+      0 9px 0 var(--tile-shadow),
+      0 13px 17px rgba(30, 90, 115, 0.18);
+  }
+}
+
+/* Selected topic looks pressed */
+.character-profile-page .profile-topic-tile.is-active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 3px 6px rgba(25, 85, 100, 0.12),
+    0 2px 0 var(--tile-shadow);
+}
+
+/* Chunkier moves section */
+.character-profile-page .profile-section:has(.profile-moves) {
+  border: none;
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.8),
+    0 7px 0 #61bfe7,
+    0 11px 15px rgba(36, 115, 155, 0.14);
+}
+
+/* Raised move labels */
+.character-profile-page .profile-move {
+  border: none;
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    0 4px 0 #74c6eb,
+    0 6px 8px rgba(36, 115, 155, 0.12);
+}
+
+/* Character header with more rounded depth */
+.character-profile-page .profile-hero {
+  border: none;
+  border-radius: 24px;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.65),
+    0 8px 0 #4ab59e,
+    0 13px 18px rgba(36, 115, 155, 0.15);
+}
+
+/* Opened reading panel */
+.character-profile-page .profile-topic-panel {
+  border: none;
+  border-radius: 17px;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.9),
+    0 6px 0 #85cddd,
+    0 10px 16px rgba(36, 115, 155, 0.13);
+}
+
+/* =========================================
+   FNaF World Gallery - Chunky 3D Styling
+   ========================================= */
+
+/* Main character cards */
+.animatronic-card {
+  position: relative;
+  border: none;
+  border-radius: 22px;
+  overflow: hidden;
+
+  /* Default depth color */
+  --card-depth: #3979b9;
+
+  box-shadow:
+    0 8px 0 var(--card-depth),
+    0 14px 18px rgba(20, 50, 100, 0.24);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* Match the depth to each character color */
+.animatronic-card.card-coral {
+  --card-depth: #d8795c;
+}
+
+.animatronic-card.card-purple {
+  --card-depth: #8662c6;
+}
+
+.animatronic-card.card-yellow {
+  --card-depth: #d9a12e;
+}
+
+.animatronic-card.card-green {
+  --card-depth: #39a482;
+}
+
+/* Glossy top edge without extra shapes */
+.animatronic-card {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.18),
+    transparent 35%
+  );
+}
+
+/* Keep the colorful banners clean */
+.animatronic-card .card-banner {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Remove any unwanted banner semicircles */
+.animatronic-card .card-banner::before,
+.animatronic-card .card-banner::after {
+  display: none;
+}
+
+/* Slightly raised character icon */
+.animatronic-card .card-banner .character-icon {
+  filter: drop-shadow(
+    0 5px 4px rgba(28, 67, 91, 0.2)
+  );
+}
+
+/* Raised unlock and role badges */
+.animatronic-card .unlock-badge,
+.animatronic-card .role-tag {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 3px 0 rgba(49, 78, 120, 0.14);
+}
+
+/* Character name hover */
+.animatronic-card .character-profile-link {
+  transition:
+    color 0.18s ease,
+    text-shadow 0.18s ease;
+}
+
+.animatronic-card .character-profile-link:hover {
+  color: #f08091;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Cards rise slightly when hovered */
+@media (hover: hover) {
+  .animatronic-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+      0 12px 0 var(--card-depth),
+      0 19px 22px rgba(20, 50, 100, 0.3);
+  }
+}
+
+/* Keep extra space for the raised edges */
+.animatronic-grid {
+  row-gap: 30px;
+  padding-bottom: 15px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 650px) {
+  .animatronic-card {
+    border-radius: 18px;
+
+    box-shadow:
+      0 6px 0 var(--card-depth),
+      0 10px 13px rgba(20, 50, 100, 0.2);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card {
+    transition: none;
+  }
+}
+
+/* =========================================
+   Gallery: Chunky 3D Character Icons
+   ========================================= */
+
+/* Only affect icons in the character gallery */
+.gallery-page .card-banner .character-avatar.avatar-large {
+  position: relative;
+  z-index: 2;
+
+  border: 4px solid #ffffff;
+  border-radius: 26px;
+
+  transform: rotate(-8deg);
+
+  box-shadow:
+    0 6px 0 rgba(35, 55, 80, 0.25),
+    0 11px 0 rgba(35, 55, 80, 0.10),
+    0 16px 22px rgba(35, 55, 80, 0.22),
+    inset 0 3px 0 rgba(255, 255, 255, 0.30);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Make the icons pop when hovering over a card */
+@media (hover: hover) {
+  .gallery-page .animatronic-card:hover
+  .card-banner .character-avatar.avatar-large {
+    transform: translateY(-5px) rotate(-3deg);
+
+    box-shadow:
+      0 9px 0 rgba(35, 55, 80, 0.25),
+      0 14px 0 rgba(35, 55, 80, 0.10),
+      0 22px 26px rgba(35, 55, 80, 0.25),
+      inset 0 3px 0 rgba(255, 255, 255, 0.30);
+  }
+}
+
+/* Subtle light reflecting across the badge */
+.gallery-page .card-banner .character-avatar.avatar-large::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.28),
+    transparent 48%
+  );
+}
+
+/* Keep the banner clean */
+.gallery-page .card-banner {
+  border-bottom: none;
+}
+
+/* Soft, rounded 3D backgrounds without extra shapes */
+
+.gallery-page .animatronic-card.card-coral .card-banner {
+  background: linear-gradient(155deg, #fff0e7, #ffc8b2);
+}
+
+.gallery-page .animatronic-card.card-purple .card-banner {
+  background: linear-gradient(155deg, #f5edff, #d7c3f7);
+}
+
+.gallery-page .animatronic-card.card-yellow .card-banner {
+  background: linear-gradient(155deg, #fff8df, #ffdfa0);
+}
+
+.gallery-page .animatronic-card.card-green .card-banner {
+  background: linear-gradient(155deg, #effff6, #b8ebd6);
+}
+
+/* =====================================
+   Gallery: Shimmer and Golden Sparkles
+   ===================================== */
+
+/* Shimmer across character banners */
+.animatronic-card .card-banner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.animatronic-card .card-banner::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -90%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Shimmer moves when hovering */
+@media (hover: hover) {
+  .animatronic-card:hover .card-banner::after {
+    animation: gallery-shimmer 0.8s ease-out;
+  }
+}
+
+@keyframes gallery-shimmer {
+  from {
+    left: -90%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
+
+/* Golden sparkle next to character names */
+.animatronic-card .character-profile-link::after {
+  content: "✦";
+  display: inline-block;
+  margin-left: 6px;
+  color: #f4b344;
+  font-size: 16px;
+  opacity: 0;
+  transform: scale(0.4) rotate(-25deg);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.animatronic-card .character-profile-link:hover::after,
+.animatronic-card .character-profile-link:focus-visible::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Existing banner sparkles twinkle */
+.animatronic-card .banner-sparkle {
+  display: inline-block;
+  animation: gallery-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes gallery-twinkle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(20deg);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card .banner-sparkle,
+  .animatronic-card:hover .card-banner::after {
+    animation: none;
+  }
+
+  .animatronic-card .character-profile-link::after {
+    transition: none;
+  }
+}
+
+/* One-way card shimmer: no reverse animation */
+
+.animatronic-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.animatronic-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(255, 220, 245, 0.45) 50%,
+    rgba(255, 255, 255, 0.55) 55%,
+    transparent 75%
+  );
+
+  transform: translateX(-150%);
+}
+
+@media (hover: hover) {
+  .animatronic-card:hover::after {
+    animation: card-shimmer 1.6s ease-in-out forwards;
+  }
+}
+
+@keyframes card-shimmer {
+  from {
+    transform: translateX(-150%);
+  }
+
+  to {
+    transform: translateX(150%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card:hover::after {
+    animation: none;
+  }
+}
+
+
+
+
+/* Clear, twinkling diamond sparkles */
+
+.animatronic-card .banner-sparkle {
+  display: inline-block;
+  color: #ffffff;
+  opacity: 1;
+
+  /* Dark outline for contrast on pastel backgrounds */
+  -webkit-text-stroke: 1px rgba(79, 65, 125, 0.55);
+
+  filter:
+    drop-shadow(0 2px 2px rgba(55, 44, 90, 0.35))
+    drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+
+  animation: clear-star-twinkle 3s ease-in-out infinite;
+}
+
+.animatronic-card:nth-child(2n) .banner-sparkle {
+  animation-delay: -1s;
+}
+
+.animatronic-card:nth-child(3n) .banner-sparkle {
+  animation-delay: -2s;
+}
+
+@keyframes clear-star-twinkle {
+  0%, 100% {
+    opacity: 0.9;
+    filter:
+      drop-shadow(0 2px 2px rgba(55, 44, 90, 0.35))
+      drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+  }
+
+  50% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 2px 3px rgba(55, 44, 90, 0.5))
+      drop-shadow(0 0 9px rgba(255, 255, 255, 1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card .banner-sparkle {
+    animation: none;
+  }
+}
+
+/* Tiny magical twinkles scattered across each card */
+
+.animatronic-card .card-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Multiple tiny stars in different positions */
+.animatronic-card .card-banner::before {
+  content: "✦";
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  color: #ffffff;
+  font-size: 9px;
+  z-index: 4;
+  pointer-events: none;
+
+  text-shadow:
+    40px 45px 0 #fff,
+    130px 8px 0 #fff,
+    160px 65px 0 #fff,
+    75px 75px 0 #fff;
+
+  animation: tiny-twinkle 2.6s ease-in-out infinite;
+}
+
+/* Different cards sparkle at different times */
+.animatronic-card:nth-child(2n) .card-banner::before {
+  animation-delay: -0.8s;
+}
+
+.animatronic-card:nth-child(3n) .card-banner::before {
+  animation-delay: -1.6s;
+}
+
+@keyframes tiny-twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Keep the original large diamond stationary */
+.animatronic-card .banner-sparkle {
+  animation: none;
+  opacity: 1;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card .card-banner::before {
+    animation: none;
+  }
+}
+
+/* Softer pastel outline for large diamond sparkles */
+
+.animatronic-card .banner-sparkle {
+  color: #ffffff;
+  -webkit-text-stroke: 0.5px rgba(157, 132, 205, 0.45);
+
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.95),
+    0 0 9px rgba(255, 255, 255, 0.65);
+
+  filter: drop-shadow(0 1px 2px rgba(133, 112, 180, 0.25));
+
+  opacity: 1;
+  animation: none;
+}
+
+/* Extra tiny twinkles across the pastel banners */
+
+.animatronic-card .card-banner {
+  position: relative;
+}
+
+/* Additional stars with their own timing */
+.animatronic-card .card-banner::before {
+  content: "✦";
+  display: block;
+  position: absolute;
+  top: 32%;
+  left: 28%;
+  font-size: 7px;
+  color: #fff;
+  pointer-events: none;
+  z-index: 4;
+
+  text-shadow:
+    65px -18px 0 #fff,
+    115px 25px 0 #fff,
+    145px -8px 0 #fff,
+    35px 48px 0 #fff,
+    90px 55px 0 #fff;
+
+  animation: extra-twinkle 3.4s ease-in-out infinite;
+}
+
+.animatronic-card:nth-child(2n) .card-banner::before {
+  animation-delay: -1.2s;
+}
+
+.animatronic-card:nth-child(3n) .card-banner::before {
+  animation-delay: -2.3s;
+}
+
+@keyframes extra-twinkle {
+  0%, 100% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatronic-card .card-banner::before {
+    animation: none;
+  }
+}

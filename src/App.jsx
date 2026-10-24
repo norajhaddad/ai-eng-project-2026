@@ -25,6 +25,7 @@ import FilterDropdown from './FilterDropdown.jsx';
 import fnafData from './fnaf-roster.js';
 import AnimatronicCard from './AnimatronicCard.jsx';
 import PartyAnalysis from './PartyAnalysis.jsx';
+import CharacterProfile from './CharacterProfile.jsx';
 import './styles.css';
 
 const accents = ['peach', 'violet', 'gold', 'mint'];
@@ -1372,6 +1373,16 @@ export default function App() {
               />
             }
           />
+
+        <Route
+          path="/characters/:characterId"
+          element={<CharacterProfile />}
+        />
+
+        <Route
+          path="*"
+          element={<Gallery />}
+        />
 
           <Route
             path="*"
