@@ -36,40 +36,46 @@ const unlockGroups = {
   ]
 };
 
+
 const gameGroups = {
   "FNaF 1": [
-    "Freddy", "Bonnie", "Chica", "Foxy", "Golden Freddy"
+    "Freddy", "Bonnie", "Chica", "Foxy",
+    "Golden Freddy", "Endo-01"
   ],
+
   "FNaF 2": [
     "Toy Bonnie", "Toy Chica", "Toy Freddy", "Mangle",
     "Balloon Boy", "JJ", "Withered Bonnie",
     "Withered Chica", "Withered Freddy", "Withered Foxy",
     "Shadow Freddy", "Marionette", "Paperpals",
-    "RWQFSFASXC"
+    "RWQFSFASXC", "Endo-02", "Purple Guy"
   ],
+
   "FNaF 3": [
     "Phantom Freddy", "Phantom Chica",
     "Phantom Balloon Boy", "Phantom Foxy",
     "Phantom Mangle", "Phantom Marionette",
-    "Springtrap"
+    "Springtrap", "Spring Bonnie"
   ],
+
   "FNaF 4": [
     "Nightmare Freddy", "Nightmare Bonnie",
     "Nightmare Chica", "Nightmare Foxy",
     "Plushtrap", "Crying Child",
     "Nightmare Fredbear", "Nightmare",
-    "Jack-O-Bonnie", "Jack-O-Chica",
+    "Fredbear", "Jack-O-Bonnie", "Jack-O-Chica",
     "Nightmare Balloon Boy", "Nightmarionne"
   ],
+
   "FNaF World / Other": [
-    "Endo-01", "Endo-02", "Endoplush",
-    "Funtime Foxy", "Fredbear", "Spring Bonnie",
-    "Animdude", "Purple Guy"
+    "Endoplush", "Funtime Foxy", "Animdude"
   ],
+
   "Miscellaneous Games": [
     "Coffee", "Mr. Chipper"
   ]
 };
+
 
 const minigameUnlocks = {
   "Jack-O-Bonnie": {
