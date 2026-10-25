@@ -7,9 +7,12 @@ import {
 } from 'react-router-dom';
 import {
   ArrowLeft,
+  BookOpen,
+  Info,
   ChartNoAxesColumnIncreasing,
   Check,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   ChevronUp,
   Plus,
@@ -20,48 +23,110 @@ import {
   Trash2,
   X
 } from 'lucide-react';
-
 import FilterDropdown from './FilterDropdown.jsx';
 import fnafData from './fnaf-roster.js';
 import AnimatronicCard from './AnimatronicCard.jsx';
 import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
 import './styles.css';
-
+import './party-bubbles.css';
 const accents = ['peach', 'violet', 'gold', 'mint'];
-const CHARACTERS_PER_PAGE = 12;
+const gamePalettes = {
+  fnaf1: ['#B97847', '#8771D9', '#F6C94E', '#C95A59'],
+  fnaf2: ['#8DCBEE', '#F2A6C8', '#B59AE9', '#F6D78C', '#B6C5D3'],
+  fnaf3: ['#A9D56A', '#6FA65D', '#D0DC83', '#557D61'],
+  fnaf4: ['#71628D', '#A78CB8', '#63728E', '#D2B7D5'],
+  sister: ['#ED7D91', '#B9A6E9', '#82D6E4', '#E5C6D9'],
+  pizzeria: ['#E8AF68', '#B77E54', '#8FA7B0', '#D6C38B'],
+  security: ['#F38DBD', '#68C8DB', '#B48BE7', '#F6DB73'],
+  misc: ['#7FC6C7', '#A8D9BB', '#C1A5D9', '#E6BFA0'],
+};
+function blendHex(a, b, amount) {
+  const channels = [1, 3, 5].map(i => {
+    const x = parseInt(a.slice(i, i + 2), 16);
+    const y = parseInt(b.slice(i, i + 2), 16);
+    return Math.round(x * (1 - amount) + y * amount)
+      .toString(16).padStart(2, '0');
+  });
+  return `#${channels.join('')}`;
+}
+function teamSlotPalette(character) {
+  const origin = (character.originalGame || '').toLowerCase();
+  const name = character.name.toLowerCase();
+  let game = 'misc';
+  if (/fnaf\s*1|five nights at freddy.s(?:\s*1)?$|original/.test(origin)) game = 'fnaf1';
+  else if (/fnaf\s*2|five nights at freddy.s 2/.test(origin)) game = 'fnaf2';
+  else if (/fnaf\s*3|five nights at freddy.s 3/.test(origin)) game = 'fnaf3';
+  else if (/fnaf\s*4|five nights at freddy.s 4/.test(origin)) game = 'fnaf4';
+  else if (/sister location/.test(origin)) game = 'sister';
+  else if (/pizzeria simulator|freddy fazbear.s pizzeria/.test(origin)) game = 'pizzeria';
+  else if (/security breach/.test(origin)) game = 'security';
+  const colors = gamePalettes[game];
+  let index = 0;
+  if (game === 'fnaf1') {
+    if (/bonnie/.test(name)) index = 1;
+    else if (/chica/.test(name)) index = 2;
+    else if (/foxy/.test(name)) index = 3;
+  } else if (game === 'fnaf2') {
+    if (/chica|golden/.test(name)) index = 3;
+    else if (/mangle|foxy/.test(name)) index = 1;
+    else if (/puppet|marionette/.test(name)) index = 2;
+    else if (/withered|endo/.test(name)) index = 4;
+    else if (/bonnie/.test(name)) index = 0;
+    else index = 2;
+  } else if (game === 'fnaf3') {
+    if (/springtrap/.test(name)) index = 2;
+    else if (/phantom/.test(name)) index = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % colors.length;
+  } else if (game === 'fnaf4') {
+    if (/foxy|fredbear/.test(name)) index = 0;
+    else if (/bonnie|plushtrap/.test(name)) index = 2;
+    else if (/chica/.test(name)) index = 3;
+    else index = 1;
+  } else {
+    index = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % colors.length;
+  }
+  const accent = colors[index];
+  return {
+    '--top': blendHex(accent, '#ffffff', 0.48),
+    '--bottom': blendHex(accent, '#ffffff', 0.86),
+    '--badge': accent,
+    '--ear': blendHex(accent, '#66516a', 0.15),
+    '--inner': blendHex(accent, '#ffffff', 0.55),
+    '--shadow': blendHex(accent, '#799bb0', 0.42),
+    '--move': blendHex(accent, '#ffffff', 0.72),
+  };
+}
+const GALLERY_PAGE_SIZES = { desktop: 12, tablet: 8, mobile: 6 };
+function getGalleryPageSize() {
+  if (typeof window === 'undefined') return GALLERY_PAGE_SIZES.desktop;
+  if (window.matchMedia('(max-width: 700px)').matches) return GALLERY_PAGE_SIZES.mobile;
+  if (window.matchMedia('(max-width: 1100px)').matches) return GALLERY_PAGE_SIZES.tablet;
+  return GALLERY_PAGE_SIZES.desktop;
+}
 const PARTY_CHARACTERS_PER_PAGE = 16;
-
 const portraitModules = import.meta.glob(
   './assets/characters/*.{png,jpg,jpeg,webp}',
   { eager: true, query: '?url', import: 'default' }
 );
-
 const characterImages = {};
-
 Object.entries(portraitModules).forEach(([path, url]) => {
   const filename = path.split('/').pop();
   const id = filename.replace(/\.(png|jpg|jpeg|webp)$/i, '');
   characterImages[id] = url;
 });
-
 function CharacterIcon({ character, size = 'normal' }) {
   const initials = character.name
     .split(' ')
     .map(word => word[0])
     .join('')
     .slice(0, 2);
-
   const index = fnafData.findIndex(
     entry => entry.id === character.id
   );
-
   const accent = accents[
     Math.max(0, index) % accents.length
   ];
-
   const image = characterImages[character.id];
-
   return (
     <span
       className={`character-avatar avatar-${accent} avatar-${size}`}
@@ -80,7 +145,6 @@ function CharacterIcon({ character, size = 'normal' }) {
     </span>
   );
 }
-
 function GalleryFilters({
   gameFilter,
   locationFilter,
@@ -129,36 +193,50 @@ function GalleryFilters({
     </div>
   );
 }
-
 function Gallery() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [gameFilter, setGameFilter] = useState('All');
   const [locationFilter, setLocationFilter] = useState('All');
   const [methodFilter, setMethodFilter] = useState('All');
   const [page, setPage] = useState(1);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
+  const [charactersPerPage, setCharactersPerPage] = useState(getGalleryPageSize);
+  useEffect(() => {
+    const mobileQuery = window.matchMedia('(max-width: 700px)');
+    const tabletQuery = window.matchMedia('(max-width: 1100px)');
+    const updatePageSize = () => {
+      const nextSize = getGalleryPageSize();
+      setCharactersPerPage(previous => {
+        if (previous !== nextSize) setPage(1);
+        return nextSize;
+      });
+    };
+    mobileQuery.addEventListener('change', updatePageSize);
+    tabletQuery.addEventListener('change', updatePageSize);
+    return () => {
+      mobileQuery.removeEventListener('change', updatePageSize);
+      tabletQuery.removeEventListener('change', updatePageSize);
+    };
+  }, []);
   const games = [
     'All',
     ...new Set(fnafData.map(c => c.originalGame))
   ];
-
   const locations = [
     'All',
     ...new Set(fnafData.map(c => c.unlockLocation))
   ];
-
   const methods = [
     'All',
     ...new Set(fnafData.map(c => c.unlockMethod))
   ];
-
   const activeFilterCount = [
     gameFilter,
     locationFilter,
     methodFilter
   ].filter(value => value !== 'All').length;
-
   const filteredCharacters = fnafData.filter(character => (
+    character.name.toLowerCase().includes(searchQuery.trim().toLowerCase()) &&
     (gameFilter === 'All' ||
       character.originalGame === gameFilter) &&
     (locationFilter === 'All' ||
@@ -166,46 +244,38 @@ function Gallery() {
     (methodFilter === 'All' ||
       character.unlockMethod === methodFilter)
   ));
-
   const totalPages = Math.max(
     1,
     Math.ceil(
-      filteredCharacters.length / CHARACTERS_PER_PAGE
+      filteredCharacters.length / charactersPerPage
     )
   );
-
   const currentPage = Math.min(page, totalPages);
-
   const visibleCharacters = filteredCharacters.slice(
-    (currentPage - 1) * CHARACTERS_PER_PAGE,
-    currentPage * CHARACTERS_PER_PAGE
+    (currentPage - 1) * charactersPerPage,
+    currentPage * charactersPerPage
   );
-
   function clearFilters() {
+    setSearchQuery('');
     setGameFilter('All');
     setLocationFilter('All');
     setMethodFilter('All');
     setPage(1);
   }
-
   function changeGame(value) {
     setGameFilter(value);
     setPage(1);
   }
-
   function changeLocation(value) {
     setLocationFilter(value);
     setPage(1);
   }
-
   function changeMethod(value) {
     setMethodFilter(value);
     setPage(1);
   }
-
   function showCharacters() {
     setMobileFiltersOpen(false);
-
     requestAnimationFrame(() => {
       document
         .getElementById('character-gallery')
@@ -215,14 +285,11 @@ function Gallery() {
         });
     });
   }
-
   function changePage(nextPage) {
     if (nextPage < 1 || nextPage > totalPages) {
       return;
     }
-
     setPage(nextPage);
-
     document
       .getElementById('character-gallery')
       ?.scrollIntoView({
@@ -230,55 +297,43 @@ function Gallery() {
         block: 'start'
       });
   }
-
   return (
-    <main className="page-shell gallery-page">
-      <div className="page-intro">
-        <span className="eyebrow">
-          <Sparkles size={15} />
-          THE CHARACTER INDEX
-        </span>
-        <h1>
-          Meet the <em>animatronics.</em>
-        </h1>
-        <p>
-          For those who are tired of the attack names
-          that aren't intuitive.
-        </p>
+    <main className="page-shell gallery-page" id="about-site">
+      <div className="aero-toolbar" aria-label="Character search and filters">
+        <label className="aero-search">
+          <Search size={23} aria-hidden="true" />
+          <input type="search" placeholder="Search characters..." value={searchQuery}
+            onChange={event => { setSearchQuery(event.target.value); setPage(1); }} />
+        </label>
+        <div className="aero-filter-controls aero-custom-filters">
+          <FilterDropdown
+            label="Original game"
+            value={gameFilter}
+            options={games}
+            onChange={changeGame}
+            allLabel="All Games"
+            color="lavender"
+          />
+          <FilterDropdown
+            label="Unlock location"
+            value={locationFilter}
+            options={locations}
+            onChange={changeLocation}
+            allLabel="All Locations"
+            color="peach"
+          />
+          <FilterDropdown
+            label="Unlock method"
+            value={methodFilter}
+            options={methods}
+            onChange={changeMethod}
+            allLabel="All Unlock Methods"
+            color="mint"
+          />
+          <button type="button" className="aero-clear" onClick={clearFilters}>Clear Filters</button>
+        </div>
       </div>
-
-      <div className="section-heading">
-        <h2>
-          Character collection
-          <span className="count-pill">
-            {fnafData.length}
-          </span>
-        </h2>
-        <span className="helper-text">
-          Original roster + Update 2
-        </span>
-      </div>
-
-      <div className="gallery-desktop-filters">
-        <GalleryFilters
-          gameFilter={gameFilter}
-          locationFilter={locationFilter}
-          methodFilter={methodFilter}
-          games={games}
-          locations={locations}
-          methods={methods}
-          onGameChange={changeGame}
-          onLocationChange={changeLocation}
-          onMethodChange={changeMethod}
-          onClear={clearFilters}
-        />
-      </div>
-
-      <p className="filter-count">
-        Showing {filteredCharacters.length} of{' '}
-        {fnafData.length} animatronics
-      </p>
-
+      <p className="aero-results" aria-live="polite">Showing {filteredCharacters.length} of {fnafData.length} animatronics</p>
       <div
         id="character-gallery"
         className="gallery-stage"
@@ -313,18 +368,19 @@ function Gallery() {
               <span>
                 Page {currentPage} of {totalPages}
               </span>
-              <span>
-                {visibleCharacters.length} characters
-                on this page
-              </span>
+              <div className="aero-page-right">
+                <span>{visibleCharacters.length} characters on this page</span>
+                <button type="button" aria-label="Previous page" disabled={currentPage === 1}
+                  onClick={() => changePage(currentPage - 1)}><ChevronLeft size={21}/></button>
+                <button type="button" aria-label="Next page" disabled={currentPage === totalPages}
+                  onClick={() => changePage(currentPage + 1)}><ChevronRight size={21}/></button>
+              </div>
             </div>
-
             <div className="character-grid">
               {visibleCharacters.map(character => {
                 const index = fnafData.findIndex(
                   entry => entry.id === character.id
                 );
-
                 return (
                   <AnimatronicCard
                     key={character.id}
@@ -342,7 +398,6 @@ function Gallery() {
                 );
               })}
             </div>
-
             {totalPages > 1 && (
               <nav
                 className="gallery-pagination"
@@ -358,35 +413,31 @@ function Gallery() {
                 >
                   ← Previous
                 </button>
-
-                <div className="pagination-numbers">
-                  {Array.from(
-                    { length: totalPages },
-                    (_, index) => index + 1
-                  ).map(pageNumber => (
-                    <button
-                      key={pageNumber}
-                      type="button"
-                      className={`pagination-number ${
-                        currentPage === pageNumber
-                          ? 'active'
-                          : ''
-                      }`}
-                      aria-label={`Page ${pageNumber}`}
-                      aria-current={
-                        currentPage === pageNumber
-                          ? 'page'
-                          : undefined
-                      }
-                      onClick={() =>
-                        changePage(pageNumber)
-                      }
-                    >
-                      {pageNumber}
-                    </button>
-                  ))}
-                </div>
-
+            <div className="pagination-numbers">
+              {Array.from(
+                { length: Math.min(3, totalPages) },
+                (_, index) => Math.max(1, Math.min(currentPage - 1, totalPages - 2)) + index
+              ).map(pageNumber => (
+                <button
+                  key={pageNumber}
+                  type="button"
+                  className={`pagination-number ${
+                    currentPage === pageNumber
+                      ? 'active'
+                      : ''
+                  }`}
+                  aria-label={`Page ${pageNumber}`}
+                  aria-current={
+                    currentPage === pageNumber
+                      ? 'page'
+                      : undefined
+                  }
+                  onClick={() => changePage(pageNumber)}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+            </div>
                 <button
                   type="button"
                   className="pagination-arrow"
@@ -402,7 +453,6 @@ function Gallery() {
           </>
         )}
       </div>
-
       <div
         className={`mobile-gallery-filter-panel ${
           mobileFiltersOpen ? 'expanded' : ''
@@ -426,7 +476,6 @@ function Gallery() {
               </span>
             )}
           </span>
-
           <span className="mobile-gallery-filter-right">
             <span>
               {filteredCharacters.length} results
@@ -438,7 +487,6 @@ function Gallery() {
             )}
           </span>
         </button>
-
         <div
           id="mobile-gallery-filter-details"
           className="mobile-gallery-filter-details"
@@ -456,7 +504,6 @@ function Gallery() {
             onMethodChange={changeMethod}
             onClear={clearFilters}
           />
-
           <button
             type="button"
             className="button button-primary mobile-show-characters"
@@ -470,13 +517,11 @@ function Gallery() {
     </main>
   );
 }
-
 function PartySlots({ selectedCharacters, onRemove }) {
   return (
     <div className="party-preview-slots">
       {Array.from({ length: 4 }, (_, index) => {
         const character = selectedCharacters[index];
-
         return (
           <div
             key={index}
@@ -487,7 +532,6 @@ function PartySlots({ selectedCharacters, onRemove }) {
             {character ? (
               <>
                 <CharacterIcon character={character} />
-
                 <span className="party-slot-details">
                   <strong>{character.name}</strong>
                   <small>
@@ -496,7 +540,6 @@ function PartySlots({ selectedCharacters, onRemove }) {
                       .join(' · ')}
                   </small>
                 </span>
-
                 <button
                   type="button"
                   className="party-slot-remove"
@@ -523,7 +566,6 @@ function PartySlots({ selectedCharacters, onRemove }) {
     </div>
   );
 }
-
 function PartyActions({
   selectedCount,
   onClear,
@@ -541,7 +583,6 @@ function PartyActions({
         <X size={16} />
         CLEAR
       </button>
-
       <button
         className="button button-primary"
         type="button"
@@ -551,6 +592,38 @@ function PartyActions({
         {saving ? 'SAVING...' : 'CREATE PARTY'}
         <ChevronRight size={17} />
       </button>
+    </div>
+  );
+}
+
+// Independent bubbles with staggered motion, no timers or animation jitter.
+const PARTY_BUBBLES = Array.from({ length: 96 }, (_, index) => {
+  const fraction = (value) => value - Math.floor(value);
+  const random = (salt) => fraction(Math.sin((index + 1) * 127.1 + salt * 311.7) * 43758.5453);
+  const size = 5 + Math.pow(random(1), 1.8) * 18;
+  return {
+    left: `${3 + random(2) * 94}%`,
+    size: `${size.toFixed(1)}px`,
+    duration: `${(5.5 + random(3) * 6).toFixed(2)}s`,
+    delay: `${(-random(4) * 13).toFixed(2)}s`,
+    drift: `${((random(5) - .5) * 38).toFixed(1)}px`,
+    opacity: (0.55 + random(6) * .35).toFixed(2),
+  };
+});
+
+function PartyBubbles() {
+  return (
+    <div className="party-bubble-field" aria-hidden="true">
+      {PARTY_BUBBLES.map((bubble, index) => (
+        <span key={index} className="party-bubble" style={{
+          '--bubble-left': bubble.left,
+          '--bubble-size': bubble.size,
+          '--bubble-duration': bubble.duration,
+          '--bubble-delay': bubble.delay,
+          '--bubble-drift': bubble.drift,
+          '--bubble-opacity': bubble.opacity,
+        }} />
+      ))}
     </div>
   );
 }
@@ -573,16 +646,13 @@ function TeamBuilder({
   const [selectedPartyIds, setSelectedPartyIds] = useState([]);
   const [deleting, setDeleting] = useState(false);
   const [pendingDeletion, setPendingDeletion] = useState(null);
-
   const selectedCharacters = selected
     .map(id =>
       fnafData.find(character => character.id === id)
     )
     .filter(Boolean);
-
   const filteredCharacters = fnafData.filter(character => {
     const query = search.trim().toLowerCase();
-
     return (
       character.name.toLowerCase().includes(query) ||
       character.fnafWorld.roles.some(role =>
@@ -590,41 +660,33 @@ function TeamBuilder({
       )
     );
   });
-
   const totalPages = Math.max(
     1,
     Math.ceil(
       filteredCharacters.length / PARTY_CHARACTERS_PER_PAGE
     )
   );
-
   const currentPage = Math.min(page, totalPages);
-
   const visibleCharacters = filteredCharacters.slice(
     (currentPage - 1) * PARTY_CHARACTERS_PER_PAGE,
     currentPage * PARTY_CHARACTERS_PER_PAGE
   );
-
   function toggle(id) {
     setSelected(current => {
       if (current.includes(id)) {
         return current.filter(value => value !== id);
       }
-
       if (current.length >= 4) {
         return current;
       }
-
       return [...current, id];
     });
   }
-
   function removeCharacter(id) {
     setSelected(current =>
       current.filter(value => value !== id)
     );
   }
-
   function cancel() {
     setSelected([]);
     setSearch('');
@@ -632,15 +694,11 @@ function TeamBuilder({
     setMobilePartyOpen(false);
     setSelecting(false);
   }
-
   async function create() {
     if (selected.length !== 4 || saving) return;
-
     setSaving(true);
-
     try {
       const saved = await onCreateParty([...selected]);
-
       if (saved) {
         cancel();
       }
@@ -648,7 +706,6 @@ function TeamBuilder({
       setSaving(false);
     }
   }
-
   function togglePartySelection(id) {
     setSelectedPartyIds(current =>
       current.includes(id)
@@ -656,17 +713,14 @@ function TeamBuilder({
         : [...current, id]
     );
   }
-
   function exitDeleteMode() {
     setDeleteMode(false);
     setSelectedPartyIds([]);
   }
-
   function deleteOneParty(party) {
     if (deleting) return;
     setPendingDeletion({ ids: [party.id], label: 'this party' });
   }
-
   function deleteSelectedParties() {
     if (deleting || selectedPartyIds.length === 0) return;
     setPendingDeletion({
@@ -674,7 +728,6 @@ function TeamBuilder({
       label: `${selectedPartyIds.length} selected ${selectedPartyIds.length === 1 ? 'party' : 'parties'}`
     });
   }
-
   async function confirmDeletion() {
     if (!pendingDeletion || deleting) return;
     const ids = pendingDeletion.ids;
@@ -695,16 +748,13 @@ function TeamBuilder({
       setDeleting(false);
     }
   }
-
   function clearSearch() {
     setSearch('');
     setPage(1);
   }
-
   const analyzingIndex = parties.findIndex(
     party => party.id === analyzingPartyId
   );
-
   if (analyzingIndex !== -1) {
     return (
       <PartyAnalysis
@@ -714,7 +764,6 @@ function TeamBuilder({
       />
     );
   }
-
   if (selecting) {
     return (
       <main className="page-shell party-builder-page">
@@ -727,7 +776,6 @@ function TeamBuilder({
           <ArrowLeft size={17} />
           Back to parties
         </button>
-
         <div className="page-intro">
           <span className="eyebrow">
             <Users size={15} />
@@ -742,13 +790,11 @@ function TeamBuilder({
             character in more than one party.
           </p>
         </div>
-
         {error && (
           <p role="alert" style={{ color: 'crimson' }}>
             {error}
           </p>
         )}
-
         <div className="party-builder-layout">
           <section className="party-picker">
             <div className="selection-top">
@@ -758,7 +804,6 @@ function TeamBuilder({
                 <span> / 4 selected</span>
               </span>
             </div>
-
             <label className="party-search">
               <Search size={18} aria-hidden="true" />
               <input
@@ -782,18 +827,15 @@ function TeamBuilder({
                 </button>
               )}
             </label>
-
             <p className="party-results-count">
               Showing {filteredCharacters.length} of{' '}
               {fnafData.length} animatronics
             </p>
-
             <div className="party-character-grid">
               {visibleCharacters.map(character => {
                 const active = selected.includes(character.id);
                 const unavailable =
                   selected.length === 4 && !active;
-
                 return (
                   <button
                     key={character.id}
@@ -815,13 +857,10 @@ function TeamBuilder({
                         <Plus size={15} />
                       )}
                     </span>
-
                     <CharacterIcon character={character} />
-
                     <strong className="party-tile-name">
                       {character.name}
                     </strong>
-
                     <small className="party-tile-roles">
                       {character.fnafWorld.roles
                         .map(role => role.label)
@@ -831,7 +870,6 @@ function TeamBuilder({
                 );
               })}
             </div>
-
             {filteredCharacters.length === 0 && (
               <div className="party-no-results">
                 <Search size={24} />
@@ -845,7 +883,6 @@ function TeamBuilder({
                 </button>
               </div>
             )}
-
             {totalPages > 1 && (
               <nav
                 className="party-pagination"
@@ -861,11 +898,9 @@ function TeamBuilder({
                 >
                   ← Previous
                 </button>
-
                 <span className="party-page-number">
                   Page {currentPage} of {totalPages}
                 </span>
-
                 <button
                   type="button"
                   className="pagination-arrow"
@@ -879,7 +914,6 @@ function TeamBuilder({
               </nav>
             )}
           </section>
-
           <aside className="party-preview party-preview-desktop">
             <div className="party-preview-heading">
               <h2>Current party</h2>
@@ -887,16 +921,13 @@ function TeamBuilder({
                 {selected.length} / 4
               </span>
             </div>
-
             <p className="party-preview-helper">
               Select four animatronics to build your team.
             </p>
-
             <PartySlots
               selectedCharacters={selectedCharacters}
               onRemove={removeCharacter}
             />
-
             <PartyActions
               selectedCount={selected.length}
               onClear={() => setSelected([])}
@@ -905,7 +936,6 @@ function TeamBuilder({
             />
           </aside>
         </div>
-
         <div
           className={`mobile-party-panel ${
             mobilePartyOpen ? 'expanded' : ''
@@ -916,11 +946,9 @@ function TeamBuilder({
               <strong>Current party</strong>
               <span>{selected.length} / 4</span>
             </div>
-
             <div className="mobile-party-portraits">
               {Array.from({ length: 4 }, (_, index) => {
                 const character = selectedCharacters[index];
-
                 return character ? (
                   <span
                     key={character.id}
@@ -956,7 +984,6 @@ function TeamBuilder({
                 );
               })}
             </div>
-
             <button
               type="button"
               className="mobile-party-expand-button"
@@ -969,7 +996,6 @@ function TeamBuilder({
               {mobilePartyOpen
                 ? 'Hide party details'
                 : 'View party details'}
-
               {mobilePartyOpen ? (
                 <ChevronDown size={17} />
               ) : (
@@ -977,7 +1003,6 @@ function TeamBuilder({
               )}
             </button>
           </div>
-
           <div
             id="mobile-party-details"
             className="mobile-party-details"
@@ -987,7 +1012,6 @@ function TeamBuilder({
               selectedCharacters={selectedCharacters}
               onRemove={removeCharacter}
             />
-
             <PartyActions
               selectedCount={selected.length}
               onClear={() => setSelected([])}
@@ -999,9 +1023,8 @@ function TeamBuilder({
       </main>
     );
   }
-
   return (
-    <main className="page-shell">
+    <main className="page-shell team-builder-page">
       <div className="page-intro">
         <span className="eyebrow">
           <Users size={15} />
@@ -1016,7 +1039,6 @@ function TeamBuilder({
           four characters.
         </p>
       </div>
-
       <div className="section-heading parties-section-heading">
         <h2>
           My parties
@@ -1024,12 +1046,10 @@ function TeamBuilder({
             {parties.length}
           </span>
         </h2>
-
         <div className="party-heading-actions">
         <button
           type="button"
           className="button button-secondary"
-          style={{ color: '#b42318', borderColor: '#b42318' }}
           onClick={() => deleteMode ? exitDeleteMode() : setDeleteMode(true)}
           disabled={deleting || loading || parties.length === 0}
         >
@@ -1047,13 +1067,11 @@ function TeamBuilder({
         </button>
       </div>
       </div>
-
       {error && (
         <p role="alert" style={{ color: 'crimson' }}>
           {error}
         </p>
       )}
-
       {deleteMode && !loading && (
       <div className="party-bulk-controls">
         <label className="party-select-all">
@@ -1069,7 +1087,6 @@ function TeamBuilder({
         <button
           type="button"
           className="button button-secondary"
-          style={{ color: '#b42318', borderColor: '#b42318' }}
           disabled={deleting || selectedPartyIds.length === 0}
           onClick={deleteSelectedParties}
         >
@@ -1078,7 +1095,6 @@ function TeamBuilder({
         </button>
       </div>
     )}
-
     {loading ? (
         <div className="empty-state">
           <p>Loading saved parties...</p>
@@ -1105,7 +1121,8 @@ function TeamBuilder({
       ) : (
         <div className="party-list">
           {parties.map((party, index) => (
-            <div className="party-row" key={party.id}>
+            <div className="party-row party-world-panel" key={party.id}>
+            <PartyBubbles />
               {deleteMode && (
               <input
                 type="checkbox"
@@ -1119,28 +1136,24 @@ function TeamBuilder({
             <span className="party-number">
                 {String(index + 1).padStart(2, '0')}
               </span>
-
               <div className="party-label">
                 <strong>Party {index + 1}</strong>
-                <small>4 animatronics</small>
+                <small>{party.memberIds.length} / 4 animatronics · Ready for adventure</small>
               </div>
-
               <div className="party-row-actions">
-                <div className="party-members">
+                <div className="party-members" aria-label={`Party ${index + 1} lineup`}>
                   {party.memberIds.map(id => {
                     const character = fnafData.find(
                       entry => entry.id === id
                     );
-
                     return character ? (
-                      <CharacterIcon
-                        key={id}
-                        character={character}
-                      />
+                      <div className="party-member-slot" key={id} style={teamSlotPalette(character)}>
+                        <CharacterIcon character={character} />
+                        <span className="party-member-name">{character.name}</span>
+                      </div>
                     ) : null;
                   })}
                 </div>
-
                 <div className="party-action-buttons">
                 <button
                   type="button"
@@ -1168,12 +1181,9 @@ function TeamBuilder({
         ))}
         </div>
       )}
-
       <p className="helper-text below-list">
-        Parties are saved to your database.
-        Analyze a party to explore its strengths and weaknesses.
+        Choose four animatronics for each party, then select Analyze to explore their strengths and weaknesses.
       </p>
-
       {pendingDeletion && (
         <div
           className="delete-modal-backdrop"
@@ -1228,25 +1238,19 @@ function TeamBuilder({
     </main>
   );
 }
-
 export default function App() {
   const [parties, setParties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
   useEffect(() => {
     async function loadParties() {
       try {
         setError('');
-
         const response = await fetch('/api/parties');
-
         if (!response.ok) {
           throw new Error('Could not load saved parties.');
         }
-
         const savedParties = await response.json();
-
         setParties(
           savedParties.map(party => ({
             id: party.id,
@@ -1259,14 +1263,11 @@ export default function App() {
         setLoading(false);
       }
     }
-
     loadParties();
   }, []);
-
   async function addParty(memberIds) {
     try {
       setError('');
-
       const response = await fetch('/api/parties', {
         method: 'POST',
         headers: {
@@ -1277,13 +1278,10 @@ export default function App() {
           member_ids: memberIds
         })
       });
-
       if (!response.ok) {
         throw new Error('Could not save party.');
       }
-
       const savedParty = await response.json();
-
       setParties(current => [
         ...current,
         {
@@ -1291,14 +1289,12 @@ export default function App() {
           memberIds: savedParty.member_ids
         }
       ]);
-
       return true;
     } catch (err) {
       setError(err.message);
       return false;
     }
   }
-
   async function deleteParty(id) {
     try {
       setError('');
@@ -1311,56 +1307,36 @@ export default function App() {
       return false;
     }
   }
-
   return (
     <BrowserRouter>
       <div className="app-layout">
-        <header className="site-header">
+        <header className="site-header aero-site-header">
           <div className="header-inner">
-            <NavLink className="brand" to="/">
-              <span className="brand-mark">★</span>
-              <span>
-                FNaF <strong>WORLD</strong>
-                <small>TEAM LAB</small>
+            <NavLink className="brand aero-brand" to="/">
+              <span className="aero-globe" aria-hidden="true">🌐</span>
+              <span className="aero-brand-copy">FNaF World
+                <small>✦ Party Builder & Encyclopedia ✦</small>
               </span>
             </NavLink>
-
-            <nav
-              className="main-nav"
-              aria-label="Main navigation"
-            >
-              <NavLink
-                end
-                to="/"
-                className={({ isActive }) =>
-                  `nav-link ${
-                    isActive ? 'active' : ''
-                  }`
-                }
-              >
-                Character Gallery
+            <nav className="main-nav aero-nav" aria-label="Main navigation">
+              <NavLink end to="/" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+                <span aria-hidden="true">🐻</span> Characters
               </NavLink>
-
-              <NavLink
-                to="/team-builder"
-                className={({ isActive }) =>
-                  `nav-link ${
-                    isActive ? 'active' : ''
-                  }`
-                }
-              >
-                Team Builder
+              <NavLink to="/team-builder" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+                <Users size={22}/> Team Builder
               </NavLink>
+              <a className="nav-link" href="#character-gallery" onClick={event => {
+                if (window.location.pathname !== '/') { event.preventDefault(); window.location.href = '/#character-gallery'; }
+              }}><BookOpen size={22}/> Encyclopedia</a>
+              <a className="nav-link" href="/#about-site"><Info size={22}/> About</a>
             </nav>
           </div>
         </header>
-
         <Routes>
           <Route
             path="/"
             element={<Gallery />}
           />
-
           <Route
             path="/team-builder"
             element={
@@ -1373,24 +1349,16 @@ export default function App() {
               />
             }
           />
-
         <Route
           path="/characters/:characterId"
           element={<CharacterProfile />}
         />
-
         <Route
           path="*"
           element={<Gallery />}
         />
-
-          <Route
-            path="*"
-            element={<Gallery />}
-          />
         </Routes>
-
-        <footer className="site-footer">
+        <footer className="site-footer" id="about-site">
           Unofficial fan project
         </footer>
       </div>

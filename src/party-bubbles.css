@@ -1,0 +1,72 @@
+/* FNaF World: individual, iridescent rising bubbles on hovered party rows. */
+/* Override old CSS-only bubble circles and static sparkle overlays. */
+.team-builder-page .party-world-panel.party-row::before,
+.team-builder-page .party-world-panel.party-row::after {
+  content: none !important;
+  display: none !important;
+}
+.team-builder-page .party-world-panel.party-row {
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+}
+.team-builder-page .party-world-panel.party-row > :not(.party-bubble-field) {
+  position: relative;
+  z-index: 2;
+}
+.team-builder-page .party-world-panel.party-row .party-bubble-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity .32s ease;
+}
+@media (hover: hover) {
+  .team-builder-page .party-world-panel.party-row:hover .party-bubble-field {
+    opacity: 1;
+  }
+}
+.team-builder-page .party-bubble {
+  position: absolute;
+  display: block;
+  left: var(--bubble-left);
+  bottom: -28px;
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.88);
+  background:
+    radial-gradient(circle at 27% 24%, rgba(255,255,255,.98) 0 7%, transparent 24%),
+    radial-gradient(circle at 72% 75%, rgba(166,235,253,.26), transparent 55%),
+    radial-gradient(circle at 28% 78%, rgba(249,193,238,.27), transparent 55%),
+    radial-gradient(circle at 60% 26%, rgba(255,255,255,.23), rgba(255,255,255,.02) 72%);
+  box-shadow:
+    inset 1px 1px 3px rgba(255,255,255,.85),
+    inset -1px -2px 3px rgba(90,173,210,.18),
+    0 0 3px rgba(255,255,255,.4);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: party-bubble-rise var(--bubble-duration) linear var(--bubble-delay) infinite;
+  animation-play-state: paused;
+}
+@media (hover: hover) {
+  .team-builder-page .party-world-panel.party-row:hover .party-bubble {
+    animation-play-state: running;
+  }
+}
+@keyframes party-bubble-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(.8); opacity: 0; }
+  12%  { opacity: var(--bubble-opacity); }
+  76%  { opacity: var(--bubble-opacity); }
+  100% { transform: translate3d(var(--bubble-drift), -155px, 0) scale(1.08); opacity: 0; }
+}
+@media (hover: none) {
+  .team-builder-page .party-bubble-field { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-builder-page .party-bubble-field { display: none !important; }
+}

@@ -1,0 +1,1093 @@
+
+/* ===================================================
+   FNAF WORLD — PARTY ANALYSIS
+   Compact Frutiger Aero / Iridescent Glass
+   Full replacement for party-analysis.css
+   =================================================== */
+
+.party-analysis-page {
+  --analysis-ink: #20375e;
+  --analysis-muted: #29496b;
+  --analysis-rainbow:
+    linear-gradient(
+      108deg,
+      rgba(178, 244, 255, .42) 0%,
+      rgba(190, 226, 255, .38) 17%,
+      rgba(228, 194, 250, .36) 35%,
+      rgba(255, 222, 178, .36) 51%,
+      rgba(167, 240, 202, .38) 70%,
+      rgba(141, 216, 245, .40) 88%,
+      rgba(188, 207, 255, .38) 100%
+    );
+}
+
+/* ==============================
+   PAGE INTRO
+   ============================== */
+
+.party-analysis-page .page-intro h1 {
+  color: #20375e !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.95),
+    0 4px 8px rgba(22,53,99,.38) !important;
+}
+
+.party-analysis-page .page-intro h1 em {
+  font-style: normal;
+  background: linear-gradient(
+    180deg,
+    #fff5ff 0%,
+    #f0cfff 25%,
+    #d3a3f1 55%,
+    #a36acb 85%,
+    #7549aa 100%
+  ) !important;
+
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px #65468c;
+
+  filter:
+    drop-shadow(0 1px 0 white)
+    drop-shadow(0 3px 2px rgba(36,31,91,.4));
+}
+
+.party-analysis-page .page-intro > p {
+  color: #18365b !important;
+  font-weight: 800 !important;
+  text-shadow:
+    0 1px 2px white,
+    0 0 8px rgba(255,255,255,.95) !important;
+}
+
+.party-analysis-page .eyebrow {
+  color: #554b9b !important;
+}
+
+/* ==============================
+   MAIN GLASS PANELS
+
+   Much clearer than the previous
+   milky-white backgrounds.
+   ============================== */
+
+.party-analysis-page .analysis-section {
+  position: relative;
+  isolation: isolate;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(225,246,255,.16),
+      rgba(255,255,255,.06) 48%,
+      rgba(235,217,255,.13)
+    ) !important;
+
+  border: 3px solid rgba(255,255,255,.96) !important;
+  border-radius: 29px !important;
+
+  backdrop-filter: blur(4px) saturate(1.28) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(1.28) !important;
+
+  box-shadow:
+    inset 0 3px 3px rgba(255,255,255,.98),
+    inset 0 -4px 7px rgba(255,255,255,.3),
+    0 3px 0 rgba(101,174,225,.55),
+    0 15px 29px rgba(16,76,134,.18),
+    0 0 16px rgba(206,250,255,.25) !important;
+}
+
+/* Remove the old moving white overlay. */
+.party-analysis-page .analysis-section::before,
+.party-analysis-page .analysis-section::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+.party-analysis-page .analysis-section h2 {
+  color: var(--analysis-ink) !important;
+  text-shadow: 0 1px 1px rgba(255,255,255,.9);
+}
+
+.party-analysis-page .helper-text {
+  color: #254668 !important;
+}
+
+.party-analysis-page .analysis-roster-section {
+  overflow: visible !important;
+  padding-bottom: 28px !important;
+}
+
+/* ==============================
+   FOUR-CARD COMPACT LAYOUT
+   ============================== */
+
+.party-analysis-page .analysis-character-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+
+  padding: 5px 0 13px !important;
+}
+
+/* ==============================
+   CHARACTER CARDS
+
+   The rainbow is permanently visible.
+   Character color remains as a tint.
+   ============================== */
+
+.party-analysis-page .analysis-character.analysis-aero-card {
+  position: relative;
+  isolation: isolate;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  min-width: 0;
+  padding: 17px 15px 16px !important;
+
+  border: 3px solid rgba(255,255,255,.98) !important;
+  border-radius: 23px !important;
+
+  overflow: hidden !important;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255,255,255,.28),
+      rgba(255,255,255,.06) 45%,
+      rgba(255,255,255,.10)
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--badge, #8ec7e5) 28%, transparent),
+      color-mix(in srgb, var(--badge, #8ec7e5) 12%, transparent)
+    ),
+    var(--analysis-rainbow) !important;
+
+  backdrop-filter: blur(5px) saturate(1.35) !important;
+  -webkit-backdrop-filter: blur(5px) saturate(1.35) !important;
+
+  box-shadow:
+    0 6px 0 -1px var(--shadow, #8eb4d1),
+    0 12px 22px rgba(26,72,123,.19),
+    inset 0 3px 3px rgba(255,255,255,.98),
+    inset 0 -4px 7px rgba(255,255,255,.36) !important;
+
+  transform: none !important;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease !important;
+}
+
+.party-analysis-page .analysis-character.analysis-aero-card:hover {
+  transform: translateY(-5px) !important;
+
+  box-shadow:
+    0 6px 0 -1px var(--shadow, #8eb4d1),
+    0 19px 29px rgba(25,75,137,.28),
+    inset 0 3px 3px white,
+    inset 0 -4px 7px rgba(255,255,255,.4) !important;
+}
+
+/* No moving sheets or diagonal glints. */
+.party-analysis-page .analysis-aero-card::before,
+.party-analysis-page .analysis-aero-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ==============================
+   CHARACTER HEADER
+   ============================== */
+
+.party-analysis-page .analysis-compact-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 65px;
+  margin-bottom: 12px;
+}
+
+.party-analysis-page .analysis-compact-portrait {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+
+  border-radius: 18px;
+  border: 3px solid white;
+
+  background: linear-gradient(
+    145deg,
+    #fff,
+    var(--top, #d8eeff) 30%,
+    var(--badge, #8ec7e5)
+  );
+
+  box-shadow:
+    0 4px 0 -1px var(--shadow, #8eb4d1),
+    0 7px 12px rgba(34,70,116,.2),
+    inset 0 2px 2px white;
+
+  transform: rotate(-4deg);
+}
+
+.party-analysis-page .analysis-compact-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.party-analysis-page .analysis-compact-portrait > span {
+  display: block;
+  color: #20375e;
+  font-size: 29px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.party-analysis-page .analysis-compact-heading {
+  min-width: 0;
+  flex: 1;
+}
+
+.party-analysis-page .analysis-compact-heading h3 {
+  margin: 0 0 4px !important;
+  font-size: 22px !important;
+  line-height: 1.1;
+  color: #20375e !important;
+  text-shadow: 0 1px 0 white;
+}
+
+.party-analysis-page .analysis-compact-heading small {
+  display: block;
+  color: var(--badge, #4e94bb);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+/* ==============================
+   SPARKLES AND BUBBLES
+   ============================== */
+
+.party-analysis-page .analysis-compact-spark {
+  position: absolute;
+  right: 16px;
+  top: 13px;
+
+  color: white;
+  font-size: 18px;
+
+  text-shadow:
+    0 0 6px white,
+    0 0 12px var(--badge, #8ec7e5);
+
+  pointer-events: none;
+}
+
+.party-analysis-page .analysis-compact-bubble {
+  position: absolute;
+  right: 15px;
+  top: 44px;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+
+  border: 1px solid white;
+
+  background: radial-gradient(
+    circle at 30% 25%,
+    white,
+    rgba(255,255,255,.3) 40%,
+    rgba(113,186,237,.2)
+  );
+
+  box-shadow: 0 2px 5px rgba(33,89,143,.15);
+  pointer-events: none;
+}
+
+/* ==============================
+   ROLE BADGES
+   ============================== */
+
+.party-analysis-page .analysis-role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 11px !important;
+}
+
+.party-analysis-page .analysis-role-list .role-tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px !important;
+  border-radius: 999px !important;
+
+  color: #19345d !important;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.90),
+    rgba(255,255,255,.50)
+  ) !important;
+
+  border: 1px solid rgba(255,255,255,.95) !important;
+
+  box-shadow:
+    0 2px 4px rgba(34,70,111,.1),
+    inset 0 1px 1px white !important;
+}
+
+/* ==============================
+   MOVESET HEADING
+   ============================== */
+
+.party-analysis-page .analysis-compact-moves-heading {
+  margin: 0 0 8px !important;
+  padding-top: 8px !important;
+
+  border-top: 1px solid rgba(91,151,196,.27);
+
+  color: #19345d !important;
+  font-size: 13px !important;
+}
+
+.party-analysis-page .analysis-compact-moves-heading span {
+  color: #ffae24;
+}
+
+/* ==============================
+   MOVES AND EMOJIS
+
+   Explicitly overrides the older
+   .analysis-character li span rules.
+   ============================== */
+
+.party-analysis-page .analysis-aero-card ul.analysis-moves {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.party-analysis-page .analysis-aero-card ul.analysis-moves > li {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  min-width: 0;
+  box-sizing: border-box !important;
+
+  padding: 8px 10px 8px 12px !important;
+
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,.78) !important;
+
+  background: rgba(255,255,255,.28) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.85) !important;
+
+  transform: none !important;
+}
+
+.party-analysis-page .analysis-aero-card .analysis-moves li::before,
+.party-analysis-page .analysis-aero-card .analysis-moves li::after {
+  content: none !important;
+  display: none !important;
+}
+
+.party-analysis-page .analysis-aero-card .analysis-moves li:hover {
+  background: rgba(255,255,255,.43) !important;
+  transform: none !important;
+}
+
+.party-analysis-page
+.analysis-aero-card
+.analysis-moves li > .analysis-move-icon {
+  display: grid !important;
+  place-items: center !important;
+
+  flex: 0 0 31px !important;
+  width: 31px !important;
+  height: 31px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  box-sizing: border-box !important;
+
+  border-radius: 10px;
+  border: 2px solid white;
+
+  font-size: 18px;
+  line-height: 1;
+
+  background: linear-gradient(
+    155deg,
+    rgba(255,255,255,.96),
+    var(--move, rgba(255,255,255,.6))
+  );
+
+  box-shadow:
+    0 3px 5px rgba(38,75,116,.18),
+    inset 0 1px 1px white;
+}
+
+.party-analysis-page .analysis-move-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px;
+
+  min-width: 0;
+  flex: 1;
+
+  padding-right: 2px;
+}
+
+.party-analysis-page .analysis-move-text strong {
+  display: block;
+  color: #19345d !important;
+  font-size: 12px !important;
+  line-height: 1.25;
+}
+
+.party-analysis-page .analysis-move-text > span {
+  display: block;
+  color: #365273 !important;
+  font-size: 11px !important;
+  line-height: 1.35;
+}
+
+/* Disable leftover old card layers. */
+.party-analysis-page .analysis-card-body,
+.party-analysis-page .analysis-card-banner {
+  background: transparent !important;
+}
+
+/* ==============================
+   ABILITY COVERAGE
+   ============================== */
+
+.party-analysis-page .analysis-role-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255,255,255,.42),
+      rgba(255,255,255,.08) 65%
+    ),
+    var(--analysis-rainbow) !important;
+
+  border: 2px solid rgba(255,255,255,.96) !important;
+  border-radius: 20px !important;
+
+  box-shadow:
+    0 5px 0 -2px rgba(92,148,190,.3),
+    0 9px 16px rgba(29,76,130,.14),
+    inset 0 2px 2px white !important;
+}
+
+.party-analysis-page .analysis-role-top > strong {
+  color: #20375e !important;
+}
+
+.party-analysis-page .analysis-role-count {
+  color: #127eaf !important;
+}
+
+.party-analysis-page .analysis-role-count small {
+  color: #3b5576 !important;
+}
+
+.party-analysis-page .analysis-role-card p {
+  color: #345171 !important;
+}
+
+.party-analysis-page .analysis-role-spark {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+
+  color: white;
+  font-size: 19px;
+
+  text-shadow: 0 0 8px rgba(75,167,225,.5);
+  pointer-events: none;
+}
+
+/* ==============================
+   ANIMATED ABILITY BARS
+   ============================== */
+
+.party-analysis-page .analysis-meter {
+  height: 14px !important;
+  border-radius: 999px !important;
+  overflow: hidden;
+
+  background: rgba(255,255,255,.55) !important;
+  border: 1px solid rgba(255,255,255,.95) !important;
+
+  box-shadow:
+    inset 0 2px 4px rgba(40,82,125,.25),
+    0 1px 2px rgba(255,255,255,.8) !important;
+}
+
+.party-analysis-page .analysis-meter span {
+  position: relative;
+  display: block;
+
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: left center;
+
+  background: linear-gradient(
+    180deg,
+    #e6ffff,
+    #83e9fc 30%,
+    #27b8e5 70%,
+    #1487c8
+  ) !important;
+
+  box-shadow:
+    inset 0 2px 1px rgba(255,255,255,.9),
+    0 0 8px rgba(59,207,241,.45) !important;
+}
+
+.party-analysis-page .analysis-meter span::after {
+  content: "";
+  position: absolute;
+
+  left: 4px;
+  right: 4px;
+  top: 2px;
+  height: 30%;
+
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+}
+
+.party-analysis-page
+.analysis-role-card:nth-child(4n+2)
+.analysis-meter span {
+  background: linear-gradient(
+    180deg,
+    #f5eaff,
+    #c3a5ff 30%,
+    #9874dc 75%,
+    #7153c0
+  ) !important;
+}
+
+.party-analysis-page
+.analysis-role-card:nth-child(4n+3)
+.analysis-meter span {
+  background: linear-gradient(
+    180deg,
+    #effff8,
+    #a6f5d5 30%,
+    #4ed4a9 75%,
+    #239f85
+  ) !important;
+}
+
+.party-analysis-page
+.analysis-role-card:nth-child(4n+4)
+.analysis-meter span {
+  background: linear-gradient(
+    180deg,
+    #fff1f9,
+    #ffc2dc 30%,
+    #f297bb 75%,
+    #d96e9e
+  ) !important;
+}
+
+/* ==============================
+   STRENGTHS AND WEAKNESSES
+   ============================== */
+
+.party-analysis-page .analysis-feedback-grid li {
+  background: rgba(255,255,255,.28) !important;
+
+  border: 1px solid rgba(255,255,255,.8) !important;
+  border-radius: 14px !important;
+
+  color: #244367 !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.85),
+    0 3px 6px rgba(34,76,122,.08) !important;
+}
+
+/* ==============================
+   SUGGESTED PARTY SWAPS
+   ============================== */
+
+.party-analysis-page .analysis-recommendation {
+  position: relative;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255,255,255,.32),
+      rgba(255,255,255,.07)
+    ),
+    var(--analysis-rainbow) !important;
+
+  border: 2px solid rgba(255,255,255,.96) !important;
+  border-radius: 22px !important;
+
+  box-shadow:
+    0 5px 0 -2px rgba(103,151,193,.3),
+    0 10px 19px rgba(30,77,131,.15),
+    inset 0 2px 2px rgba(255,255,255,.95) !important;
+}
+
+.party-analysis-page .analysis-recommendation h3 {
+  color: #20375e !important;
+}
+
+.party-analysis-page .analysis-recommendation p {
+  color: #2c4a6b !important;
+}
+
+.party-analysis-page .swap-preview {
+  background: rgba(255,255,255,.25) !important;
+  border: 1px solid rgba(255,255,255,.8) !important;
+  border-radius: 17px !important;
+}
+
+.party-analysis-page .swap-character-portrait {
+  background: linear-gradient(
+    155deg,
+    white,
+    var(--top, #d9edff),
+    var(--badge, #8ab8d8)
+  ) !important;
+
+  border: 3px solid white !important;
+
+  box-shadow:
+    0 4px 0 -1px var(--shadow, #95afc5),
+    0 7px 11px rgba(36,74,120,.18),
+    inset 0 2px 2px rgba(255,255,255,.9) !important;
+}
+
+.party-analysis-page .swap-character strong {
+  color: #20375e !important;
+}
+
+/* ==============================
+   RESPONSIVE LAYOUT
+   ============================== */
+
+@media (max-width: 1000px) {
+  .party-analysis-page .analysis-character-grid {
+    grid-template-columns:
+      repeat(2, minmax(0,1fr)) !important;
+
+    row-gap: 24px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .party-analysis-page .analysis-character-grid {
+    grid-template-columns:
+      minmax(0,1fr) !important;
+
+    gap: 24px !important;
+  }
+
+  .party-analysis-page .analysis-section {
+    border-radius: 23px !important;
+  }
+
+  .party-analysis-page .analysis-aero-card {
+    border-radius: 22px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .party-analysis-page .analysis-aero-card,
+  .party-analysis-page .analysis-moves li {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   YOUR ANIMATRONICS — FROSTED GLASS PANEL
+   Match the Character Gallery's glass look
+   ========================================== */
+
+.party-analysis-page .analysis-section.analysis-roster-section {
+  background: linear-gradient(
+    135deg,
+    rgba(210, 240, 255, 0.23),
+    rgba(255, 255, 255, 0.17) 50%,
+    rgba(225, 205, 255, 0.22)
+  ) !important;
+
+  background-image: linear-gradient(
+    135deg,
+    rgba(210, 240, 255, 0.23),
+    rgba(255, 255, 255, 0.17) 50%,
+    rgba(225, 205, 255, 0.22)
+  ) !important;
+
+  backdrop-filter: blur(6px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(1.2) !important;
+
+  border: 3px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 29px !important;
+
+  box-shadow:
+    0 12px 25px rgba(20, 70, 120, 0.18),
+    inset 0 2px 2px rgba(255, 255, 255, 0.65) !important;
+}
+
+/* ==========================================
+   SUGGESTED PARTY SWAPS — FROSTED GLASS
+   ========================================== */
+
+.party-analysis-page .analysis-section.analysis-swaps-section {
+  background: linear-gradient(
+    135deg,
+    rgba(210, 240, 255, 0.23),
+    rgba(255, 255, 255, 0.17) 50%,
+    rgba(225, 205, 255, 0.22)
+  ) !important;
+
+  backdrop-filter: blur(6px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(1.2) !important;
+
+  border: 3px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 29px !important;
+
+  box-shadow:
+    0 12px 25px rgba(20, 70, 120, 0.18),
+    inset 0 2px 2px rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Make individual swap recommendations
+   slightly translucent as well */
+
+.party-analysis-page .analysis-recommendation {
+  background: linear-gradient(
+    135deg,
+    rgba(225, 245, 255, 0.25),
+    rgba(245, 225, 255, 0.20),
+    rgba(220, 255, 235, 0.22)
+  ) !important;
+
+  backdrop-filter: blur(4px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(1.2) !important;
+}
+
+/* ==========================================
+   MEMBER LABELS — BETTER TEXT CONTRAST
+   ========================================== */
+
+/* Subtle darker edge around light text */
+.party-analysis-page .analysis-compact-heading small {
+  -webkit-text-stroke: 0.35px rgba(35, 45, 85, 0.65);
+
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.9),
+    0 0 2px rgba(35, 45, 85, 0.35) !important;
+}
+
+/* Keep member names clearly readable */
+.party-analysis-page .analysis-compact-heading h3 {
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.95),
+    0 0 2px rgba(30, 45, 85, 0.2) !important;
+}
+
+/* ==========================================
+   FIX: CHARACTER CARDS DISAPPEARING ON SCROLL
+   Keep cards permanently visible
+   ========================================== */
+
+.party-analysis-page .analysis-character-grid > .analysis-character {
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  animation: none !important;
+  animation-delay: 0s !important;
+
+  transform: none !important;
+  filter: none !important;
+
+  will-change: auto !important;
+}
+
+/* Preserve the gentle hover lift */
+.party-analysis-page .analysis-character-grid > .analysis-character:hover {
+  transform: translateY(-5px) !important;
+}
+
+/* Avoid scroll-related rendering glitches
+   from nested backdrop filters */
+.party-analysis-page .analysis-character-grid {
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+}
+
+/* ==========================================
+   PARTY ANALYSIS — FINAL TEXT & ICON FIXES
+   ========================================== */
+
+/* 1. Darker, clearer text throughout
+   Suggested Party Swaps */
+
+.party-analysis-page .analysis-swaps-section p,
+.party-analysis-page .analysis-recommendation p,
+.party-analysis-page .analysis-swaps-section .helper-text {
+  color: #102747 !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+
+  text-shadow:
+    0 1px 1px rgba(255,255,255,.95),
+    0 0 4px rgba(255,255,255,.75) !important;
+}
+
+/* Current / Suggested labels */
+
+.party-analysis-page .swap-preview small,
+.party-analysis-page .swap-character small {
+  color: #1c3456 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* 2. Footer disclaimer:
+   dark navy with a translucent white backing
+   so the grass doesn't obscure it */
+
+.party-analysis-page .analysis-footer,
+.party-analysis-page .analysis-disclaimer,
+.party-analysis-page > p:last-child {
+  color: #102747 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 10px;
+
+  background: rgba(240,250,255,.58) !important;
+
+  text-shadow:
+    0 1px 1px rgba(255,255,255,1),
+    0 0 3px rgba(255,255,255,.85) !important;
+}
+
+/* 3. Align weakness diamonds with the text */
+
+.party-analysis-page .analysis-feedback-grid li {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+}
+
+/* If the diamond comes from a pseudo-element,
+   replace the hollow outline with a filled one */
+
+.party-analysis-page .analysis-feedback-grid li::before {
+  content: "◆" !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+
+  color: #f28c75 !important;
+  font-size: 12px;
+  line-height: 1 !important;
+
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* ==========================================
+   LARGER BODY TEXT — PARTY ANALYSIS
+   ========================================== */
+
+/* Strengths and Potential Weaknesses */
+.party-analysis-page .analysis-feedback-grid li {
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+}
+
+/* Suggested Party Swaps descriptions */
+.party-analysis-page .analysis-recommendation p {
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+}
+
+/* Introductory text above swap suggestions */
+.party-analysis-page .analysis-swaps-section > p,
+.party-analysis-page .analysis-swaps-section .helper-text {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+/* Footer disclaimer */
+.party-analysis-page .analysis-footer,
+.party-analysis-page .analysis-disclaimer,
+.party-analysis-page > p:last-child {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* ==========================================
+   ABILITY COVERAGE — LARGER BODY TEXT
+   ========================================== */
+
+/* Descriptions inside the ability cards */
+.party-analysis-page .analysis-role-card p {
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
+/* Explanation beneath Ability Coverage heading */
+.party-analysis-page .analysis-role-section > p,
+.party-analysis-page .analysis-role-section .helper-text {
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
+/* ==========================================
+   PARTY ANALYSIS — COMPACT LAYOUT + FIXES
+   ========================================== */
+
+/* 1. Reduce space between major sections */
+.party-analysis-page .analysis-section {
+  margin-bottom: 16px !important;
+}
+
+/* Slightly tighter section headings */
+.party-analysis-page .analysis-section h2 {
+  margin-bottom: 14px !important;
+}
+
+/* Keep four character cards compact */
+.party-analysis-page .analysis-character-grid {
+  gap: 13px !important;
+}
+
+/* Reduce unused space in character cards */
+.party-analysis-page .analysis-character.analysis-aero-card {
+  padding: 15px 13px 14px !important;
+}
+
+/* Compact role labels and moves */
+.party-analysis-page .analysis-role-list {
+  margin-bottom: 8px !important;
+}
+
+.party-analysis-page .analysis-compact-header {
+  margin-bottom: 9px !important;
+}
+
+.party-analysis-page .analysis-aero-card ul.analysis-moves {
+  gap: 6px !important;
+}
+
+/* Tighten ability coverage cards */
+.party-analysis-page .analysis-role-grid {
+  gap: 11px !important;
+}
+
+.party-analysis-page .analysis-role-card {
+  padding: 15px !important;
+}
+
+/* Preserve 15px body text */
+.party-analysis-page .analysis-role-card p {
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+}
+
+/* Strengths and weaknesses */
+.party-analysis-page .analysis-feedback-grid {
+  gap: 15px !important;
+}
+
+.party-analysis-page .analysis-feedback-grid li {
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+/* Suggested swaps */
+.party-analysis-page .analysis-recommendation {
+  padding: 15px !important;
+}
+
+.party-analysis-page .analysis-swaps-section {
+  padding-bottom: 20px !important;
+}
+
+/* 2. Hide the extra sparkle beside Moveset */
+.party-analysis-page .analysis-compact-moves-heading span {
+  display: none !important;
+}
+
+/* 3. Prevent character cards disappearing on scroll */
+
+/* Avoid stacking backdrop filters on the cards.
+   The outer panel still has frosted glass. */
+.party-analysis-page .analysis-character.analysis-aero-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  animation: none !important;
+  filter: none !important;
+
+  will-change: auto !important;
+  backface-visibility: visible !important;
+}
+
+/* Disable scroll-related card transforms */
+.party-analysis-page .analysis-character-grid > .analysis-character {
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+}
+
+/* Keep the simple upward hover effect */
+.party-analysis-page .analysis-character-grid > .analysis-character:hover {
+  transform: translateY(-5px) !important;
+}
