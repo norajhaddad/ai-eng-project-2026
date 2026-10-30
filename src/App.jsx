@@ -31,6 +31,7 @@ import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
 import EncyclopediaIndex from './EncyclopediaIndex.jsx';
 import getCharacterImages from './character-images.js';
+import CharacterCoverflow from './CharacterCoverflow.jsx';
 import './styles.css';
 import './party-bubbles.css';
 import './party-rename.css';
@@ -1239,6 +1240,7 @@ function TeamBuilder({
       <p className="helper-text below-list">
         Choose four animatronics for each party, then select Analyze to explore their strengths and weaknesses.
       </p>
+      <CharacterCoverflow characters={fnafData} getCharacterImages={getCharacterImages} />
       {pendingDeletion && (
         <div
           className="delete-modal-backdrop"
