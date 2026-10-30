@@ -451,7 +451,7 @@ export default function CharacterProfile() {
 
     <main className="page-shell character-profile-page">
 
-      <Link to="/" className="text-button back-button">
+      <Link to="/encyclopedia" className="text-button back-button">
 
         <ArrowLeft size={17} />
 

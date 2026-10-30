@@ -1123,3 +1123,13 @@
   transform: rotate(45deg) !important;
   box-shadow: none !important;
 }
+/* Align the Ability Coverage wave with its heading. */
+.party-analysis-page .analysis-coverage-section > h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.party-analysis-page .analysis-coverage-section > h2 > svg {
+  flex-shrink: 0;
+}

@@ -793,7 +793,7 @@ function TeamBuilder({
         <div className="page-intro">
           <span className="eyebrow">
             <Users size={15} />
-            BUILD YOUR DREAM TEAM
+            PLAN YOUR PARTIES
           </span>
           <h1>
             Choose your <em>four.</em>

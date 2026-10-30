@@ -2772,7 +2772,7 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .delete-modal { animation: none; }
 }
-/* Party deletion controls â€” responsive styling */
+/* Party deletion controls Ã¢â‚¬â€ responsive styling */
 .parties-section-heading {
   display: flex;
   align-items: center;
@@ -2887,7 +2887,7 @@ a {
   .party-bulk-controls { align-items: stretch; }
 }
 
-/* Party recommendation cards â€” append to src/styles.css */
+/* Party recommendation cards Ã¢â‚¬â€ append to src/styles.css */
 .party-analysis-page .analysis-recommendations {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
@@ -2909,7 +2909,7 @@ a {
   margin: 0;
   line-height: 1.55;
 }
-/* Analysis layout polish â€” append at the VERY END of src/styles.css */
+/* Analysis layout polish Ã¢â‚¬â€ append at the VERY END of src/styles.css */
 .party-analysis-page .analysis-feedback-grid {
   gap: 20px;
   margin-bottom: 24px;
@@ -3044,7 +3044,7 @@ a {
 
 /* Green stars for strengths */
 .party-analysis-page .analysis-strengths li::before {
-  content: "â˜…";
+  content: "Ã¢Ëœâ€¦";
   position: absolute;
   left: 0;
   top: 0;
@@ -3054,7 +3054,7 @@ a {
 
 /* Orange diamonds for weaknesses */
 .party-analysis-page .analysis-weaknesses li::before {
-  content: "â—†";
+  content: "Ã¢â€”â€ ";
   position: absolute;
   left: 0;
   top: 50%;
@@ -3204,7 +3204,7 @@ a {
 }
 
 .character-profile-page .profile-section li::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   position: absolute;
   left: 0;
   top: 0;
@@ -3366,7 +3366,7 @@ a {
 }
 
 .character-profile-page .profile-section li::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   position: absolute;
   left: 0;
   top: 0;
@@ -3489,7 +3489,7 @@ a {
 
 /* Add small star icons to each topic */
 .character-profile-page .profile-section details > summary::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   margin-right: 8px;
   color: #f2b83d;
   font-size: 14px;
@@ -3591,7 +3591,7 @@ a {
 
 /* Gold sparkle */
 .character-profile-page .profile-section > details > summary::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   color: #f0ad32;
   font-size: 21px;
   margin-right: 2px;
@@ -3599,7 +3599,7 @@ a {
 
 /* Arrow at the right */
 .character-profile-page .profile-section > details > summary::after {
-  content: "âŒ„";
+  content: "Ã¢Å’â€ž";
   margin-left: auto;
   color: #39758c;
   font-size: 23px;
@@ -4720,7 +4720,7 @@ a {
 
 /* Multiple tiny stars in different positions */
 .animatronic-card .card-banner::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   display: block;
   position: absolute;
   top: 20%;
@@ -4795,7 +4795,7 @@ a {
 
 /* Additional stars with their own timing */
 .animatronic-card .card-banner::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   display: block;
   position: absolute;
   top: 32%;
@@ -4870,7 +4870,7 @@ body {
 
 
 /* ==========================================
-   FNAF WORLD â€” FRUTIGER AERO MOCKUP CARDS
+   FNAF WORLD Ã¢â‚¬â€ FRUTIGER AERO MOCKUP CARDS
    ========================================== */
 
 /* Color themes */
@@ -4954,7 +4954,7 @@ body {
 
 /* Restore delicate twinkles without the old oversized overlays. */
 .gallery-page .aero-card .card-banner::before {
-  content: "âœ¦";
+  content: "Ã¢Å“Â¦";
   display: block;
   position: absolute;
   z-index: 3;
@@ -5074,12 +5074,12 @@ body {
   transform: rotate(20deg);
 }
 
-/* Freddy â€” round bear ears */
+/* Freddy Ã¢â‚¬â€ round bear ears */
 .gallery-page .aero-bear .aero-ear {
   border-radius: 50%;
 }
 
-/* Bonnie â€” tall but proportional bunny ears */
+/* Bonnie Ã¢â‚¬â€ tall but proportional bunny ears */
 .gallery-page .aero-bunny .aero-ear {
   top: -27px;
   width: 31px;
@@ -5097,7 +5097,7 @@ body {
   transform: rotate(15deg);
 }
 
-/* Foxy â€” upright pointed ears */
+/* Foxy Ã¢â‚¬â€ upright pointed ears */
 .gallery-page .aero-fox .aero-ear {
   top: -8px;
   width: 44px;
@@ -5123,7 +5123,7 @@ body {
   transform: rotate(12deg);
 }
 
-/* Chica â€” three feather-like tufts */
+/* Chica Ã¢â‚¬â€ three feather-like tufts */
 .gallery-page .aero-chick .aero-ear {
   top: -7px;
   width: 25px;
@@ -5289,7 +5289,7 @@ body {
   .gallery-page .aero-card .card-banner::before { animation: none; }
 }
 /* ==============================================================
-   MOCKUP-MATCH CHARACTERS PAGE â€” replaces old experimental Aero
+   MOCKUP-MATCH CHARACTERS PAGE Ã¢â‚¬â€ replaces old experimental Aero
    ============================================================== */
 .app-layout { background: transparent !important; }
 .site-header.aero-site-header { background: transparent; border: 0; position: relative; z-index: 10; }
@@ -5396,7 +5396,7 @@ body {
 
 
 /* ============================================================
-   GLASS REFINEMENT â€” 24 OCT 2026
+   GLASS REFINEMENT Ã¢â‚¬â€ 24 OCT 2026
    Static specular reflections; no moving white shimmer.
    ============================================================ */
 .gallery-page .aero-card .card-body::after,
@@ -5471,7 +5471,7 @@ body {
 @media (max-width: 720px) { .aero-select { flex: 1 1 42%; } }
 
 /* ============================================================
-   MOCKUP MATCH â€” visible hover shimmer + polished controls
+   MOCKUP MATCH Ã¢â‚¬â€ visible hover shimmer + polished controls
    ============================================================ */
 
 /* Hide accessible labels visually; the native select itself remains accessible. */
@@ -6237,7 +6237,7 @@ html, body, input, textarea, select, option, button {
   background: linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,0));
 }
 .team-builder-page .party-world-panel.party-row::after {
-  content: 'âœ¦';
+  content: 'Ã¢Å“Â¦';
   position: absolute;
   z-index: -1;
   right: 18%;
@@ -6439,7 +6439,7 @@ html, body, input, textarea, select, option, button {
   text-shadow: 0 2px 4px #0064b7;
 }
 
-/* Mockup-inspired icy glass lettering and controls â€” October 24 */
+/* Mockup-inspired icy glass lettering and controls Ã¢â‚¬â€ October 24 */
 /* Gradient belongs to the letters, not to the globe or subtitle. */
 .aero-site-header .aero-brand .aero-brand-copy {
   color: #bdefff;
@@ -6968,4 +6968,69 @@ html, body, input, textarea, select, option, button {
   .party-analysis-page .back-button {
     transition: none;
   }
+}
+/* Create Party: focused readability refinement (no layout changes). */
+.party-builder-page .page-intro h1 em {
+  color: #087c55;
+  -webkit-text-stroke: 1px rgba(245,255,251,.95);
+  text-shadow: 0 2px 0 rgba(255,255,255,.9), 0 4px 5px rgba(0,58,52,.55), 0 0 14px rgba(255,255,255,.8);
+}
+.party-builder-page .page-intro h1 {
+  text-shadow: 0 2px 0 rgba(255,255,255,.95), 0 5px 12px rgba(7,49,90,.34);
+}
+.party-builder-page .page-intro .eyebrow {
+  color: #063e6e;
+  font-weight: 900;
+  text-shadow: 0 1px 1px white;
+}
+.party-builder-page .page-intro p {
+  color: #092f51;
+  font-weight: 700;
+  background: rgba(239,251,255,.91);
+  box-shadow: 0 3px 12px rgba(9,68,110,.13);
+}
+.party-builder-page .selection-top h2 {
+  color: #072f55;
+  text-shadow: 0 1px 2px rgba(255,255,255,.9);
+}
+.party-builder-page .party-results-count,
+.party-builder-page .selection-count { color: #0b466c; font-weight: 750; }
+.party-builder-page .party-character-tile {
+  background: linear-gradient(155deg,rgba(249,255,255,.97),rgba(215,245,253,.95) 54%,rgba(211,250,235,.95));
+}
+.party-builder-page .party-tile-name { color: #092f52; font-size: 14px; font-weight: 900; }
+.party-builder-page .party-tile-roles { color: #164e6b; font-size: 12px; font-weight: 700; }
+.party-builder-page .party-preview-heading h2 { color: #092f52; font-weight: 900; }
+.party-builder-page .party-preview-helper,
+.party-builder-page .party-empty-label { color: #225777; font-weight: 650; }
+
+/* Restore original Party Analysis panel gradients, unchanged. */
+/* Final Analysis panel surfaces: override later party-analysis.css rules. */
+.party-analysis-page section.analysis-section.analysis-coverage-section {
+  background: linear-gradient(180deg, rgba(204,238,255,.74) 0%, rgba(231,247,255,.96) 30%, rgba(232,251,245,.96) 70%, rgba(196,235,253,.74) 100%) !important;
+  border: 2px solid rgba(255,255,255,.96) !important;
+  box-shadow: inset 0 2px 2px #fff, 0 8px 20px rgba(9,72,121,.16) !important;
+  backdrop-filter: blur(10px);
+}
+.party-analysis-page .analysis-coverage-section .analysis-role-grid .analysis-role-card {
+  background: linear-gradient(180deg, rgba(197,231,253,.76) 0%, rgba(242,250,255,.97) 35%, rgba(240,250,255,.97) 65%, rgba(186,225,248,.78) 100%) !important;
+  border: 1px solid rgba(255,255,255,.96) !important;
+  box-shadow: inset 0 2px 2px #fff, 0 4px 10px rgba(8,75,123,.12) !important;
+}
+.party-analysis-page .analysis-feedback-grid > section.analysis-section.analysis-strengths {
+  background: linear-gradient(180deg, rgba(185,233,215,.76) 0%, rgba(234,252,243,.97) 34%, rgba(234,252,243,.97) 66%, rgba(178,231,211,.76) 100%) !important;
+  border: 2px solid rgba(255,255,255,.96) !important;
+  box-shadow: inset 0 2px 2px #fff, 0 8px 20px rgba(9,72,121,.16) !important;
+  backdrop-filter: blur(10px);
+}
+.party-analysis-page .analysis-feedback-grid > section.analysis-section.analysis-weaknesses {
+  background: linear-gradient(180deg, rgba(255,229,181,.76) 0%, rgba(255,249,226,.97) 34%, rgba(255,249,226,.97) 66%, rgba(249,220,177,.76) 100%) !important;
+  border: 2px solid rgba(255,255,255,.96) !important;
+  box-shadow: inset 0 2px 2px #fff, 0 8px 20px rgba(9,72,121,.16) !important;
+  backdrop-filter: blur(10px);
+}
+.party-analysis-page .analysis-feedback-grid > section.analysis-section:is(.analysis-strengths,.analysis-weaknesses) li {
+  background: rgba(255,255,255,.85) !important;
+  color: #143c58 !important;
+  text-shadow: none !important;
 }
