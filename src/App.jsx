@@ -28,6 +28,7 @@ import fnafData from './fnaf-roster.js';
 import AnimatronicCard from './AnimatronicCard.jsx';
 import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
+import EncyclopediaIndex from './EncyclopediaIndex.jsx';
 import './styles.css';
 import './party-bubbles.css';
 const accents = ['peach', 'violet', 'gold', 'mint'];
@@ -1325,13 +1326,16 @@ export default function App() {
               <NavLink to="/team-builder" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
                 <Users size={22}/> Team Builder
               </NavLink>
-              <a className="nav-link" href="#character-gallery" onClick={event => {
-                if (window.location.pathname !== '/') { event.preventDefault(); window.location.href = '/#character-gallery'; }
-              }}><BookOpen size={22}/> Encyclopedia</a>
-              <a className="nav-link" href="/#about-site"><Info size={22}/> About</a>
-            </nav>
-          </div>
-        </header>
+            <NavLink
+              to="/encyclopedia"
+              className="nav-link"
+            >
+              <BookOpen size={22} />
+              Encyclopedia
+            </NavLink>
+          </nav>
+        </div>
+      </header>
         <Routes>
           <Route
             path="/"
@@ -1356,6 +1360,14 @@ export default function App() {
         <Route
           path="*"
           element={<Gallery />}
+        />
+        <Route
+          path="/encyclopedia"
+          element={<EncyclopediaIndex />}
+        />
+        <Route
+          path="/characters/:characterId"
+          element={<CharacterProfile />}
         />
         </Routes>
         <footer className="site-footer" id="about-site">
