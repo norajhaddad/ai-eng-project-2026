@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Puzzle, Star, MapPin } from 'lucide-react';
@@ -11,7 +10,7 @@ export function mascotType(name) {
   if (/chica/.test(n)) return 'chick';
   return 'other';
 }
-
+// Specific move names first, then broader families. Keep emojis meaningful.
 const moveArt = [
   [/mimic ball/i, '🪩'],
   [/endo army/i, '🤖'],
@@ -59,16 +58,19 @@ const moveArt = [
   [/eye beam/i, '👁️'],
   [/sludge|goo|slime/i, '🟢'],
   [/bite|fang/i, '🦷'],
-  [/attack|bash|punch|smash|strike/i, '💥']
+  [/attack|bash|punch|smash|strike/i, '💥'],
 ];
-
 export function moveEmoji(name) {
   return moveArt.find(([pattern]) => pattern.test(name))?.[1] || '✨';
 }
 
-import freddyGif from './assets/adventure-freddy.gif';
-import freddyStill from './assets/adventure-freddy-still.png';
 
+// Explicit imports ensure Vite bundles Freddy's images.
+import getCharacterImages from './character-images.js';
+
+
+// Game-inspired colors, with a character-specific shade within each game.
+// The colors are CSS variables, so existing glossy card styling stays intact.
 const gamePalettes = {
   fnaf1: ['#B97847', '#8771D9', '#F6C94E', '#C95A59'],
   fnaf2: ['#8DCBEE', '#F2A6C8', '#B59AE9', '#F6D78C', '#B6C5D3'],
@@ -77,7 +79,7 @@ const gamePalettes = {
   sister: ['#ED7D91', '#B9A6E9', '#82D6E4', '#E5C6D9'],
   pizzeria: ['#E8AF68', '#B77E54', '#8FA7B0', '#D6C38B'],
   security: ['#F38DBD', '#68C8DB', '#B48BE7', '#F6DB73'],
-  misc: ['#7FC6C7', '#A8D9BB', '#C1A5D9', '#E6BFA0']
+  misc: ['#7FC6C7', '#A8D9BB', '#C1A5D9', '#E6BFA0'],
 };
 
 function blendHex(a, b, amount) {
@@ -94,7 +96,6 @@ export function cardPalette(character) {
   const origin = (character.originalGame || '').toLowerCase();
   const name = character.name.toLowerCase();
   let game = 'misc';
-
   if (/fnaf\s*1|five nights at freddy.s(?:\s*1)?$|original/.test(origin)) game = 'fnaf1';
   else if (/fnaf\s*2|five nights at freddy.s 2/.test(origin)) game = 'fnaf2';
   else if (/fnaf\s*3|five nights at freddy.s 3/.test(origin)) game = 'fnaf3';
@@ -105,7 +106,6 @@ export function cardPalette(character) {
 
   const colors = gamePalettes[game];
   let index = 0;
-
   if (game === 'fnaf1') {
     if (/bonnie/.test(name)) index = 1;
     else if (/chica/.test(name)) index = 2;
@@ -119,9 +119,7 @@ export function cardPalette(character) {
     else index = 2;
   } else if (game === 'fnaf3') {
     if (/springtrap/.test(name)) index = 2;
-    else if (/phantom/.test(name)) {
-      index = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % colors.length;
-    }
+    else if (/phantom/.test(name)) index = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % colors.length;
   } else if (game === 'fnaf4') {
     if (/foxy|fredbear/.test(name)) index = 0;
     else if (/bonnie|plushtrap/.test(name)) index = 2;
@@ -130,9 +128,7 @@ export function cardPalette(character) {
   } else {
     index = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % colors.length;
   }
-
   const accent = colors[index];
-
   return {
     '--top': blendHex(accent, '#ffffff', 0.48),
     '--bottom': blendHex(accent, '#ffffff', 0.86),
@@ -140,14 +136,13 @@ export function cardPalette(character) {
     '--ear': blendHex(accent, '#66516a', 0.15),
     '--inner': blendHex(accent, '#ffffff', 0.55),
     '--shadow': blendHex(accent, '#799bb0', 0.42),
-    '--move': blendHex(accent, '#ffffff', 0.72)
+    '--move': blendHex(accent, '#ffffff', 0.72),
   };
 }
 
 export default function AnimatronicCard({ character, accent }) {
   const [hovered, setHovered] = useState(false);
-  const spriteGif = character.id === 'freddy' ? freddyGif : null;
-  const spriteStill = character.id === 'freddy' ? freddyStill : null;
+  const { animated: spriteGif, still: spriteStill } = getCharacterImages(character);
   const hasSprite = Boolean(spriteGif || spriteStill);
   const { fnafWorld } = character;
   const type = mascotType(character.name);
@@ -155,101 +150,47 @@ export default function AnimatronicCard({ character, accent }) {
   const isPinwheel = character.unlockLocation === 'Pinwheel Funhouse';
   const isStarter = character.unlockMethod === 'Starter';
   const UnlockIcon = isMinigame ? Puzzle : isPinwheel ? Star : MapPin;
-
   return (
-    <article
-      className={`animatronic-card aero-card card-${accent} aero-${type} ${hasSprite ? 'has-adventure-sprite' : ''}`}
-      style={cardPalette(character)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={event => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setHovered(false);
-      }}
-    >
+    <article className={`animatronic-card aero-card card-${accent} aero-${type} ${hasSprite ? 'has-adventure-sprite' : ''}`} style={cardPalette(character)} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setHovered(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setHovered(false); }}>
       <div className="card-banner">
         <span className="aero-spark aero-spark-one" aria-hidden="true">✧</span>
         <span className="aero-spark aero-spark-two" aria-hidden="true">✦</span>
         <span className="aero-spark aero-spark-three" aria-hidden="true">✧</span>
         <span className="aero-bubble aero-bubble-one" aria-hidden="true" />
         <span className="aero-bubble aero-bubble-two" aria-hidden="true" />
-
         <div className="aero-mascot">
-          {type !== 'other' && (
-            <div className="aero-ears" aria-hidden="true">
-              <span className="aero-ear left" />
-              <span className="aero-ear right" />
-              {type === 'chick' && <span className="aero-feather" />}
-            </div>
-          )}
-
+          {type !== 'other' && <div className="aero-ears" aria-hidden="true">
+            <span className="aero-ear left" /><span className="aero-ear right" />
+            {type === 'chick' && <span className="aero-feather" />}
+          </div>}
           <div className="aero-letter-badge">
             {hasSprite ? (
               <span className="adventure-sprite" aria-label={`${character.name} sprite`}>
-                {!hovered && spriteStill && (
-                  <img src={spriteStill} alt="" className="adventure-sprite-still" draggable="false" />
-                )}
-                {hovered && spriteGif && (
-                  <img key="freddy-animated" src={spriteGif} alt="" className="adventure-sprite-gif" draggable="false" />
-                )}
+                {!hovered && spriteStill && <img src={spriteStill} alt="" className="adventure-sprite-still" draggable="false" />}
+                {hovered && spriteGif && <img key={`${character.id}-animated`} src={spriteGif} alt="" className="adventure-sprite-gif" draggable="false" />}
               </span>
             ) : (
-              <span className="aero-letter">
-                {character.name.split(' ').map(w => w[0]).join('').slice(0, 2)}
-              </span>
+              <span className="aero-letter">{character.name.split(' ').map(w => w[0]).join('').slice(0,2)}</span>
             )}
           </div>
         </div>
       </div>
-
       <div className="card-body">
-        <div className="card-title-line">
-          <h3>
-            <Link to={`/characters/${character.id}`} className="character-profile-link">
-              {character.name}
-            </Link>
-          </h3>
-          {isStarter && <span className="starter-tag">STARTER</span>}
-        </div>
-
-        <p className="character-subtitle">
-          {character.originalGame}
-          {character.update === 2 ? ' · Update 2' : ''}
-        </p>
-
+        <div className="card-title-line"><h3><Link to={`/characters/${character.id}`} className="character-profile-link">{character.name}</Link></h3>
+          {isStarter && <span className="starter-tag">STARTER</span>}</div>
+        <p className="character-subtitle">{character.originalGame}{character.update === 2 ? ' · Update 2' : ''}</p>
         <div className="character-badges">
-          <span
-            className={`unlock-badge ${isMinigame ? 'unlock-minigame' : isPinwheel ? 'unlock-pinwheel' : 'unlock-normal'}`}
-            title={character.unlockDetail}
-          >
-            <UnlockIcon size={13} />
-            {character.unlockBadge}
-          </span>
-          {fnafWorld.roles.map(role => (
-            <span className="role-tag" key={role.label}>{role.label}</span>
-          ))}
+          <span className={`unlock-badge ${isMinigame ? 'unlock-minigame' : isPinwheel ? 'unlock-pinwheel' : 'unlock-normal'}`} title={character.unlockDetail}>
+            <UnlockIcon size={13}/>{character.unlockBadge}</span>
+          {fnafWorld.roles.map(role => <span className="role-tag" key={role.label}>{role.label}</span>)}
         </div>
-
-        {isMinigame && character.minigame && (
-          <p className="unlock-hint minigame-hint">
-            <Puzzle size={14} />
-            <span><strong>Minigame:</strong> {character.minigame}</span>
-          </p>
-        )}
-
+        {isMinigame && character.minigame && <p className="unlock-hint minigame-hint"><Puzzle size={14}/><span><strong>Minigame:</strong> {character.minigame}</span></p>}
         <h4>Moveset <span>✦</span></h4>
         <ul className="move-list aero-move-list">
-          {fnafWorld.moves.map(move => (
-            <li key={move.name}>
-              <span className="aero-move-icon" aria-hidden="true">
-                {moveEmoji(move.name)}
-              </span>
-              <div className="aero-move-text">
-                <strong>{move.name}</strong>
-                <span>{move.effect}</span>
-              </div>
-            </li>
-          ))}
+          {fnafWorld.moves.map(move => <li key={move.name}>
+            <span className="aero-move-icon" aria-hidden="true">{moveEmoji(move.name)}</span>
+            <div className="aero-move-text"><strong>{move.name}</strong><span>{move.effect}</span></div>
+          </li>)}
         </ul>
       </div>
     </article>

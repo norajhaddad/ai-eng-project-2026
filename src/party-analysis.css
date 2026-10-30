@@ -1,6 +1,6 @@
 
 /* ===================================================
-   FNAF WORLD — PARTY ANALYSIS
+   FNAF WORLD â€” PARTY ANALYSIS
    Compact Frutiger Aero / Iridescent Glass
    Full replacement for party-analysis.css
    =================================================== */
@@ -674,9 +674,10 @@
 }
 
 .party-analysis-page .swap-preview {
-  background: rgba(255,255,255,.25) !important;
-  border: 1px solid rgba(255,255,255,.8) !important;
-  border-radius: 17px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .party-analysis-page .swap-character-portrait {
@@ -738,7 +739,7 @@
 }
 
 /* ==========================================
-   YOUR ANIMATRONICS — FROSTED GLASS PANEL
+   YOUR ANIMATRONICS â€” FROSTED GLASS PANEL
    Match the Character Gallery's glass look
    ========================================== */
 
@@ -769,7 +770,7 @@
 }
 
 /* ==========================================
-   SUGGESTED PARTY SWAPS — FROSTED GLASS
+   SUGGESTED PARTY SWAPS â€” FROSTED GLASS
    ========================================== */
 
 .party-analysis-page .analysis-section.analysis-swaps-section {
@@ -807,7 +808,7 @@
 }
 
 /* ==========================================
-   MEMBER LABELS — BETTER TEXT CONTRAST
+   MEMBER LABELS â€” BETTER TEXT CONTRAST
    ========================================== */
 
 /* Subtle darker edge around light text */
@@ -858,7 +859,7 @@
 }
 
 /* ==========================================
-   PARTY ANALYSIS — FINAL TEXT & ICON FIXES
+   PARTY ANALYSIS â€” FINAL TEXT & ICON FIXES
    ========================================== */
 
 /* 1. Darker, clearer text throughout
@@ -919,7 +920,7 @@
    replace the hollow outline with a filled one */
 
 .party-analysis-page .analysis-feedback-grid li::before {
-  content: "◆" !important;
+  content: "â—†" !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -938,7 +939,7 @@
 }
 
 /* ==========================================
-   LARGER BODY TEXT — PARTY ANALYSIS
+   LARGER BODY TEXT â€” PARTY ANALYSIS
    ========================================== */
 
 /* Strengths and Potential Weaknesses */
@@ -969,7 +970,7 @@
 }
 
 /* ==========================================
-   ABILITY COVERAGE — LARGER BODY TEXT
+   ABILITY COVERAGE â€” LARGER BODY TEXT
    ========================================== */
 
 /* Descriptions inside the ability cards */
@@ -986,7 +987,7 @@
 }
 
 /* ==========================================
-   PARTY ANALYSIS — COMPACT LAYOUT + FIXES
+   PARTY ANALYSIS â€” COMPACT LAYOUT + FIXES
    ========================================== */
 
 /* 1. Reduce space between major sections */
@@ -1090,4 +1091,35 @@
 /* Keep the simple upward hover effect */
 .party-analysis-page .analysis-character-grid > .analysis-character:hover {
   transform: translateY(-5px) !important;
+}
+
+/* Align the Suggested Party Swaps icon and heading text. */
+.party-analysis-page .analysis-swaps-section > h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.party-analysis-page .analysis-swaps-section > h2 > svg {
+  flex-shrink: 0;
+}
+
+/* Encoding-safe diamond bullets for strengths and weaknesses. */
+.party-analysis-page .analysis-feedback-grid li::before {
+  content: "" !important;
+  display: block !important;
+  flex: 0 0 8px !important;
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  min-height: 8px !important;
+  background: #f28c75 !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  position: static !important;
+  margin: 0 3px 0 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  transform: rotate(45deg) !important;
+  box-shadow: none !important;
 }

@@ -21,6 +21,7 @@ import {
   Sparkles,
   Users,
   Trash2,
+  Pencil,
   X
 } from 'lucide-react';
 import FilterDropdown from './FilterDropdown.jsx';
@@ -29,8 +30,10 @@ import AnimatronicCard from './AnimatronicCard.jsx';
 import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
 import EncyclopediaIndex from './EncyclopediaIndex.jsx';
+import getCharacterImages from './character-images.js';
 import './styles.css';
 import './party-bubbles.css';
+import './party-rename.css';
 const accents = ['peach', 'violet', 'gold', 'mint'];
 const gamePalettes = {
   fnaf1: ['#B97847', '#8771D9', '#F6C94E', '#C95A59'],
@@ -105,16 +108,6 @@ function getGalleryPageSize() {
   return GALLERY_PAGE_SIZES.desktop;
 }
 const PARTY_CHARACTERS_PER_PAGE = 16;
-const portraitModules = import.meta.glob(
-  './assets/characters/*.{png,jpg,jpeg,webp}',
-  { eager: true, query: '?url', import: 'default' }
-);
-const characterImages = {};
-Object.entries(portraitModules).forEach(([path, url]) => {
-  const filename = path.split('/').pop();
-  const id = filename.replace(/\.(png|jpg|jpeg|webp)$/i, '');
-  characterImages[id] = url;
-});
 function CharacterIcon({ character, size = 'normal' }) {
   const initials = character.name
     .split(' ')
@@ -127,7 +120,7 @@ function CharacterIcon({ character, size = 'normal' }) {
   const accent = accents[
     Math.max(0, index) % accents.length
   ];
-  const image = characterImages[character.id];
+  const image = getCharacterImages(character).still;
   return (
     <span
       className={`character-avatar avatar-${accent} avatar-${size}`}
@@ -596,7 +589,6 @@ function PartyActions({
     </div>
   );
 }
-
 // Independent bubbles with staggered motion, no timers or animation jitter.
 const PARTY_BUBBLES = Array.from({ length: 96 }, (_, index) => {
   const fraction = (value) => value - Math.floor(value);
@@ -611,7 +603,6 @@ const PARTY_BUBBLES = Array.from({ length: 96 }, (_, index) => {
     opacity: (0.55 + random(6) * .35).toFixed(2),
   };
 });
-
 function PartyBubbles() {
   return (
     <div className="party-bubble-field" aria-hidden="true">
@@ -628,11 +619,11 @@ function PartyBubbles() {
     </div>
   );
 }
-
 function TeamBuilder({
   parties,
   onCreateParty,
   onDeleteParty,
+  onRenameParty,
   loading,
   error
 }) {
@@ -647,6 +638,9 @@ function TeamBuilder({
   const [selectedPartyIds, setSelectedPartyIds] = useState([]);
   const [deleting, setDeleting] = useState(false);
   const [pendingDeletion, setPendingDeletion] = useState(null);
+  const [editingPartyId, setEditingPartyId] = useState(null);
+  const [draftPartyName, setDraftPartyName] = useState('');
+  const [renamingPartyId, setRenamingPartyId] = useState(null);
   const selectedCharacters = selected
     .map(id =>
       fnafData.find(character => character.id === id)
@@ -747,6 +741,25 @@ function TeamBuilder({
       setPendingDeletion(null);
     } finally {
       setDeleting(false);
+    }
+  }
+  function startRenaming(party, index) {
+    setEditingPartyId(party.id);
+    setDraftPartyName(party.name || `Party ${index + 1}`);
+  }
+  function cancelRenaming() {
+    setEditingPartyId(null);
+    setDraftPartyName('');
+  }
+  async function savePartyName(id) {
+    const nextName = draftPartyName.trim();
+    if (!nextName || renamingPartyId) return;
+    setRenamingPartyId(id);
+    try {
+      const saved = await onRenameParty(id, nextName);
+      if (saved) cancelRenaming();
+    } finally {
+      setRenamingPartyId(null);
     }
   }
   function clearSearch() {
@@ -1138,8 +1151,49 @@ function TeamBuilder({
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div className="party-label">
-                <strong>Party {index + 1}</strong>
-                <small>{party.memberIds.length} / 4 animatronics · Ready for adventure</small>
+                {editingPartyId === party.id ? (
+                <form className="party-rename-form" onSubmit={event => {
+                  event.preventDefault();
+                  savePartyName(party.id);
+                }}>
+                  <div className="party-rename-field">
+                  <input
+                    className="party-rename-input"
+                    aria-label="New party name"
+                    autoFocus
+                    maxLength={32}
+                    value={draftPartyName}
+                    onChange={event => setDraftPartyName(event.target.value)}
+                    onKeyDown={event => {
+                      if (event.key === 'Escape') cancelRenaming();
+                    }}
+                    disabled={renamingPartyId === party.id}
+                  />
+                  <span className={`party-rename-counter ${draftPartyName.length >= 32 ? 'at-limit' : ''}`} aria-live="polite">
+                    {draftPartyName.length} / 32
+                  </span>
+                  </div>
+                  <button type="submit" className="party-rename-icon" aria-label="Save party name"
+                    title="Save name" disabled={!draftPartyName.trim() || renamingPartyId === party.id}>
+                    <Check size={17} />
+                  </button>
+                  <button type="button" className="party-rename-icon" aria-label="Cancel renaming"
+                    title="Cancel" onClick={cancelRenaming} disabled={renamingPartyId === party.id}>
+                    <X size={17} />
+                  </button>
+                </form>
+              ) : (
+                <div className="party-name-line">
+                  <strong>{party.name || `Party ${index + 1}`}</strong>
+                  {!deleteMode && (
+                    <button type="button" className="party-rename-icon" title="Rename party"
+                      aria-label={`Rename ${party.name || `Party ${index + 1}`}`}
+                      onClick={() => startRenaming(party, index)} disabled={deleting}>
+                      <Pencil size={15} />
+                    </button>
+                  )}
+                </div>
+              )}
               </div>
               <div className="party-row-actions">
                 <div className="party-members" aria-label={`Party ${index + 1} lineup`}>
@@ -1255,6 +1309,7 @@ export default function App() {
         setParties(
           savedParties.map(party => ({
             id: party.id,
+            name: party.name,
             memberIds: party.member_ids
           }))
         );
@@ -1287,9 +1342,32 @@ export default function App() {
         ...current,
         {
           id: savedParty.id,
+          name: savedParty.name,
           memberIds: savedParty.member_ids
         }
       ]);
+      return true;
+    } catch (err) {
+      setError(err.message);
+      return false;
+    }
+  }
+  async function renameParty(id, name) {
+    try {
+      setError('');
+      const response = await fetch(`/api/parties/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+      });
+      if (!response.ok) {
+        const details = await response.json().catch(() => ({}));
+        throw new Error(details.error || 'Could not rename party.');
+      }
+      const updated = await response.json();
+      setParties(current => current.map(party =>
+        party.id === id ? { ...party, name: updated.name } : party
+      ));
       return true;
     } catch (err) {
       setError(err.message);
@@ -1316,12 +1394,12 @@ export default function App() {
             <NavLink className="brand aero-brand" to="/">
               <span className="aero-globe" aria-hidden="true">🌐</span>
               <span className="aero-brand-copy">FNaF World
-                <small>✦ Party Builder & Encyclopedia ✦</small>
+                <small>✦ Party Builder &amp; Lore &amp; More ✦</small>
               </span>
             </NavLink>
             <nav className="main-nav aero-nav" aria-label="Main navigation">
               <NavLink end to="/" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
-                <span aria-hidden="true">🐻</span> Characters
+                <BookOpen size={22} /> Character Profiles
               </NavLink>
               <NavLink to="/team-builder" className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
                 <Users size={22}/> Team Builder
@@ -1331,7 +1409,7 @@ export default function App() {
               className="nav-link"
             >
               <BookOpen size={22} />
-              Encyclopedia
+              Lore &amp; More
             </NavLink>
           </nav>
         </div>
@@ -1348,19 +1426,12 @@ export default function App() {
                 parties={parties}
                 onCreateParty={addParty}
               onDeleteParty={deleteParty}
+              onRenameParty={renameParty}
                 loading={loading}
                 error={error}
               />
             }
           />
-        <Route
-          path="/characters/:characterId"
-          element={<CharacterProfile />}
-        />
-        <Route
-          path="*"
-          element={<Gallery />}
-        />
         <Route
           path="/encyclopedia"
           element={<EncyclopediaIndex />}
@@ -1369,6 +1440,7 @@ export default function App() {
           path="/characters/:characterId"
           element={<CharacterProfile />}
         />
+        <Route path="*" element={<Gallery />} />
         </Routes>
         <footer className="site-footer" id="about-site">
           Unofficial fan project

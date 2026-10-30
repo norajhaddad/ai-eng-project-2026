@@ -1,0 +1,295 @@
+/* Party rename controls: Frutiger Aero-style glass */
+.party-name-line,
+.party-rename-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.party-name-line strong { overflow-wrap: anywhere; }
+.party-rename-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  background: linear-gradient(155deg, rgba(255,255,255,.92), rgba(192,231,255,.65));
+  box-shadow: 0 2px 7px rgba(42, 99, 142, 0.16);
+  color: #28628c;
+  cursor: pointer;
+}
+.party-rename-icon:hover:not(:disabled) { filter: brightness(1.05); transform: translateY(-1px); }
+.party-rename-icon:focus-visible { outline: 3px solid #398fe2; outline-offset: 2px; }
+.party-rename-icon:disabled { opacity: 0.55; cursor: not-allowed; }
+.party-rename-input {
+  min-width: 120px;
+  max-width: 100%;
+  width: min(230px, 100%);
+  padding: 7px 10px;
+  border: 1px solid rgba(89, 165, 210, 0.6);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #204768;
+  font: inherit;
+  box-shadow: inset 0 1px 4px rgba(55, 114, 158, 0.1);
+}
+.party-rename-input:focus { outline: 2px solid #64b6ef; outline-offset: 1px; }
+
+/* Keep long names readable on narrow screens without horizontal scrolling. */
+.party-label { min-width: 0; }
+.party-name-line { max-width: 100%; min-width: 0; }
+.party-name-line strong { overflow-wrap: anywhere; word-break: normal; min-width: 0; }
+.party-rename-form { max-width: 100%; }
+.party-rename-input { flex: 1 1 150px; min-width: 0; width: min(230px, 100%); }
+
+/* Larger centered party names and a live rename counter. */
+.party-world-panel .party-label {
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+  justify-items: center;
+}
+.party-world-panel .party-name-line {
+  width: 100%;
+  justify-content: center;
+  gap: 0.55rem;
+}
+.party-world-panel .party-name-line strong {
+  font-size: clamp(24px, 2.1vw, 30px);
+  line-height: 1.15;
+  text-align: center;
+}
+.party-world-panel .party-rename-form {
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+.party-rename-field {
+  display: flex;
+  flex: 1 1 150px;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  max-width: 230px;
+}
+.party-rename-field .party-rename-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex: none;
+}
+.party-rename-counter {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  color: #567ba4;
+  padding-right: 3px;
+}
+.party-rename-counter.at-limit { color: #b12b48; }
+@media (max-width: 600px) {
+  .party-world-panel .party-name-line strong { font-size: 24px; }
+  .party-world-panel .party-rename-form { gap: 6px; }
+}
+
+/* Corrected party-title layout: undo absolute centering and prevent
+   the name/pencil group from breaking into separate lines. */
+.team-builder-page .party-world-panel.party-row > .party-label {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  grid-column: 2 !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  justify-self: stretch;
+  text-align: center;
+}
+.team-builder-page .party-world-panel .party-name-line {
+  display: flex;
+  flex-flow: row nowrap !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+.team-builder-page .party-world-panel .party-name-line strong {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+.team-builder-page .party-world-panel .party-name-line .party-rename-icon {
+  flex: 0 0 30px;
+}
+.team-builder-page .party-world-panel.party-row > .party-row-actions {
+  position: static;
+  transform: none;
+  margin-left: 0;
+}
+@media (max-width: 1050px) {
+  .team-builder-page .party-world-panel.party-row > .party-label {
+    grid-column: 2 !important;
+  }
+}
+
+
+/* Keep the party title beside its number, as in the approved layout. */
+.team-builder-page .party-world-panel.party-row > .party-label {
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  right: auto !important;
+  margin: 0 !important;
+  flex: 1 1 auto !important;
+  min-width: 0;
+  width: auto !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+.team-builder-page .party-world-panel .party-name-line {
+  justify-content: flex-start !important;
+}
+.team-builder-page .party-world-panel .party-name-line strong {
+  text-align: left !important;
+}
+
+/* Larger portraits, with character lineup and buttons vertically aligned. */
+.team-builder-page .party-world-panel .party-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+}
+.team-builder-page .party-world-panel .party-members {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.team-builder-page .party-world-panel .party-member-slot {
+  width: 64px;
+  flex: 0 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.team-builder-page .party-world-panel .party-member-slot .character-avatar {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+}
+.team-builder-page .party-world-panel .party-member-name {
+  font-size: 11px;
+  line-height: 1.15;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.team-builder-page .party-world-panel .party-action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+/* Break before the lineup gets squeezed into the party name. */
+@media (max-width: 850px) {
+  .team-builder-page .party-world-panel.party-row {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+  .team-builder-page .party-world-panel.party-row > .party-row-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 560px) {
+  .team-builder-page .party-world-panel .party-row-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .team-builder-page .party-world-panel .party-members {
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 2px;
+  }
+  .team-builder-page .party-world-panel .party-member-slot {
+    width: min(23%, 64px);
+    flex: 0 1 64px;
+  }
+  .team-builder-page .party-world-panel .party-action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+/* Align portrait squares with the action buttons */
+@media (min-width: 851px) {
+  .team-builder-page .party-world-panel .party-row-actions {
+    align-items: center;
+  }
+
+  .team-builder-page .party-world-panel .party-member-slot {
+    position: relative;
+    justify-content: flex-start;
+    height: 52px;
+    gap: 0;
+  }
+
+  .team-builder-page .party-world-panel .party-member-name {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Give the characters breathing room inside their portrait squares */
+.team-builder-page .party-world-panel .party-member-slot .character-avatar {
+  box-sizing: border-box;
+  width: 52px;
+  height: 52px;
+  padding: 5px 5px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.team-builder-page .party-world-panel .character-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Make the section heading larger than individual party names */
+.team-builder-page .party-world-panel .party-name-line strong {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+/* My parties section heading */
+.team-builder-page .party-section-heading h2 {
+  font-size: 30px;
+  line-height: 1.15;
+}

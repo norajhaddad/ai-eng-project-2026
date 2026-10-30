@@ -7,7 +7,6 @@ app.use(express.json());
 
 let rosterPromise;
 function getRoster() {
-  // Import the same roster the React gallery uses; no duplicate character data.
   if (!rosterPromise) {
     rosterPromise = import('../src/fnaf-roster.js').then(module => module.default);
   }
@@ -25,7 +24,6 @@ const WEIGHTS = {
 function categoryCounts(characters) {
   const counts = Object.fromEntries(CATEGORIES.map(category => [category, 0]));
   for (const character of characters) {
-    // Count characters providing an ability, not how many moves have it.
     const categories = new Set(
       (character.fnafWorld?.moves || []).map(move => move.category)
     );
@@ -41,7 +39,6 @@ function scoreTeam(characters) {
   let score = 0;
   for (const category of CATEGORIES) {
     const count = counts[category] || 0;
-    // First provider matters most; additional providers offer some redundancy.
     if (count > 0) score += WEIGHTS[category];
     if (count > 1) score += WEIGHTS[category] * 0.3;
     if (count > 2) score += WEIGHTS[category] * 0.1;
@@ -102,8 +99,6 @@ function analyzeTeam(characters, roster) {
 
   suggestions.sort((a, b) => b.improvement - a.improvement ||
     a.addName.localeCompare(b.addName));
-
-  // Offer different incoming characters, not three variations of the same swap.
   const picked = [];
   const seen = new Set();
   for (const suggestion of suggestions) {
@@ -112,7 +107,6 @@ function analyzeTeam(characters, roster) {
     picked.push(suggestion);
     if (picked.length === 3) break;
   }
-
   return { roleCounts: counts, strengths, weaknesses, suggestions: picked };
 }
 
@@ -141,6 +135,21 @@ app.post('/api/parties', (req, res) => {
   });
 });
 
+app.patch('/api/parties/:id', (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isSafeInteger(id) || id <= 0) {
+    return res.status(400).json({ error: 'Invalid party ID.' });
+  }
+  const { name } = req.body || {};
+  if (typeof name !== 'string' || !name.trim() || name.trim().length > 32) {
+    return res.status(400).json({ error: 'Party name must be 1 to 32 characters.' });
+  }
+  const result = db.prepare('UPDATE parties SET name = ? WHERE id = ?')
+    .run(name.trim(), id);
+  if (!result.changes) return res.status(404).json({ error: 'Party not found.' });
+  res.json({ id, name: name.trim() });
+});
+
 app.post('/api/parties/:id/analyze', async (req, res) => {
   const id = Number(req.params.id);
   if (!Number.isSafeInteger(id) || id <= 0) {
@@ -159,10 +168,7 @@ app.post('/api/parties/:id/analyze', async (req, res) => {
         error: 'One or more saved party characters are missing from the roster.'
       });
     }
-    res.json({
-      partyId: id,
-      ...analyzeTeam(characters, roster)
-    });
+    res.json({ partyId: id, ...analyzeTeam(characters, roster) });
   } catch (error) {
     console.error('Analysis error:', error);
     res.status(500).json({ error: 'Could not analyze this party.' });
