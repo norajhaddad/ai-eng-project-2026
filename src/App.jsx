@@ -32,6 +32,7 @@ import CharacterProfile from './CharacterProfile.jsx';
 import EncyclopediaIndex from './EncyclopediaIndex.jsx';
 import getCharacterImages from './character-images.js';
 import CharacterCoverflow from './CharacterCoverflow.jsx';
+import CircularCarousel from './CircularCarousel';
 import './styles.css';
 import './party-bubbles.css';
 import './party-rename.css';
@@ -1240,7 +1241,29 @@ function TeamBuilder({
       <p className="helper-text below-list">
         Choose four animatronics for each party, then select Analyze to explore their strengths and weaknesses.
       </p>
-      <CharacterCoverflow characters={fnafData} getCharacterImages={getCharacterImages} />
+                  <div style={{ height: '420px', width: '100%', position: 'relative' }}>
+        <CircularCarousel
+          items={fnafData
+            .map(character => ({
+              src: getCharacterImages(character)?.still,
+              alt: character.name,
+              title: character.name,
+              subtitle: character.fnafWorld?.roles?.map(role => role.label).join(' · ') || '',
+            }))
+            .filter(item => item.src)}
+          preset="cylinder"
+          intro="rise"
+          cardWidth={400}
+          speed={5}
+          aspectRatio={0.77}
+          captions={false}
+          gap={25}
+          autoplay="drift"
+          pauseOnHover
+          draggable
+          snap
+        />
+      </div>
       {pendingDeletion && (
         <div
           className="delete-modal-backdrop"
