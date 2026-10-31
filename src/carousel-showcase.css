@@ -1,0 +1,154 @@
+
+/* Frutiger Aero carousel showcase */
+.carousel-showcase {
+  position: relative;
+  isolation: isolate;
+  margin: 34px 0 28px;
+  padding: 24px 22px 18px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  background: linear-gradient(
+    145deg,
+    rgba(231, 255, 250, 0.52),
+    rgba(115, 218, 244, 0.32) 52%,
+    rgba(188, 247, 255, 0.46)
+  );
+  box-shadow:
+    0 14px 35px rgba(0, 75, 125, 0.19),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.carousel-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 42%;
+  border-radius: 26px 26px 50% 50%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.48),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.carousel-showcase__heading {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.carousel-showcase__eyebrow {
+  color: #087a92;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.carousel-showcase__heading h2 {
+  margin: 5px 0;
+  color: #073c73;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.carousel-showcase__heading p {
+  margin: 4px 0 0;
+  color: #165575;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.carousel-showcase__display {
+  position: relative;
+  height: 460px;
+  margin-top: 12px;
+}
+
+/* Soft holographic glow beneath the carousel */
+
+.carousel-showcase__display::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 65px;
+  width: 100%;
+  height: 150px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(103, 255, 235, 0.8) 20%,
+      rgba(38, 205, 255, 0.55) 45%,
+      rgba(0, 139, 220, 0.18) 65%,
+      transparent 80%
+    );
+  box-shadow:
+    0 0 35px rgba(68, 237, 255, 0.45),
+    0 0 75px rgba(42, 178, 255, 0.3);
+  filter: blur(9px);
+  pointer-events: none;
+}
+
+
+.carousel-showcase__display > .circular-carousel {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-showcase__bubble {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255, 255, 255, 0.85),
+    rgba(123, 235, 255, 0.12) 48%,
+    rgba(41, 161, 228, 0.16)
+  );
+  box-shadow: inset -3px -4px 8px rgba(35, 135, 190, 0.1);
+  pointer-events: none;
+}
+
+.carousel-showcase__bubble--one {
+  width: 42px;
+  height: 42px;
+  top: 22%;
+  left: 5%;
+}
+
+.carousel-showcase__bubble--two {
+  width: 24px;
+  height: 24px;
+  top: 65%;
+  right: 7%;
+}
+
+.carousel-showcase__bubble--three {
+  width: 15px;
+  height: 15px;
+  bottom: 12%;
+  left: 15%;
+}
+
+@media (max-width: 650px) {
+  .carousel-showcase {
+    padding: 18px 10px 12px;
+  }
+
+  .carousel-showcase__display {
+    height: 340px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-showcase {
+    scroll-behavior: auto;
+  }
+}

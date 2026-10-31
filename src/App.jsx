@@ -33,6 +33,7 @@ import EncyclopediaIndex from './EncyclopediaIndex.jsx';
 import getCharacterImages from './character-images.js';
 import CharacterCoverflow from './CharacterCoverflow.jsx';
 import CircularCarousel from './CircularCarousel';
+import './carousel-showcase.css';
 import './styles.css';
 import './party-bubbles.css';
 import './party-rename.css';
@@ -1241,29 +1242,43 @@ function TeamBuilder({
       <p className="helper-text below-list">
         Choose four animatronics for each party, then select Analyze to explore their strengths and weaknesses.
       </p>
-                  <div style={{ height: '420px', width: '100%', position: 'relative' }}>
-        <CircularCarousel
-          items={fnafData
-            .map(character => ({
-              src: getCharacterImages(character)?.still,
-              alt: character.name,
-              title: character.name,
-              subtitle: character.fnafWorld?.roles?.map(role => role.label).join(' · ') || '',
-            }))
-            .filter(item => item.src)}
-          preset="cylinder"
-          intro="rise"
-          cardWidth={400}
-          speed={5}
-          aspectRatio={0.77}
-          captions={false}
-          gap={25}
-          autoplay="drift"
-          pauseOnHover
-          draggable
-          snap
-        />
-      </div>
+                  
+      <section className="carousel-showcase" aria-labelledby="carousel-showcase-title">
+        <div className="carousel-showcase__heading">
+          <span className="carousel-showcase__eyebrow">CHARACTER SPOTLIGHT</span>
+          <h2 id="carousel-showcase-title">Meet the Animatronics</h2>
+          <p>Take a spin through the roster and find your next teammate!</p>
+        </div>
+
+        <div className="carousel-showcase__display">
+          <span className="carousel-showcase__bubble carousel-showcase__bubble--one" aria-hidden="true" />
+          <span className="carousel-showcase__bubble carousel-showcase__bubble--two" aria-hidden="true" />
+          <span className="carousel-showcase__bubble carousel-showcase__bubble--three" aria-hidden="true" />
+
+          <CircularCarousel
+            items={fnafData
+              .map(character => ({
+                src: getCharacterImages(character)?.still,
+                alt: character.name,
+                title: character.name,
+                subtitle: character.fnafWorld?.roles?.map(role => role.label).join(' · ') || '',
+              }))
+              .filter(item => item.src)}
+            preset="cylinder"
+            intro="rise"
+            cardWidth={400}
+            aspectRatio={0.77}
+            captions={false}
+            gap={25}
+            speed={5}
+            autoplay="drift"
+            pauseOnHover
+            draggable
+            snap
+          />
+        </div>
+      </section>
+
       {pendingDeletion && (
         <div
           className="delete-modal-backdrop"

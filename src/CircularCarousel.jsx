@@ -724,11 +724,13 @@ const CircularCarousel = ({
       samples: [{ time: performance.now(), angle: state.angle }]
     };
   };
-
   const handlePointerMove = event => {
     const state = stateRef.current;
     if (event.pointerType === 'mouse') {
       state.pointer.inside = true;
+      state.hover = Boolean(
+        event.target.closest('.circular-carousel__card')
+      );
       updatePointer(event);
     }
     const press = state.press;
@@ -787,11 +789,13 @@ const CircularCarousel = ({
     wakeRef.current();
   };
 
-  const handlePointerEnter = event => {
-    if (event.pointerType !== 'mouse') return;
-    stateRef.current.hover = true;
-    wakeRef.current();
-  };
+    const handlePointerEnter = event => {
+      if (event.pointerType !== 'mouse') return;
+      stateRef.current.hover = Boolean(
+        event.target.closest('.circular-carousel__card')
+      );
+      wakeRef.current();
+    };
 
   const handlePointerLeave = event => {
     const state = stateRef.current;
