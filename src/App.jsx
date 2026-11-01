@@ -1245,7 +1245,6 @@ function TeamBuilder({
                   
       <section className="carousel-showcase" aria-labelledby="carousel-showcase-title">
         <div className="carousel-showcase__heading">
-          <span className="carousel-showcase__eyebrow">CHARACTER SPOTLIGHT</span>
           <h2 id="carousel-showcase-title">Meet the Animatronics</h2>
           <p>Take a spin through the roster and find your next teammate!</p>
         </div>
@@ -1266,7 +1265,7 @@ function TeamBuilder({
               .filter(item => item.src)}
             preset="cylinder"
             intro="rise"
-            cardWidth={400}
+            cardWidth={430}
             aspectRatio={0.77}
             captions={false}
             gap={25}
