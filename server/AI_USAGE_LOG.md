@@ -37,7 +37,7 @@ AI assistance: I used the assistant for help understanding code errors, troubles
 My work: I tested the website's functionality, made frontend adjustments (bubble effects and color changes when a party is hovered over in Party Builder, as well as additional hover and coloring effects whenever other buttons were hovered over on the site, among other minor tweaks), and improved responsiveness across different screen sizes. 
 Result: I resolved issues encountered during development and verified that the existing features worked as intended.
 
-Entry 8: Capstone documentation
+Entry 9: Capstone documentation
 AI assistance: Understanding the milestone requirements for this capstone.
 My work: I laid out this log and organized it in order of what I've been doing for the site so far, so all in all: I started out with the frontend, going with the minimalistic but functional design that the assistant largely provided, moved on to building a functional backend and linking them with a custom API to analyze parties, and only then redesigning the frontend to reflect the Frutiger Aero aesthetic. Then, I could work on the site structure, character encyclopedia, and testing the final product to make sure the site functions as intended.
 Result: I created documentation that distinguishes plain old fully AI work from my independent development work.

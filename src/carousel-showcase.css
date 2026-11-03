@@ -1,13 +1,25 @@
 
 /* Frutiger Aero carousel showcase */
+
+@font-face {
+  font-family: "Berlin Sans";
+  src: url("./assets/fonts/BRLNSDB.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 .carousel-showcase {
   position: relative;
   isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   margin: 34px 0 28px;
-  padding: 24px 22px 18px;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 28px;
+  padding: 46px 115px 34px;
+  border: none;
+  border-radius: 30px;
+  overflow: visible;
   background: linear-gradient(
     145deg,
     rgba(231, 255, 250, 0.52),
@@ -21,12 +33,14 @@
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* Glossy highlight */
+
 .carousel-showcase::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
   height: 42%;
-  border-radius: 26px 26px 50% 50%;
+  border-radius: 30px 30px 45% 45%;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.48),
@@ -36,10 +50,29 @@
   z-index: -1;
 }
 
+/* Original decorative frame */
+
+.carousel-showcase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("./assets/frutiger-aero-carousel-overlay.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Heading */
+
 .carousel-showcase__heading {
   position: relative;
   z-index: 2;
+  margin: 0 0 10px;
   text-align: center;
+  transform: translateY(20px);
 }
 
 .carousel-showcase__eyebrow {
@@ -52,7 +85,10 @@
 .carousel-showcase__heading h2 {
   margin: 5px 0;
   color: #073c73;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-family: "Berlin Sans", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
@@ -61,15 +97,26 @@
   color: #165575;
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1.4;
 }
+
+/* Carousel display */
 
 .carousel-showcase__display {
   position: relative;
+  width: 100%;
   height: 460px;
-  margin-top: 12px;
+  margin: 12px auto 0;
+  transform: translateX(35px);
 }
 
-/* Soft holographic glow beneath the carousel */
+.carousel-showcase__display > .circular-carousel {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-30px);
+}
+
+/* Holographic glow */
 
 .carousel-showcase__display::before {
   content: "";
@@ -80,15 +127,14 @@
   height: 150px;
   transform: translateX(-50%);
   border-radius: 50%;
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(103, 255, 235, 0.8) 20%,
-      rgba(38, 205, 255, 0.55) 45%,
-      rgba(0, 139, 220, 0.18) 65%,
-      transparent 80%
-    );
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(103, 255, 235, 0.8) 20%,
+    rgba(38, 205, 255, 0.55) 45%,
+    rgba(0, 139, 220, 0.18) 65%,
+    transparent 80%
+  );
   box-shadow:
     0 0 35px rgba(68, 237, 255, 0.45),
     0 0 75px rgba(42, 178, 255, 0.3);
@@ -96,11 +142,7 @@
   pointer-events: none;
 }
 
-
-.carousel-showcase__display > .circular-carousel {
-  position: relative;
-  z-index: 1;
-}
+/* Decorative bubbles */
 
 .carousel-showcase__bubble {
   position: absolute;
@@ -137,111 +179,106 @@
   left: 15%;
 }
 
-@media (max-width: 650px) {
+
+/* Tablet and phone: fit content inside decorative frames */
+@media (max-width: 1024px) {
   .carousel-showcase {
-    padding: 18px 10px 12px;
+    padding: 55px 20px 45px;
+  }
+
+  /* Keep text inside the clear opening */
+  .carousel-showcase__heading {
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 17%;
+    padding-right: 5%;
+    margin: 0 0 12px;
+    transform: none;
+    text-align: center;
+  }
+
+  .carousel-showcase__heading h2 {
+    font-size: clamp(1.15rem, 2.8vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .carousel-showcase__heading p {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    line-height: 1.4;
+  }
+
+  /*
+   * Narrow the 3D viewing area without moving its center.
+   * The carousel automatically scales to this space.
+   */
+  .carousel-showcase__display {
+    box-sizing: border-box;
+    width: 72%;
+    height: 260px;
+    margin: 0 auto;
+    transform: translateX(5%);
+  }
+
+  .carousel-showcase__display > .circular-carousel {
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+}
+
+/* Tablet: 501px to 1024px */
+/* Tablet: 501px to 1024px */
+@media (min-width: 501px) and (max-width: 1024px) {
+  .carousel-showcase::after {
+    background-image: url("./assets/frutiger-aero-tablet-cut.png");
   }
 
   .carousel-showcase__display {
-    height: 340px;
+    width: 72%;
+    height: 260px;
+    margin: 0 auto;
+    transform: translateX(5%);
   }
 }
+
+/* Phone: up to 500px */
+@media (max-width: 500px) {
+  .carousel-showcase {
+    padding: 48px 15px 55px;
+    border-radius: 24px;
+  }
+
+  .carousel-showcase::after {
+    background-image: url("./assets/frutiger-aero-phone-cut.png");
+  }
+
+  .carousel-showcase__heading {
+    padding-left: 24%;
+    padding-right: 3%;
+  }
+
+  .carousel-showcase__heading h2 {
+    font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+  }
+
+  .carousel-showcase__heading p {
+    font-size: 0.68rem;
+    line-height: 1.4;
+  }
+
+  .carousel-showcase__display {
+    width: 75%;
+    height: 230px;
+    margin: 0 auto;
+    transform: translateX(5%);
+  }
+}
+
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   .carousel-showcase {
     scroll-behavior: auto;
   }
-}
-
-/* Aquatic decorative frame */
-.carousel-showcase {
-  position: relative;
-  border: none;
-  border-radius: 0;
-  overflow: visible;
-}
-
-.carousel-showcase::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('./assets/frutiger-aero-carousel-overlay.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Refine the glass showcase behind the aquatic frame */
-.carousel-showcase {
-  border-radius: 30px;
-  padding: 46px 115px 34px;
-  overflow: visible;
-}
-
-/* Round the glossy glass highlight */
-.carousel-showcase::before {
-  border-radius: 30px 30px 45% 45%;
-}
-
-/* Keep the decorative frame covering the entire showcase */
-.carousel-showcase::after {
-  inset: 0;
-  border-radius: 30px;
-}
-
-/* Move the heading below the top frame */
-.carousel-showcase__heading {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-/* Give the 3D carousel its own centered display area */
-.carousel-showcase__display {
-  width: 100%;
-  height: 460px;
-  margin: 12px auto 0;
-}
-
-/* Adjust padding on smaller screens */
-@media (max-width: 800px) {
-  .carousel-showcase {
-    padding: 48px 55px 25px;
-  }
-}
-
-@media (max-width: 550px) {
-  .carousel-showcase {
-    padding: 48px 28px 20px;
-  }
-}
-/* Center the carousel within the aquatic frame */
-.carousel-showcase__display {
-  position: relative;
-  width: 100%;
-  height: 460px;
-  margin: 12px auto 0;
-  transform: translateX(35px);
-}
-/* Berlin Sans showcase heading */
-.carousel-showcase__heading h2 {
-  font-family: "Berlin Sans", sans-serif;
-  font-weight: 700;
-  font-size: 2.4rem;
-}
-.carousel-showcase__heading {
-  transform: translateY(20px);
-}
-
-/* Move the rotating characters upward */
-.carousel-showcase__display > .circular-carousel {
-  transform: translateY(-30px);
-}
-@font-face {
-  font-family: "Berlin Sans";
-  src: url("./assets/fonts/BRLNSDB.TTF") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
 }
