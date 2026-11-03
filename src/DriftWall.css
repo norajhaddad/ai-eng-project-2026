@@ -1,0 +1,55 @@
+.drift-wall {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  overflow: hidden;
+  isolation: isolate;
+  perspective: var(--dw-perspective);
+  border-radius: 24px;
+  background: linear-gradient(155deg, rgba(214, 245, 255, .65), rgba(213, 249, 222, .6));
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+}
+.drift-wall__plane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  gap: var(--dw-gap);
+  width: max-content;
+  transform-style: preserve-3d;
+  transform: translate(calc(-50% - 75px), -50%) rotateX(calc(var(--dw-tilt) + var(--dw-pointer-y, 0deg))) rotateY(calc(var(--dw-turn) + var(--dw-pointer-x, 0deg))) rotateZ(var(--dw-roll)) translateZ(calc(-1 * var(--dw-depth)));
+}
+.drift-wall__column { width: var(--dw-tile-width); flex: none; overflow: visible; }
+.drift-wall__track { display: flex; flex-direction: column; will-change: transform; }
+.drift-wall__cycle { display: flex; flex-direction: column; }
+.drift-wall__tile {
+  flex: none;
+  width: var(--dw-tile-width);
+  height: calc(var(--dw-tile-height) + var(--dw-gap));
+  padding-bottom: var(--dw-gap);
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+}
+.drift-wall__tile > .encyclopedia-index-card {
+  width: 100%;
+  height: var(--dw-tile-height);
+  min-height: 0;
+  box-sizing: border-box;
+}
+.drift-wall__tile > .encyclopedia-index-card:hover,
+.drift-wall__tile > .encyclopedia-index-card:focus-visible {
+  transform: translateZ(12px) translateY(-4px);
+}
+@media (max-width: 700px) {
+  .drift-wall { height: 520px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .drift-wall__track { will-change: auto; }
+  .drift-wall__plane { transform: translate(-50%, -50%); }
+}
+@media (max-width: 1000px) {
+  .drift-wall__plane {
+    margin-left: 60px;
+  }
+}
