@@ -37,6 +37,11 @@ AI assistance: I used the assistant for help understanding code errors, troubles
 My work: I tested the website's functionality, made frontend adjustments (bubble effects and color changes when a party is hovered over in Party Builder, as well as additional hover and coloring effects whenever other buttons were hovered over on the site, among other minor tweaks), and improved responsiveness across different screen sizes. 
 Result: I resolved issues encountered during development and verified that the existing features worked as intended.
 
+Entry 8: Animations & interactive effects
+AI assistance: I used the assistant to help integrate and troubleshoot animated React components, including effects inspired by React Bits. This involved adding interactive effects to different parts of the website, such as character cards, party lists, dropdowns, and page headings.
+My work: I chose which animations I wanted to use and where they would fit best without interfering with the website's functionality or overall design. I experimented with different effects, adjusted their appearance, and removed or modified effects that I didn't like. For example, I worked on removing an unwanted hover outline from the party list and customized the encyclopedia's glitching heading to use the Berlin Sans font already featured elsewhere on the website. I also tested the animations and addressed issues that appeared during integration.
+Result: I added more interactive elements to the website while maintaining its Frutiger Aero aesthetic & FNaF World theme.
+
 Entry 9: Capstone documentation
 AI assistance: Understanding the milestone requirements for this capstone.
 My work: I laid out this log and organized it in order of what I've been doing for the site so far, so all in all: I started out with the frontend, going with the minimalistic but functional design that the assistant largely provided, moved on to building a functional backend and linking them with a custom API to analyze parties, and only then redesigning the frontend to reflect the Frutiger Aero aesthetic. Then, I could work on the site structure, character encyclopedia, and testing the final product to make sure the site functions as intended.
