@@ -6,6 +6,10 @@
 }
 
 .target-cursor__corner {
+  filter:
+    drop-shadow(0 0 1px #103d25)
+    drop-shadow(0 0 3px #76ff85)
+    drop-shadow(0 0 7px rgba(118, 255, 133, 0.8));
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +25,21 @@
   top: 0;
   left: 0;
   border-radius: 50%;
-  background: var(--target-cursor-color, #ffffff);
+
+  background: radial-gradient(
+    circle at 35% 30%,
+    #ffffff 0%,
+    #f0fff4 48%,
+    #a5f3b8 100%
+  );
+
+  border: 1.5px solid #14532d;
+
+  box-shadow:
+    0 0 0 2px #237a42,
+    0 0 9px 3px rgba(118, 255, 133, 0.85),
+    0 0 19px 6px rgba(30, 140, 65, 0.4);
+
   will-change: transform;
 }
 

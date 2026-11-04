@@ -25,6 +25,7 @@ import { cardPalette, moveEmoji } from './AnimatronicCard.jsx';
 import getCharacterImages from './character-images.js';
 
 import './party-analysis.css';
+import AnimatedContent from './AnimatedContent.jsx';
 
 const ROLE_DESCRIPTIONS = {
 
@@ -77,7 +78,7 @@ function AnalysisCharacter({ character }) {
 
     <article
 
-      className="analysis-character analysis-aero-card"
+      className="analysis-character analysis-aero-card cursor-target"
 
       style={cardPalette(character)}
 
@@ -531,6 +532,7 @@ export default function PartyAnalysis({
 
       {/* Page heading */}
 
+      <AnimatedContent distance={25} duration={0.6} threshold={0.1} once>
       <div className="page-intro">
 
         <span className="eyebrow">
@@ -559,12 +561,14 @@ export default function PartyAnalysis({
 
       </div>
 
+      </AnimatedContent>
       {/* ====================================
 
           PARTY MEMBERS
 
           \==================================== */}
 
+      <AnimatedContent distance={25} duration={0.6} threshold={0.1} once>
       <section className="analysis-section analysis-roster-section">
 
         <h2>Your animatronics</h2>
@@ -587,6 +591,7 @@ export default function PartyAnalysis({
 
       </section>
 
+      </AnimatedContent>
       {/* Loading */}
 
       {loading && (
@@ -645,6 +650,7 @@ export default function PartyAnalysis({
 
           {/* Ability coverage */}
 
+      <AnimatedContent distance={25} duration={0.6} threshold={0.1} once>
           <section className="analysis-section analysis-coverage-section">
 
             <h2>
@@ -779,12 +785,14 @@ export default function PartyAnalysis({
 
           </section>
 
+      </AnimatedContent>
           {/* ==================================
 
               STRENGTHS AND WEAKNESSES
 
               \================================== */}
 
+      <AnimatedContent distance={25} duration={0.6} threshold={0.1} once>
           <div className="analysis-feedback-grid">
 
             <section className="analysis-section analysis-strengths">
@@ -845,12 +853,14 @@ export default function PartyAnalysis({
 
           </div>
 
+      </AnimatedContent>
           {/* ==================================
 
               SUGGESTED PARTY SWAPS
 
               \================================== */}
 
+      <AnimatedContent distance={25} duration={0.6} threshold={0.1} once>
           <section className="analysis-section analysis-swaps-section">
 
             <h2>
@@ -971,6 +981,7 @@ export default function PartyAnalysis({
 
           </section>
 
+      </AnimatedContent>
         </>
 
       )}

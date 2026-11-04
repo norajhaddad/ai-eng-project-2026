@@ -8,6 +8,8 @@ import './encyclopedia-index.css';
 import getCharacterImages from './character-images.js';
 import FilterDropdown from './FilterDropdown.jsx';
 import DriftWall from './DriftWall.jsx';
+import AnimatedContent from './AnimatedContent.jsx';
+import GlitchText from './GlitchText.jsx';
 
 function EncyclopediaCharacterCard({ character, index }) {
   const image = getCharacterImages(character).still;
@@ -139,11 +141,17 @@ export default function EncyclopediaIndex() {
 
   return (
     <main className="page-shell encyclopedia-index-page">
+      <AnimatedContent>
       <header className="encyclopedia-index-header">
         <span className="encyclopedia-index-eyebrow"><Sparkles size={16} /> LORE &amp; MORE</span>
-        <h1>Meet the animatronics</h1>
+        <h1 className="encyclopedia-index-glitch-heading">
+          <GlitchText mode="slices" trigger="always" speed={0.5} intensity={0.5} offset={10} color="#ffffff" shadowColors={['#ff0000', '#00ffff']}>
+            Meet the animatronics
+          </GlitchText>
+        </h1>
         <p>Choose a character to explore their story, appearances, trivia, moves, and mysteries.</p>
       </header>
+      </AnimatedContent>
       <section className="encyclopedia-index-directory" aria-label="Character directory">
         <div className="encyclopedia-index-toolbar">
           <label className="encyclopedia-index-search">

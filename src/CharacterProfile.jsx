@@ -31,6 +31,7 @@ import fnafData from './fnaf-roster.js';
 
 import characterLore from './character-lore.js';
 import getCharacterImages from './character-images.js';
+import AnimatedContent from './AnimatedContent.jsx';
 
 const topics = [
 
@@ -460,6 +461,7 @@ export default function CharacterProfile() {
 
       </Link>
 
+      <AnimatedContent>
       <section className="profile-hero">
 
         <div className="profile-portrait">
@@ -522,6 +524,8 @@ export default function CharacterProfile() {
 
       </section>
 
+      </AnimatedContent>
+      <AnimatedContent>
       <section className="profile-section">
 
         <h2>Moves & abilities</h2>
@@ -554,6 +558,7 @@ export default function CharacterProfile() {
 
       </section>
 
+      </AnimatedContent>
       <section className="profile-explore">
 
         <div className="profile-explore-heading">

@@ -1,6 +1,6 @@
 
 /* ===================================================
-   FNAF WORLD â€” PARTY ANALYSIS
+   FNAF WORLD Ã¢â‚¬â€ PARTY ANALYSIS
    Compact Frutiger Aero / Iridescent Glass
    Full replacement for party-analysis.css
    =================================================== */
@@ -739,7 +739,7 @@
 }
 
 /* ==========================================
-   YOUR ANIMATRONICS â€” FROSTED GLASS PANEL
+   YOUR ANIMATRONICS Ã¢â‚¬â€ FROSTED GLASS PANEL
    Match the Character Gallery's glass look
    ========================================== */
 
@@ -770,7 +770,7 @@
 }
 
 /* ==========================================
-   SUGGESTED PARTY SWAPS â€” FROSTED GLASS
+   SUGGESTED PARTY SWAPS Ã¢â‚¬â€ FROSTED GLASS
    ========================================== */
 
 .party-analysis-page .analysis-section.analysis-swaps-section {
@@ -808,7 +808,7 @@
 }
 
 /* ==========================================
-   MEMBER LABELS â€” BETTER TEXT CONTRAST
+   MEMBER LABELS Ã¢â‚¬â€ BETTER TEXT CONTRAST
    ========================================== */
 
 /* Subtle darker edge around light text */
@@ -859,7 +859,7 @@
 }
 
 /* ==========================================
-   PARTY ANALYSIS â€” FINAL TEXT & ICON FIXES
+   PARTY ANALYSIS Ã¢â‚¬â€ FINAL TEXT & ICON FIXES
    ========================================== */
 
 /* 1. Darker, clearer text throughout
@@ -920,7 +920,7 @@
    replace the hollow outline with a filled one */
 
 .party-analysis-page .analysis-feedback-grid li::before {
-  content: "â—†" !important;
+  content: "Ã¢â€”â€ " !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -939,7 +939,7 @@
 }
 
 /* ==========================================
-   LARGER BODY TEXT â€” PARTY ANALYSIS
+   LARGER BODY TEXT Ã¢â‚¬â€ PARTY ANALYSIS
    ========================================== */
 
 /* Strengths and Potential Weaknesses */
@@ -970,7 +970,7 @@
 }
 
 /* ==========================================
-   ABILITY COVERAGE â€” LARGER BODY TEXT
+   ABILITY COVERAGE Ã¢â‚¬â€ LARGER BODY TEXT
    ========================================== */
 
 /* Descriptions inside the ability cards */
@@ -987,7 +987,7 @@
 }
 
 /* ==========================================
-   PARTY ANALYSIS â€” COMPACT LAYOUT + FIXES
+   PARTY ANALYSIS Ã¢â‚¬â€ COMPACT LAYOUT + FIXES
    ========================================== */
 
 /* 1. Reduce space between major sections */
@@ -1132,4 +1132,12 @@
 
 .party-analysis-page .analysis-coverage-section > h2 > svg {
   flex-shrink: 0;
+}
+/* Narrow analysis layouts: center compact cards instead of leaving a wide gutter. */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .party-analysis-page .analysis-character-grid {
+    grid-template-columns: repeat(2, minmax(0, 300px)) !important;
+    justify-content: center !important;
+    column-gap: 20px !important;
+  }
 }

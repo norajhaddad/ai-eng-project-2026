@@ -158,3 +158,51 @@
   .encyclopedia-index-motion-actions { flex-direction: column; }
   .encyclopedia-index-motion-actions button { width: 100%; }
 }
+/* Glitch heading: original React Bits white/red/cyan colors, with readable backdrop. */
+.encyclopedia-index-header {
+  max-width: 900px;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 26px;
+  background: rgba(7, 38, 78, .55);
+  box-shadow: 0 10px 28px rgba(8, 42, 86, .18);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+.encyclopedia-index-header .encyclopedia-index-eyebrow { color: #d5faff; }
+.encyclopedia-index-header .encyclopedia-index-glitch-heading {
+  margin: 10px 0;
+  font-size: clamp(1.75rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: none;
+}
+.encyclopedia-index-glitch-heading .glitch {
+  width: fit-content;
+  max-width: 100%;
+  font-size: inherit;
+  font-weight: 900;
+  line-height: inherit;
+  white-space: normal;
+  cursor: default;
+}
+.encyclopedia-index-header p {
+  color: #f2fbff;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 18, 45, .5);
+}
+@media (max-width: 600px) {
+  .encyclopedia-index-header { padding: 16px 12px; }
+}
+@font-face {
+  font-family: "Berlin Sans Demi";
+  src: url("./assets/fonts/BRLNSDB.TTF") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.encyclopedia-index-header .glitch {
+  font-family: "Berlin Sans Demi", sans-serif;
+  font-weight: 900;
+}

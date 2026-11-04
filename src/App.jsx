@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   BrowserRouter,
   NavLink,
@@ -31,6 +31,7 @@ import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
 import EncyclopediaIndex from './EncyclopediaIndex.jsx';
 import TargetCursor from './TargetCursor.jsx';
+import AnimatedContent from './AnimatedContent.jsx';
 import getCharacterImages from './character-images.js';
 import CharacterCoverflow from './CharacterCoverflow.jsx';
 import CircularCarousel from './CircularCarousel';
@@ -38,6 +39,7 @@ import './carousel-showcase.css';
 import './styles.css';
 import './party-bubbles.css';
 import './party-rename.css';
+import './party-animated-list.css';
 const accents = ['peach', 'violet', 'gold', 'mint'];
 const gamePalettes = {
   fnaf1: ['#B97847', '#8771D9', '#F6C94E', '#C95A59'],
@@ -297,8 +299,9 @@ function Gallery() {
   }
   return (
     <main className="page-shell gallery-page" id="about-site">
+      <AnimatedContent>
       <div className="aero-toolbar" aria-label="Character search and filters">
-        <label className="aero-search">
+        <label className="aero-search cursor-target">
           <Search size={23} aria-hidden="true" />
           <input type="search" placeholder="Search characters..." value={searchQuery}
             onChange={event => { setSearchQuery(event.target.value); setPage(1); }} />
@@ -331,6 +334,7 @@ function Gallery() {
           <button type="button" className="aero-clear" onClick={clearFilters}>Clear Filters</button>
         </div>
       </div>
+      </AnimatedContent>
       <p className="aero-results" aria-live="polite">Showing {filteredCharacters.length} of {fnafData.length} animatronics</p>
       <div
         id="character-gallery"
@@ -380,19 +384,26 @@ function Gallery() {
                   entry => entry.id === character.id
                 );
                 return (
-                  <AnimatronicCard
+                  <AnimatedContent
                     key={character.id}
-                    character={character}
-                    accent={
-                      accents[index % accents.length]
-                    }
-                    icon={
-                      <CharacterIcon
-                        character={character}
-                        size="large"
-                      />
-                    }
-                  />
+                    distance={25}
+                    duration={0.6}
+                    threshold={0}
+                    once={true}
+                  >
+                    <AnimatronicCard
+                      character={character}
+                      accent={
+                        accents[index % accents.length]
+                      }
+                      icon={
+                        <CharacterIcon
+                          character={character}
+                          size="large"
+                        />
+                      }
+                    />
+                  </AnimatedContent>
                 );
               })}
             </div>
@@ -644,7 +655,47 @@ function TeamBuilder({
   const [pendingDeletion, setPendingDeletion] = useState(null);
   const [editingPartyId, setEditingPartyId] = useState(null);
   const [draftPartyName, setDraftPartyName] = useState('');
+  const partyListRef = useRef(null);
   const [renamingPartyId, setRenamingPartyId] = useState(null);
+  useEffect(() => {
+    const list = partyListRef.current;
+    if (!list || loading || !parties.length) return undefined;
+    const rows = [...list.querySelectorAll('.party-row')];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) return undefined;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('party-row--revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 35px 0px' });
+    rows.forEach((row, index) => {
+      row.style.setProperty('--party-reveal-delay', `${Math.min(index % 4, 3) * 65}ms`);
+      row.classList.add('party-row--entering');
+      observer.observe(row);
+    });
+    return () => {
+      observer.disconnect();
+      rows.forEach(row => row.classList.remove('party-row--entering', 'party-row--revealed'));
+    };
+  }, [loading, parties]);
+
+  function movePartyHighlight(event) {
+    const list = partyListRef.current;
+    if (!list || !window.matchMedia('(hover: hover)').matches) return;
+    const row = event.target.closest('.party-row');
+    if (!row || !list.contains(row)) return;
+    const listBox = list.getBoundingClientRect();
+    const rowBox = row.getBoundingClientRect();
+    list.style.setProperty('--party-highlight-top', `${rowBox.top - listBox.top + list.scrollTop}px`);
+    list.style.setProperty('--party-highlight-height', `${rowBox.height}px`);
+    list.style.setProperty('--party-highlight-left', `${rowBox.left - listBox.left}px`);
+    list.style.setProperty('--party-highlight-width', `${rowBox.width}px`);
+    list.classList.add('party-list--hovering');
+  }
+
   const selectedCharacters = selected
     .map(id =>
       fnafData.find(character => character.id === id)
@@ -794,6 +845,7 @@ function TeamBuilder({
           <ArrowLeft size={17} />
           Back to parties
         </button>
+      <AnimatedContent>
         <div className="page-intro">
           <span className="eyebrow">
             <Users size={15} />
@@ -808,6 +860,7 @@ function TeamBuilder({
             character in more than one party.
           </p>
         </div>
+      </AnimatedContent>
         {error && (
           <p role="alert" style={{ color: 'crimson' }}>
             {error}
@@ -822,7 +875,7 @@ function TeamBuilder({
                 <span> / 4 selected</span>
               </span>
             </div>
-            <label className="party-search">
+            <label className="party-search cursor-target">
               <Search size={18} aria-hidden="true" />
               <input
                 type="search"
@@ -1043,6 +1096,7 @@ function TeamBuilder({
   }
   return (
     <main className="page-shell team-builder-page">
+      <AnimatedContent>
       <div className="page-intro">
         <span className="eyebrow">
           <Users size={15} />
@@ -1057,6 +1111,7 @@ function TeamBuilder({
           four characters.
         </p>
       </div>
+      </AnimatedContent>
       <div className="section-heading parties-section-heading">
         <h2>
           My parties
@@ -1137,7 +1192,8 @@ function TeamBuilder({
           </button>
         </div>
       ) : (
-        <div className="party-list">
+        <div className="party-list party-list--animated" ref={partyListRef} onPointerOver={movePartyHighlight} onPointerLeave={() => partyListRef.current?.classList.remove('party-list--hovering')}>
+          <span className="party-list__hover-ring" aria-hidden="true" />
           {parties.map((party, index) => (
             <div className="party-row party-world-panel" key={party.id}>
             <PartyBubbles />
@@ -1245,11 +1301,13 @@ function TeamBuilder({
       </p>
                   
       <section className="carousel-showcase" aria-labelledby="carousel-showcase-title">
+      <AnimatedContent>
         <div className="carousel-showcase__heading">
           <h2 id="carousel-showcase-title">Meet the Animatronics</h2>
           <p>Take a spin through the roster and find your next teammate!</p>
         </div>
 
+      </AnimatedContent>
         <div className="carousel-showcase__display">
           <span className="carousel-showcase__bubble carousel-showcase__bubble--one" aria-hidden="true" />
           <span className="carousel-showcase__bubble carousel-showcase__bubble--two" aria-hidden="true" />
@@ -1430,10 +1488,12 @@ export default function App() {
     <BrowserRouter>
       <div className="app-layout">
         <TargetCursor
-          cursorColor="#25bdf0"
-          cursorColorOnTarget="#66e7bd"
+          cursorColor="#176b3a"
+          cursorColorOnTarget="#34a853"
           hideDefaultCursor={true}
-          targetSelector={'button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [role="button"], [role="link"], .cursor-target'}
+          blendMode="normal"
+          thickness={4}
+          targetSelector={'button:not(:disabled), a[href], input:not([type="search"]):not(:disabled), select:not(:disabled), textarea:not(:disabled), [role="button"], [role="link"], .cursor-target'}
         />
         <header className="site-header aero-site-header">
           <div className="header-inner">

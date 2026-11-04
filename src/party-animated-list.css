@@ -1,0 +1,31 @@
+/* AnimatedList-inspired enhancements; preserves existing party layout. */
+.party-list--animated { position: relative; isolation: isolate; }
+.party-list--animated .party-row { position: relative; z-index: 1; }
+.party-list__hover-ring {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  top: var(--party-highlight-top, 0px);
+  left: var(--party-highlight-left, 0px);
+  width: var(--party-highlight-width, 100%);
+  height: var(--party-highlight-height, 0px);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 2px rgba(61, 204, 190, .58), 0 0 18px rgba(43, 182, 225, .16);
+  background: rgba(92, 214, 201, .045);
+  opacity: 0;
+  transition: top 380ms cubic-bezier(.2, 1.25, .35, 1), left 380ms cubic-bezier(.2, 1.25, .35, 1), width 380ms cubic-bezier(.2, 1.25, .35, 1), height 380ms cubic-bezier(.2, 1.25, .35, 1), opacity 180ms ease;
+}
+.party-list--hovering .party-list__hover-ring { opacity: 1; }
+.party-row--entering { opacity: 0; transform: translateY(18px) scale(.985); }
+.party-row--entering.party-row--revealed {
+  opacity: 1; transform: none;
+  transition: opacity 530ms ease var(--party-reveal-delay, 0ms), transform 620ms cubic-bezier(.2, 1.18, .3, 1) var(--party-reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .party-row--entering { opacity: 1; transform: none; }
+  .party-list__hover-ring { transition: none; }
+}
+/* Remove the extra animated cyan hover border. */
+.team-builder-page .party-list__hover-ring {
+  display: none !important;
+}

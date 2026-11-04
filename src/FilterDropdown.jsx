@@ -1,6 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Check, ChevronDown } from 'lucide-react';
+import { animatedListItemStyle } from './AnimatedList.jsx';
+import './animated-list.css';
 
 export default function FilterDropdown({ label, value, options, onChange, allLabel = 'All', color = 'lavender' }) {
   const [open, setOpen] = useState(false);
@@ -81,13 +83,14 @@ export default function FilterDropdown({ label, value, options, onChange, allLab
         <ChevronDown size={17} className="filter-chevron" />
       </button>
       {open && position && createPortal(
-        <div ref={menuRef} id={listId} className={`filter-menu filter-${color} portal-filter-menu`}
+        <div ref={menuRef} id={listId} className={`filter-menu filter-${color} portal-filter-menu animated-list-menu`}
           role="listbox" aria-label={label} style={position}>
           {options.map((option, index) => (
             <div key={option} ref={element => { optionRefs.current[index] = element; }}
               role="option" tabIndex={index === activeIndex ? 0 : -1}
               aria-selected={value === option}
-              className={`filter-option ${value === option ? 'is-selected' : ''}`}
+              className={`filter-option animated-list-option ${value === option ? 'is-selected' : ''}`}
+              style={animatedListItemStyle(index)}
               onClick={() => choose(option)} onMouseEnter={() => setActiveIndex(index)}
               onKeyDown={event => handleOptionKeyDown(event, index)}>
               <span>{displayName(option)}</span>

@@ -7034,3 +7034,208 @@ html, body, input, textarea, select, option, button {
   color: #143c58 !important;
   text-shadow: none !important;
 }
+/* Team Builder intro — pastel glass panel */
+.party-builder-page .page-intro p {
+  display: inline-block;
+  max-width: 560px;
+  padding: 14px 20px;
+  margin-top: 12px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(225, 250, 255, 0.92),
+    rgba(235, 226, 255, 0.88)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 5px rgba(132, 171, 214, 0.12),
+    0 8px 24px rgba(40, 92, 151, 0.18),
+    0 2px 5px rgba(40, 92, 151, 0.1);
+
+  color: #173c60;
+  line-height: 1.6;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* Team Builder — improve text contrast */
+
+/* Back to parties */
+.party-builder-page .back-button {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow:
+    0 1px 3px rgba(12, 54, 105, 0.85),
+    0 2px 8px rgba(12, 54, 105, 0.5);
+}
+
+.party-builder-page .back-button:hover {
+  color: #d4fff2;
+}
+
+/* PLAN YOUR PARTIES */
+.party-builder-page .eyebrow {
+  color: #ffffff;
+  font-weight: 800;
+  text-shadow:
+    0 1px 3px rgba(12, 54, 105, 0.9),
+    0 2px 8px rgba(12, 54, 105, 0.65);
+}
+
+/* 0 / 4 selected */
+.party-builder-page .selection-count {
+  color: #ffffff;
+  font-weight: 800;
+  text-shadow:
+    0 1px 3px rgba(12, 54, 105, 0.9),
+    0 2px 8px rgba(12, 54, 105, 0.65);
+}
+
+.party-builder-page .selection-count span {
+  color: #ffffff;
+}
+
+/* Showing 48 of 48 animatronics */
+.party-builder-page .party-results-count {
+  display: inline-block;
+  width: fit-content;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(237, 250, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(25, 80, 130, 0.14);
+  color: #173c60;
+  font-weight: 700;
+}
+/* PLAN YOUR PARTIES — pastel glass badge */
+.party-builder-page .page-intro .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(230, 255, 249, 0.96),
+    rgba(222, 235, 255, 0.96)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    inset 0 1px 2px #ffffff,
+    0 4px 14px rgba(17, 64, 128, 0.22);
+
+  color: #153e67;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-shadow: none;
+}
+/* BACK TO PARTIES — pastel glass capsule */
+.party-builder-page .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+
+  padding: 9px 16px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(230, 255, 249, 0.96),
+    rgba(222, 235, 255, 0.96)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    inset 0 1px 2px #ffffff,
+    0 4px 12px rgba(17, 64, 128, 0.22);
+
+  color: #153e67;
+  font-weight: 800;
+  text-shadow: none;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+@media (hover: hover) {
+  .party-builder-page .back-button:hover {
+    color: #153e67;
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 1px 2px #ffffff,
+      0 9px 20px rgba(17, 64, 128, 0.3);
+  }
+}
+
+.party-builder-page .back-button:active {
+  transform: translateY(0);
+}
+
+.party-builder-page .back-button:focus-visible {
+  outline: 3px solid #155fbb;
+  outline-offset: 3px;
+}
+
+/* PLAN YOUR PARTIES — clean white text */
+.party-builder-page .page-intro .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  text-shadow:
+    0 1px 3px rgba(12, 54, 105, 0.95),
+    0 2px 8px rgba(12, 54, 105, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .party-builder-page .back-button {
+    transition: none;
+  }
+
+  .party-builder-page .back-button:hover {
+    transform: none;
+  }
+}
+/* Proper spacing between Back button and page intro */
+.party-builder-page .back-button {
+  margin-bottom: 18px;
+}
+
+/* Keep the eyebrow label separate from the button */
+.party-builder-page .page-intro .eyebrow {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+/* Remove AnimatedList hover outlines in Team Builder */
+.party-builder-page .animated-list-item:hover,
+.party-builder-page .animated-list-item:focus-visible {
+  outline: none;
+}
+/* Remove the extra AnimatedList hover border */
+.party-builder-page .animated-list-item:hover {
+  outline: none !important;
+  border-color: transparent !important;
+}
