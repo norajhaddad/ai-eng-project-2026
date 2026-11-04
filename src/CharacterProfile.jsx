@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
@@ -448,8 +449,8 @@ export default function CharacterProfile() {
   }
 
   return (
-
     <main className="page-shell character-profile-page">
+      
 
       <Link to="/encyclopedia" className="text-button back-button">
 
