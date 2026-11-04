@@ -2,6 +2,20 @@ AI Usage Log
 Project: FNaF World Party Builder & Encyclopedia
 Pathway: Full-Stack Web
 
+!!CREDITS & DISCLAIMER!!
+FNaF World & the Five Nights at Freddy's franchise, including their characters and lore, were created by Scott Cawthon. This is an unofficial, fan-made educational project created for Code2College and is not affiliated with or endorsed by Scott Cawthon. Additional credits for third-party visual assets & resources are provided in the relevant entries below.
+
+!!ALL 3rd PARTY SOURCES/POSTS USED!!
+https://reactbits.dev/components/drift-wall
+https://reactbits.dev/components/animated-list
+https://reactbits.dev/animations/target-cursor
+https://reactbits.dev/animations/animated-content
+https://reactbits.dev/components/circular-carousel
+https://reactbits.dev/text-animations/glitch-text
+https://www.reddit.com/r/FrutigerAero/comments/1hqtb48/frutiger_aero_stream_overlays/
+https://www.reddit.com/r/FrutigerAero/comments/1qgeej5/my_own_take_on_frutiger_aero_wallpaper_what_are/
+
+
 Entry 1: Planning and organizing the website
 AI assistance: I discussed my FNaF World project structure with the assistant in terms of what would be plausible, including the character gallery, team builder, and encyclopedia so I wouldn't be tacking on more than I could do. I also used the assistant to help organize my ideas and plan features of the site, such as where I could add certain elements like bubble effects, hover effects, and those sort of details/where they would fit most easily.
 My work: I decided which features to include and how I wanted the website to function, including the party creation system and character filters.
@@ -19,7 +33,7 @@ Result: I established and tested the backend and SQLite database functionality b
 
 Entry 4: Frutiger Aero redesign
 AI assistance: The assistant helped with the original frontend foundation, which used a fairly generic modern layout with simple character cards. 
-My work: After trying to get the assistant to make a foundation I wasn't dissatisfied with, I decided to change the entire visual direction of the website, to a Frutiger Aero-inspired design. I redesigned the interface with glossy and translucent panels, colorful gradients, a Frutiger Aero background provided by a person on Reddit who created it via Photoshop (u/Adamskyvara), dimensional character badges, and more detailed character cards. I also adjsuted the filters, navigation, spacing, and responsive layouts to work with the new design.
+My work: After trying to get the assistant to make a foundation I wasn't dissatisfied with, I decided to change the entire visual direction of the website to a Frutiger Aero-inspired design. I redesigned the interface with glossy and translucent panels, colorful gradients, a Frutiger Aero background created in Photoshop by Reddit user u/Adamskyvara (https://www.reddit.com/user/Adamskyvara/), dimensional character badges, and more detailed character cards. I also adjusted the filters, navigation, spacing, and responsive layouts to work with the new design.
 Result: I transformed the website from a relatively simple card-based layout into a much more distinctive Frutiger Aero-inspired interface.
 
 Entry 5: Character gallery and party builder
@@ -38,8 +52,8 @@ My work: I tested the website's functionality, made frontend adjustments (bubble
 Result: I resolved issues encountered during development and verified that the existing features worked as intended.
 
 Entry 8: Animations & interactive effects
-AI assistance: I used the assistant to help integrate and troubleshoot animated React components, including effects inspired by React Bits. This involved adding interactive effects to different parts of the website, such as character cards, party lists, dropdowns, and page headings, as well as a display carousel for the team builder page below the list of created parties.
-My work: I chose which animations I wanted to use and where they would fit best without interfering with the website's functionality or overall design. I experimented with different effects, adjusted their appearance, and removed or modified effects that I didn't like. I also added a carousel overlay created by Reddit user (u/Mystx_xAbyss) as part of the website's later visual improvements. For example, I worked on removing an unwanted hover outline from the party list and customized the encyclopedia's glitching heading to use the Berlin Sans font already featured elsewhere on the website. I also tested the animations and addressed issues that appeared during integration.
+AI assistance: I used the assistant to help integrate and troubleshoot animated React components, including effects inspired by React Bits. This involved adding interactive effects to different parts of the website, such as character cards, party lists, dropdowns, and page headings. I also used the assistant to help implement a character display carousel below the list of created parties on the Team Builder page.
+My work: I chose which animations I wanted to use and where they would fit best without interfering with the website's functionality or overall design. I experimented with different effects, adjusted their appearance, and removed or modified effects that I didn't like. For the character carousel, I incorporated a visual overlay created by Reddit user u/Mystx_xAbyss (https://www.reddit.com/user/Mystx_xAbyss/) to better match the Frutiger Aero aesthetic. I also worked on removing an unwanted hover outline from the party list and customized the encyclopedia's glitching heading to use the Berlin Sans font already featured elsewhere on the website. I tested the animations and addressed issues that appeared during integration.
 Result: I added more interactive elements to the website while maintaining its Frutiger Aero aesthetic & FNaF World theme.
 
 Entry 9: Capstone documentation
@@ -49,5 +63,5 @@ Result: I created documentation that distinguishes AI-generated work from my ind
 
 Overall reflection:
 I used the assistant for coding assistance, troubleshooting, organizing information, and generating examples throughout my project. However, I reviewed its output and made significant changes independently. I built and tested the backend and SQLite database before moving on to a major frontend redesign. I changed the website from a generic modern layout to a Frutiger Aero-inspired design and independently worked on responsiveness, layouts, and visual details.
-Later, I added more interactive elements, including animations, hover effects, and a carousel for displaying FNaF World characters. I chose which effects to use, adjusted their appearance, and worked on making sure they fit the rest of the website without interfering with its functionality. For the encyclopedia, I wasn't satisfied with the content that AI provided, so I started over and wrote the character entries myself. I used AI mainly as a reference for the structure and approximate length of each section, for the sake of speeding up the process.
-One thing I learned is that AI-generated code isn't always correct or necessarily what I want. Sometimes it introduced errors or changed elements I wanted to preserve, so I had to review the results, test the website, and decide what to keep, modify, or remove. And, for a couple elements like the custom target cursor, I referenced a wonderful site called https://reactbits.dev/, where I could find plenty of open source code from other developers and adjust it to fit my site specifically. Overall, AI helped me with parts of the development process, but I made my own design decisions, implemented and tested functionality, and substantially customized the website to reflect what I actually wanted to create.
+Later, I added more interactive elements, including animations, hover effects, and a carousel displaying FNaF World characters below the saved parties on the Team Builder page. I chose which effects to use, adjusted their appearance, and worked on making sure they fit the rest of the website without interfering with its functionality. For the encyclopedia, I wasn't satisfied with the content that AI provided, so I started over and wrote the character entries myself. I used AI mainly as a reference for the structure and approximate length of each section, for the sake of speeding up the process.
+One thing I learned is that AI-generated code isn't always correct or necessarily what I want. Sometimes it introduced errors or changed elements I wanted to preserve, so I had to review the results, test the website, and decide what to keep, modify, or remove. For elements like the custom target cursor, animated list scrolling, Drift Wall, GlitchText, and animated content, I also used React Bits, an open-source component library, as a resource. I selected components I liked and customized them to fit my website. Overall, AI helped me with parts of the development process, but I made my own design decisions, implemented and tested functionality, and substantially customized the website to reflect what I actually wanted to create.
