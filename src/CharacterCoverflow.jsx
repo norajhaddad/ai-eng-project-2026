@@ -118,7 +118,7 @@ export default function CharacterCoverflow({ characters = [], getCharacterImages
                 const angle = offset * stepDegrees;
                 return (
                   <button type="button" key={slot}
-                    className={`character-coverflow-card${offset === 0 ? ' is-active' : ''}`}
+                    className={`character-coverflow-card cursor-target${offset === 0 ? ' is-active' : ''}`}
                     style={{ '--slot-angle': `${angle}deg`, '--face-angle': `${-angle * 0.7}deg`, '--slot-depth': `${Math.cos(angle * Math.PI / 180)}`, zIndex: Math.round(100 + 50 * Math.cos(angle * Math.PI / 180)) }}
                     onClick={() => { if (offset) move(Math.sign(offset)); }}
                     aria-label={`${character.name}${offset === 0 ? ', selected' : ', show character'}`}
@@ -127,7 +127,7 @@ export default function CharacterCoverflow({ characters = [], getCharacterImages
                     <span className="character-coverflow-art">
                       {still ? <img src={still} alt="" loading="lazy" /> : <span aria-hidden="true">✦</span>}
                     </span>
-                    <strong>{character.name}</strong>
+                    <strong className="cursor-target">{character.name}</strong>
                     {offset === 0 && <small>{role}</small>}
                   </button>
                 );

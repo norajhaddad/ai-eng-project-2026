@@ -151,7 +151,7 @@ export default function AnimatronicCard({ character, accent }) {
   const isStarter = character.unlockMethod === 'Starter';
   const UnlockIcon = isMinigame ? Puzzle : isPinwheel ? Star : MapPin;
   return (
-    <article className={`animatronic-card aero-card card-${accent} aero-${type} ${hasSprite ? 'has-adventure-sprite' : ''}`} style={cardPalette(character)} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setHovered(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setHovered(false); }}>
+    <article className={`animatronic-card cursor-target aero-card card-${accent} aero-${type} ${hasSprite ? 'has-adventure-sprite' : ''}`} style={cardPalette(character)} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setHovered(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setHovered(false); }}>
       <div className="card-banner">
         <span className="aero-spark aero-spark-one" aria-hidden="true">✧</span>
         <span className="aero-spark aero-spark-two" aria-hidden="true">✦</span>
@@ -176,7 +176,7 @@ export default function AnimatronicCard({ character, accent }) {
         </div>
       </div>
       <div className="card-body">
-        <div className="card-title-line"><h3><Link to={`/characters/${character.id}`} className="character-profile-link">{character.name}</Link></h3>
+        <div className="card-title-line"><h3><Link to={`/characters/${character.id}`} className="character-profile-link cursor-target">{character.name}</Link></h3>
           {isStarter && <span className="starter-tag">STARTER</span>}</div>
         <p className="character-subtitle">{character.originalGame}{character.update === 2 ? ' · Update 2' : ''}</p>
         <div className="character-badges">

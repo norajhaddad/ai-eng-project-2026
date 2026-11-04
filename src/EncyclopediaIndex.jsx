@@ -27,7 +27,7 @@ function EncyclopediaCharacterCard({ character, index }) {
         )}
       </div>
       <div className="encyclopedia-index-card-label">
-        <strong>{character.name}</strong>
+        <strong className="cursor-target">{character.name}</strong>
         <small>{character.originalGame}</small>
       </div>
       <span className="encyclopedia-index-card-sparkle" aria-hidden="true">✦</span>

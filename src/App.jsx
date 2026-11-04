@@ -30,7 +30,7 @@ import AnimatronicCard from './AnimatronicCard.jsx';
 import PartyAnalysis from './PartyAnalysis.jsx';
 import CharacterProfile from './CharacterProfile.jsx';
 import EncyclopediaIndex from './EncyclopediaIndex.jsx';
-import GlowCursor from './GlowCursor.jsx';
+import TargetCursor from './TargetCursor.jsx';
 import getCharacterImages from './character-images.js';
 import CharacterCoverflow from './CharacterCoverflow.jsx';
 import CircularCarousel from './CircularCarousel';
@@ -1429,7 +1429,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="app-layout">
-        <GlowCursor color="#25bdf0" secondaryColor="#66e7bd" quality="low" intensity={0.8} glow={0.75} trailWidth={2.5} linger={0.9} clickBurst={false} />
+        <TargetCursor
+          cursorColor="#25bdf0"
+          cursorColorOnTarget="#66e7bd"
+          hideDefaultCursor={true}
+          targetSelector={'button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [role="button"], [role="link"], .cursor-target'}
+        />
         <header className="site-header aero-site-header">
           <div className="header-inner">
             <NavLink className="brand aero-brand" to="/">

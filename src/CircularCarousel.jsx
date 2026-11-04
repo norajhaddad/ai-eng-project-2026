@@ -930,7 +930,7 @@ const CircularCarousel = ({
                   ref={element => {
                     cardRefs.current[index] = element;
                   }}
-                  className="circular-carousel__card"
+                  className="circular-carousel__card cursor-target"
                   data-cc-index={index}
                   role="group"
                   aria-roledescription="slide"
