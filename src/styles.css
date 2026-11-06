@@ -7239,3 +7239,35 @@ html, body, input, textarea, select, option, button {
   outline: none !important;
   border-color: transparent !important;
 }
+/* Layer the still and animated portraits without replacing either image. */
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-still,
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-gif {
+  grid-area: 1 / 1 !important;
+  transition: opacity 90ms ease;
+}
+
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-gif {
+  opacity: 0;
+}
+
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-gif.is-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-still,
+  .gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-gif {
+    transition: none;
+  }
+}
+/* Append AFTER the earlier character-hover CSS in styles.css.
+   Hide the still portrait completely whenever the loaded animation is shown.
+   Disable crossfade so transparent GIF frames cannot reveal the PNG. */
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-still,
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-gif {
+  transition: none;
+}
+
+.gallery-page .gallery-stage .aero-card .aero-letter-badge .adventure-sprite img.adventure-sprite-still.is-hidden {
+  opacity: 0;
+}

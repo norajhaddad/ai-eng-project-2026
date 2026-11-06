@@ -206,3 +206,26 @@
   font-family: "Berlin Sans Demi", sans-serif;
   font-weight: 900;
 }
+/* Hide the browser's built-in search clear button. */
+.encyclopedia-index-search input::-webkit-search-cancel-button {
+  display: none;
+}
+/* Motion warning buttons: lift and shadow on hover */
+.encyclopedia-index-motion-actions button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.encyclopedia-index-motion-actions button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 80, 120, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .encyclopedia-index-motion-actions button {
+    transition: none;
+  }
+
+  .encyclopedia-index-motion-actions button:hover {
+    transform: none;
+  }
+}

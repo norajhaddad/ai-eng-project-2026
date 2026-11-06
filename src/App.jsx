@@ -384,26 +384,17 @@ function Gallery() {
                   entry => entry.id === character.id
                 );
                 return (
-                  <AnimatedContent
+                  <AnimatronicCard
                     key={character.id}
-                    distance={25}
-                    duration={0.6}
-                    threshold={0}
-                    once={true}
-                  >
-                    <AnimatronicCard
-                      character={character}
-                      accent={
-                        accents[index % accents.length]
-                      }
-                      icon={
-                        <CharacterIcon
-                          character={character}
-                          size="large"
-                        />
-                      }
-                    />
-                  </AnimatedContent>
+                    character={character}
+                    accent={accents[index % accents.length]}
+                    icon={
+                      <CharacterIcon
+                        character={character}
+                        size="large"
+                      />
+                    }
+                  />
                 );
               })}
             </div>

@@ -142,6 +142,7 @@ export function cardPalette(character) {
 
 export default function AnimatronicCard({ character, accent }) {
   const [hovered, setHovered] = useState(false);
+  const [animatedReady, setAnimatedReady] = useState(false);
   const { animated: spriteGif, still: spriteStill } = getCharacterImages(character);
   const hasSprite = Boolean(spriteGif || spriteStill);
   const { fnafWorld } = character;
@@ -166,8 +167,16 @@ export default function AnimatronicCard({ character, accent }) {
           <div className="aero-letter-badge">
             {hasSprite ? (
               <span className="adventure-sprite" aria-label={`${character.name} sprite`}>
-                {!hovered && spriteStill && <img src={spriteStill} alt="" className="adventure-sprite-still" draggable="false" />}
-                {hovered && spriteGif && <img key={`${character.id}-animated`} src={spriteGif} alt="" className="adventure-sprite-gif" draggable="false" />}
+                {spriteStill && <img src={spriteStill} alt="" className={`adventure-sprite-still${hovered && animatedReady && spriteGif !== spriteStill ? ' is-hidden' : ''}`} draggable="false" />}
+                {spriteGif && spriteGif !== spriteStill && (
+                  <img
+                    src={spriteGif}
+                    alt=""
+                    className={`adventure-sprite-gif${hovered && animatedReady ? ' is-visible' : ''}`}
+                    onLoad={() => setAnimatedReady(true)}
+                    draggable="false"
+                  />
+                )}
               </span>
             ) : (
               <span className="aero-letter">{character.name.split(' ').map(w => w[0]).join('').slice(0,2)}</span>
